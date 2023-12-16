@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.slipper.modules.conversation.mapper.ConversationMapper">
+
+    <resultMap id="listMap" type="com.slipper.modules.conversation.model.res.ConversationResVO">
+        <id property="id" column="id" />
+        <result property="userId" column="user_id" />
+        <result property="roomId" column="room_id" />
+        <association property="message" javaType="com.slipper.modules.message.model.dto.MessageBaseDTO">
+            <id property="id" column="messageId" />
+            <result property="type" column="messageType" />
+            <result property="text" column="messageText" />
+            <result property="image" column="messageImage" />
+            <result property="voice" column="messageVoice" />
+            <result property="file" column="messageFile" />
+            <result property="status" column="messageStatus" />
+            <result property="createdAt" column="messageCreatedAt" />
+        </association>
+        <association property="friend" javaType="com.slipper.modules.friend.model.dto.FriendDTO">
+            <id property="id" column="friendId" />
+            <result property="remark" column="friendRemark" />
+            <result property="userId" column="friendUserId" />
+            <result property="nickname" column="friendNickname" />
+            <result property="avatar" column="friendAvatar" />
+            <result property="sex" column="friendSex" />
+            <result property="online" column="friendOnline" />
+        </association>
+        <association property="group" javaType="com.slipper.modules.roomGroup.model.dto.RoomGroupBaseDTO">
+            <id property="id" column="groupId" />
+            <result property="name" column="groupName" />
+            <result property="avatar" column="groupAvatar" />
+        </association>
+    </resultMap>
+
+    <select id="queryList" resultMap="listMap">
+        SELECT c.id, c.user_id, c.room_id,
+               m.id AS messageId, m.type AS messageType, m.text AS messageText, m.image AS messageImage,
+               m.voice AS messageVoice, m.file AS messageFile, m.status AS messageStatus, m.created_at AS messageCreatedAt,
+               rg.id AS groupId, rg.name AS groupName, rg.avatar AS groupAvatar,
+               f.id AS friendId, f.remark AS friendRemark, u.id AS friendUserId, u.nickname AS friendNickname,
+               u.avatar AS friendAvatar, u.sex AS friendSex, u.online AS friendOnline
+        FROM conversation AS c
+        LEFT JOIN room AS r ON r.id = c.room_id
+        LEFT JOIN message AS m ON m.id = r.last_message_id
+        LEFT JOIN room_group AS rg ON rg.room_id = c.room_id
+        LEFT JOIN room_friend AS rf ON rf.room_id = c.room_id
+        LEFT JOIN user AS u
+            ON (rf.source_user_id = #{ userId } AND u.id = rf.target_user_id)
+                   OR (rf.target_user_id = #{ userId } AND u.id = rf.source_user_id)
+        LEFT JOIN friend AS f
+            ON f.user_id = #{ userId } AND f.friend_id = u.id
+        WHERE c.deleted = 0 AND c.user_id = #{ userId }
+    </select>
+
+</mapper>

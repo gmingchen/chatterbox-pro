@@ -1,0 +1,71 @@
+{
+  "groups": [
+    {
+      "name": "jwt",
+      "type": "com.slipper.core.jwt.config.JsonWebTokenConfig",
+      "sourceType": "com.slipper.core.jwt.config.JsonWebTokenConfig"
+    },
+    {
+      "name": "netty",
+      "type": "com.slipper.core.netty.config.NettyConfig",
+      "sourceType": "com.slipper.core.netty.config.NettyConfig"
+    },
+    {
+      "name": "wechat",
+      "type": "com.slipper.core.wechat.config.WechatConfig",
+      "sourceType": "com.slipper.core.wechat.config.WechatConfig"
+    }
+  ],
+  "properties": [
+    {
+      "name": "jwt.expire",
+      "type": "java.lang.Long",
+      "description": "过期是时间（秒）",
+      "sourceType": "com.slipper.core.jwt.config.JsonWebTokenConfig"
+    },
+    {
+      "name": "jwt.secret",
+      "type": "java.lang.String",
+      "description": "秘钥",
+      "sourceType": "com.slipper.core.jwt.config.JsonWebTokenConfig"
+    },
+    {
+      "name": "netty.port",
+      "type": "java.lang.Integer",
+      "description": "WebSocket-netty Server port",
+      "sourceType": "com.slipper.core.netty.config.NettyConfig",
+      "defaultValue": 0
+    },
+    {
+      "name": "netty.url",
+      "type": "java.lang.String",
+      "description": "WebSocket Url",
+      "sourceType": "com.slipper.core.netty.config.NettyConfig"
+    },
+    {
+      "name": "wechat.aes-key",
+      "type": "java.lang.String",
+      "description": "aesKey",
+      "sourceType": "com.slipper.core.wechat.config.WechatConfig"
+    },
+    {
+      "name": "wechat.app-id",
+      "type": "java.lang.String",
+      "description": "AppId",
+      "sourceType": "com.slipper.core.wechat.config.WechatConfig"
+    },
+    {
+      "name": "wechat.app-secret",
+      "type": "java.lang.String",
+      "description": "AppSecret",
+      "sourceType": "com.slipper.core.wechat.config.WechatConfig"
+    },
+    {
+      "name": "wechat.token",
+      "type": "java.lang.String",
+      "description": "token",
+      "sourceType": "com.slipper.core.wechat.config.WechatConfig"
+    }
+  ],
+  "hints": []
+}

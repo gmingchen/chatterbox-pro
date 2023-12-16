@@ -1,0 +1,9 @@
+
+A
+java:S1948"&Make "list" transient or serializable.(Ì‡³°ûÿÿÿÿ
+B
+java:S1172$",Remove this unused method parameter "total".(‘ÂÂÍ
+E
+java:S1656'"/Remove or correct this useless self-assignment.(Ù€ıÁ
+x
+java:S4165'"bRemove this useless assignment; "list" already holds the assigned value along all execution paths.(Ù€ıÁ

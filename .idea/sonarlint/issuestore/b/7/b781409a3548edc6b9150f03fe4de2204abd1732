@@ -1,0 +1,11 @@
+
+c
+java:S3252%"MUse static access with "cn.hutool.core.collection.CollUtil" for "isNotEmpty".(‡ÿ•û
+g
+java:S32520"LUse static access with "cn.hutool.core.text.CharSequenceUtil" for "isBlank".(˜©î·úÿÿÿÿ
+J
+java:S1066&"/Merge this if statement with the enclosing one.(ü•šûýÿÿÿÿ
+^
+java:S2259&"CA "NullPointerException" could be thrown; "bytes" is nullable here.(ü•šûýÿÿÿÿ
+=
+java:S2189#""Add an end condition to this loop.(˜ïˆžÿÿÿÿÿ

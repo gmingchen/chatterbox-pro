@@ -1,0 +1,26 @@
+
+D
+java:S37406"/Provide the parametrized type for this generic.(•ÇÅ_
+E
+java:S3740A"/Provide the parametrized type for this generic.(‹Íƒ’
+\
+java:S1128"FRemove this unused import 'com.slipper.core.repeat.annotation.Repeat'.(ÿÞýŸ
+l
+java:S1128"QRemove this unused import 'com.slipper.modules.group.model.req.GroupCreateReqVO'.(Ž³àéúÿÿÿÿ
+g
+java:S1128"QRemove this unused import 'com.slipper.modules.group.model.req.GroupDeleteReqVO'.(úÅè±
+e
+java:S1128"ORemove this unused import 'com.slipper.modules.group.model.req.GroupSortReqVO'.(—®¢õ
+g
+java:S1128	"QRemove this unused import 'com.slipper.modules.group.model.req.GroupUpdateReqVO'.(÷¡Þš
+a
+java:S1128
+"KRemove this unused import 'com.slipper.modules.group.model.res.GroupResVO'.(»œ—ì
+a
+java:S1128"KRemove this unused import 'com.slipper.modules.group.service.GroupService'.(²ÂÀû
+n
+java:S1128"SRemove this unused import 'com.slipper.modules.message.model.req.MessagePageReqVO'.(úäå›ùÿÿÿÿ
+e
+java:S1128"ORemove this unused import 'com.slipper.modules.message.model.res.MessageResVO'.(¨ùäÃ
+F
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ

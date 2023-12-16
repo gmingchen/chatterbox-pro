@@ -1,0 +1,13 @@
+
+a
+java:S1128"ERemove this unused import 'com.slipper.common.utils.CollectionUtils'.(Ï¤ªf8¡ÕÍ¾Å1
+z
+java:S1128"]Remove this unused import 'net.sf.jsqlparser.expression.operators.relational.ExpressionList'.(ñ¾±±8¢ÕÍ¾Å1
+x
+java:S1128"[Remove this unused import 'net.sf.jsqlparser.expression.operators.relational.InExpression'.(äÑÃ”8¢ÕÍ¾Å1
+M
+java:S1128"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8¢ÕÍ¾Å1
+M
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8¢ÕÍ¾Å1
+Z
+java:S1128"8Remove this unused import 'java.util.stream.Collectors'.(Óóº´úÿÿÿÿ8¢ÕÍ¾Å1

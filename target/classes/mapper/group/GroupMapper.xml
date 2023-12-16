@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.slipper.modules.group.mapper.GroupMapper">
+
+    <resultMap id="listMap" type="com.slipper.modules.group.model.res.GroupResVO">
+        <id property="id" column="id" />
+        <result property="userId" column="user_id" />
+        <result property="name" column="name" />
+        <result property="sort" column="sort" />
+        <result property="fixed" column="fixed" />
+        <collection property="friends" ofType="com.slipper.modules.friend.model.dto.FriendDTO">
+            <id property="id" column="friendId" />
+            <result property="remark" column="friendRemark" />
+            <result property="userId" column="friendUserId" />
+            <result property="nickname" column="friendNickname" />
+            <result property="avatar" column="friendAvatar" />
+            <result property="sex" column="friendSex" />
+            <result property="online" column="friendOnline" />
+        </collection>
+    </resultMap>
+    <select id="queryList" resultMap="listMap">
+        SELECT g.id, g.user_id, g.name, g.sort, g.fixed,
+               f.id AS friendId, f.remark AS friendRemark, u.id AS friendUserId, u.nickname AS friendNickname,
+               u.avatar AS friendAvatar, u.sex AS friendSex, u.online AS friendOnline
+        FROM `group` AS g
+        LEFT JOIN friend AS f ON f.group_id = g.id AND f.deleted = 0
+        LEFT JOIN user AS u ON u.id = f.friend_id AND u.deleted = 0
+        WHERE g.deleted = 0 AND g.user_id = #{ userId }
+    </select>
+
+</mapper>

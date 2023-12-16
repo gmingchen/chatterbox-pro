@@ -1,0 +1,36 @@
+service:
+  port: 8820
+  context-path: /slipper
+# 主数据源
+database:
+  ip: 139.196.182.46
+  port: 3306
+  name: im-chat
+  username: root
+  password: ll5271211314
+  installation-path: /usr/local/software/mysql/mysql-8.0.29/bin/ # 数据库安装路径
+  backup-path: /home/project/slipper/admin/resource/mysql # 数据库备份文件存放路径
+  statViewServlet: # 监控
+    url-pattern: /druid/*
+    username: gumingchen
+    password: gumingchen
+# redis
+redis:
+  database: 6
+  host: 139.196.182.46
+  port: 6379
+  password: ll5271211314
+# json web token
+jwt:
+  secret: efe1679416b57fd5af7ee0969d79ec94bf40e0268ba423681f47e4e84bd352dc # 秘钥
+  expire: 7200 # 过期是时间（秒）
+# netty
+netty:
+  port: 8821
+  url: ws://localhost:${netty.port}/${service.context-path}/websocket/{token}
+# 微信
+wechat:
+  appId: wx23d19576a46d4c86
+  appSecret: d06e0f2bfeca75c423d0dbc990d0b8a5
+  token: efe1679416b57fd5af7ee0969d79ec94
+  aesKey: SM93MPuhHkGmBean7y07RPanLAYOgEefgFGAIYF63WW

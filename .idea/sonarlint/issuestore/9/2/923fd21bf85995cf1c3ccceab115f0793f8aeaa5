@@ -1,0 +1,8 @@
+
+€
+java:S14500"eRemove the "socketServerHandShaker" field and declare it as a local variable in the relevant methods.(ñáºÒüÿÿÿÿ
+c
+java:S1854¼"@Remove this useless assignment to local variable "loginUserDTO".(‚“èâùÿÿÿÿ8•ÁÄ1
+T
+java:S1481¼"1Remove this unused "loginUserDTO" local variable.(‚“èâùÿÿÿÿ8•ÁÄ1
+^	java:S125Ã"<This block of commented-out lines of code should be removed.(Íöçşÿÿÿÿ8ÜúÁÄ1
