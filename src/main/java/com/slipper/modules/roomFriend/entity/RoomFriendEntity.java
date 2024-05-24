@@ -16,11 +16,6 @@ import lombok.experimental.Accessors;
 @TableName("room_friend")
 public class RoomFriendEntity extends BasePO {
     /**
-     * ID
-     */
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
-    /**
      * 房间ID
      */
     private Long roomId;
@@ -35,5 +30,5 @@ public class RoomFriendEntity extends BasePO {
     /**
      * 状态：0-禁用（非好友的情况） 1-启用
      */
-    private Long status;
+    private Integer status;
 }

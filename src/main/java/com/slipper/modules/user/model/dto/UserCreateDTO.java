@@ -1,12 +1,16 @@
 package com.slipper.modules.user.model.dto;
 
+import com.slipper.common.enums.SexEnum;
+import com.slipper.core.validator.constraints.Enum;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
+ * 新增用户
  * @author gumingchen
  */
 @Accessors(chain = true)
@@ -16,6 +20,7 @@ public class UserCreateDTO implements Serializable {
     /**
      * 昵称
      */
+    @NotBlank(message = "昵称不能为空")
     private String nickname;
     /**
      * 头像
@@ -24,17 +29,16 @@ public class UserCreateDTO implements Serializable {
     /**
      * 性别：0-女 1-男 2-未知
      */
+    @Enum(SexEnum.class)
     private Integer sex;
     /**
-     * 是否在线：0-离线 1-在线
+     * 邮箱
      */
-    private Integer online;
-    /**
-     * 微信openid
-     */
-    private String openId;
-    /**
-     * 最后 上|下 线时间
-     */
-    private LocalDateTime lastAt;
+    @Email(message = "邮箱格式不正确")
+    @NotBlank(message = "邮箱不能为空")
+    private String email;
+//    /**
+//     * 微信openid（保留字段）
+//     */
+//    private String openId;
 }

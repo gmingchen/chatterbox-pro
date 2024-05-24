@@ -16,14 +16,21 @@ public enum WsMessageTypeEnum implements EnumIntArray {
      * websocket消息类型
      */
     HEARTBEAT(0, "心跳"),
-    ACK(1, "ack确认"),
-    PRIVATE_CHAT_MESSAGE(2, "私聊消息"),
-    GROUP_CHAT_MESSAGE(3, "群聊消息"),
-    ERROR(4, "异常消息"),
-    FRIEND_APPLY(5, "好友申请"),
-    AGREE_FRIEND_APPLY(6, "同意好友申请"),
-    REFUSE_FRIEND_APPLY(7, "拒绝好友申请"),
-    DELETE_FRIEND(8, "删除好友"),
+    PRIVATE_CHAT_MESSAGE(1, "私聊消息"),
+    GROUP_CHAT_MESSAGE(2, "群聊消息"),
+
+    FRIEND_APPLY(3, "好友申请"),
+    AGREE_FRIEND_APPLY(4, "同意好友申请"),
+    REFUSE_FRIEND_APPLY(5, "拒绝好友申请"),
+    DELETE_FRIEND(6, "删除好友"),
+
+    GROUP_APPLY(7, "群聊申请"),
+    AGREE_GROUP_APPLY(8, "同意群聊申请"),
+    REFUSE_GROUP_APPLY(9, "拒绝群聊申请"),
+    DELETE_GROUP_APPLY(10, "删除群聊"),
+    EXIT_GROUP_APPLY(11, "退出群聊"),
+
+    ERROR(20, "异常消息"),
     ;
 
     /**

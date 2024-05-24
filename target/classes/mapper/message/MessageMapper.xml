@@ -3,37 +3,36 @@
 
 <mapper namespace="com.slipper.modules.message.mapper.MessageMapper">
 
-    <resultMap id="pageMap" type="com.slipper.modules.message.model.res.MessageResVO">
-        <association property="message" javaType="com.slipper.modules.message.model.dto.MessageBaseDTO">
-            <id property="id" column="messageId" />
-            <result property="type" column="messageType" />
-            <result property="text" column="messageText" />
-            <result property="image" column="messageImage" />
-            <result property="voice" column="messageVoice" />
-            <result property="file" column="messageFile" />
-            <result property="status" column="messageStatus" />
-            <result property="createdAt" column="messageCreatedAt" />
-        </association>
-        <association property="user" javaType="com.slipper.modules.user.model.dto.UserBaseDTO">
-            <id property="id" column="userId" />
-            <result property="nickname" column="userNickname" />
-            <result property="avatar" column="userAvatar" />
-            <result property="sex" column="userSex" />
-            <result property="online" column="userOnline" />
-        </association>
-    </resultMap>
-
-    <select id="queryPage" resultMap="pageMap">
-        SELECT m.id AS messageId, m.type AS messageType, m.text AS messageText, m.image AS messageImage,
-               m.voice AS messageVoice, m.file AS messageFile, m.status AS messageStatus, m.created_at AS messageCreatedAt,
-               u.id AS userId, u.nickname AS userNickname, u.avatar AS userAvatar, u.sex AS userSex, u.online AS userOnline
+    <sql id="MessageSql">
+        SELECT m.id, m.type, m.text, m.image, m.voice, m.file, m.status, m.created_at,
+               u.id AS userId, u.nickname, u.avatar, u.sex
         FROM message AS m
         LEFT JOIN user AS u ON u.id = m.user_id
         WHERE m.deleted = 0
-        <if test="roomId != null">
-            AND m.room_id = #{ roomId }
+    </sql>
+
+<!--    IPage<MessageResVO> queryPage(Page<MessageEntity> page, @Param("roomId") Long roomId);-->
+    <select id="queryPage" resultType="com.slipper.modules.message.model.res.MessageResVO">
+        <include refid="MessageSql"></include>
+        AND m.room_id = #{ roomId }
+        ORDER BY m.created_at DESC
+    </select>
+
+<!--    IPage<MessageResVO> queryPageByLastId(@Param("size") Integer size, @Param("roomId") Long roomId, @Param("lastId") Long lastId);-->
+    <select id="queryPageByLastId" resultType="com.slipper.modules.message.model.res.MessageResVO">
+        <include refid="MessageSql"></include>
+        AND m.room_id = #{ roomId }
+        <if test="lastId != null">
+            AND m.id <![CDATA[ < ]]> #{ lastId }
         </if>
         ORDER BY m.created_at DESC
+        LIMIT #{ size }
+    </select>
+
+<!--    MessageResVO queryInfo(@Param("id") Long id);-->
+    <select id="queryInfo" resultType="com.slipper.modules.message.model.res.MessageResVO">
+        <include refid="MessageSql"></include>
+        AND m.id = #{ id }
     </select>
 
 </mapper>

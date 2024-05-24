@@ -1,7 +1,5 @@
 package com.slipper.modules.apply.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.slipper.common.po.BasePO;
 import lombok.Data;
@@ -15,11 +13,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("`apply`")
 public class ApplyEntity extends BasePO {
-    /**
-     * ID
-     */
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
     /**
      * 用户ID（申请的用户ID）
      */
@@ -39,7 +32,7 @@ public class ApplyEntity extends BasePO {
     /**
      * 分组ID：type为0时使用
      */
-    private Long groupId;
+    private Long groupingId;
     /**
      * 备注：type为0时使用
      */

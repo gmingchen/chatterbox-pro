@@ -1,15 +1,33 @@
 package com.slipper.modules.auth.convert;
 
+import com.slipper.modules.auth.model.req.AuthRegisterReqVO;
 import com.slipper.modules.user.entity.UserEntity;
 import com.slipper.modules.user.model.dto.LoginUserDTO;
+import com.slipper.modules.user.model.dto.UserCreateDTO;
 import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-12-16T10:45:35+0800",
+    date = "2024-05-22T16:29:49+0800",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 1.8.0_291 (Oracle Corporation)"
 )
 public class AuthConvertImpl implements AuthConvert {
+
+    @Override
+    public UserCreateDTO convert(AuthRegisterReqVO bean) {
+        if ( bean == null ) {
+            return null;
+        }
+
+        UserCreateDTO userCreateDTO = new UserCreateDTO();
+
+        userCreateDTO.setNickname( bean.getNickname() );
+        userCreateDTO.setAvatar( bean.getAvatar() );
+        userCreateDTO.setSex( bean.getSex() );
+        userCreateDTO.setEmail( bean.getEmail() );
+
+        return userCreateDTO;
+    }
 
     @Override
     public LoginUserDTO convert(UserEntity bean) {
@@ -24,8 +42,10 @@ public class AuthConvertImpl implements AuthConvert {
         loginUserDTO.setAvatar( bean.getAvatar() );
         loginUserDTO.setSex( bean.getSex() );
         loginUserDTO.setOnline( bean.getOnline() );
+        loginUserDTO.setEmail( bean.getEmail() );
+        loginUserDTO.setLastAt( bean.getLastAt() );
+        loginUserDTO.setCreatedAt( bean.getCreatedAt() );
         loginUserDTO.setStatus( bean.getStatus() );
-        loginUserDTO.setOpenId( bean.getOpenId() );
 
         return loginUserDTO;
     }

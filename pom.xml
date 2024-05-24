@@ -39,6 +39,8 @@
         <commons-fileupload.version>1.4</commons-fileupload.version>
         <fastjson.version>1.2.83</fastjson.version>
 
+        <mail.version>1.6.2</mail.version>
+
         <qiniu-kodo.version>[7.7.0, 7.7.99]</qiniu-kodo.version>
         <aliyun-oss.version>3.16.2</aliyun-oss.version>
         <qcloud-cos.version>5.6.139</qcloud-cos.version>
@@ -183,6 +185,13 @@
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>${fastjson.version}</version>
+        </dependency>
+
+        <!-- 邮件：https://mvnrepository.com/artifact/com.sun.mail/javax.mail -->
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>${mail.version}</version>
         </dependency>
 
         <!-- 七牛云Kode：https://mvnrepository.com/artifact/com.qiniu/qiniu-java-sdk -->

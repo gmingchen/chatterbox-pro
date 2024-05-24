@@ -2,8 +2,8 @@ package com.slipper.modules.conversation.model.res;
 
 import com.slipper.modules.friend.model.dto.FriendDTO;
 import com.slipper.modules.message.model.dto.MessageBaseDTO;
+import com.slipper.modules.message.model.res.MessageResVO;
 import com.slipper.modules.roomGroup.model.dto.RoomGroupBaseDTO;
-import com.slipper.modules.user.model.dto.UserBaseDTO;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -19,17 +19,17 @@ public class ConversationResVO implements Serializable {
      */
     private Long id;
     /**
-     * 用户ID
-     */
-    private Long userId;
-    /**
      * 房间ID
      */
     private Long roomId;
     /**
+     * 用户ID
+     */
+    private Long userId;
+    /**
      * 最新消息信息
      */
-    private MessageBaseDTO message;
+    private MessageResVO message;
     /**
      * 好友用户信息
      */

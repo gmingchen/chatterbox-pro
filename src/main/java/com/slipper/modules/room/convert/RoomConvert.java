@@ -1,8 +1,7 @@
 package com.slipper.modules.room.convert;
 
-import com.slipper.modules.room.entity.RoomEntity;
-import com.slipper.modules.room.model.dto.RoomCreateDTO;
-import com.slipper.modules.roomFriend.model.dto.RoomFriendCreateDTO;
+import com.slipper.modules.room.model.req.RoomGroupCreateReqVO;
+import com.slipper.modules.roomGroup.model.dto.RoomGroupCreateDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -14,8 +13,6 @@ import org.mapstruct.factory.Mappers;
 public interface RoomConvert {
     RoomConvert INSTANCE = Mappers.getMapper(RoomConvert.class);
 
+    RoomGroupCreateDTO convert(RoomGroupCreateReqVO bean);
 
-    RoomEntity convert(RoomCreateDTO bean);
-
-    RoomFriendCreateDTO convertFriend(RoomCreateDTO bean);
 }

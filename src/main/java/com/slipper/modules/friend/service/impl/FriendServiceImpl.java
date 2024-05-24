@@ -1,16 +1,25 @@
 package com.slipper.modules.friend.service.impl;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.slipper.common.enums.RoomTypeEnum;
+import com.slipper.common.enums.StatusEnum;
+import com.slipper.common.enums.WsMessageTypeEnum;
 import com.slipper.core.mybatisplus.expend.service.ServiceImplX;
 import com.slipper.core.mybatisplus.expend.wrapper.LambdaQueryWrapperX;
+import com.slipper.core.netty.dto.WsResponseDTO;
+import com.slipper.core.netty.utils.WebSocketUsers;
+import com.slipper.core.security.utils.SecurityUtils;
 import com.slipper.exception.RunException;
+import com.slipper.modules.conversation.model.res.ConversationResVO;
 import com.slipper.modules.friend.entity.FriendEntity;
 import com.slipper.modules.friend.mapper.FriendMapper;
 import com.slipper.modules.friend.model.dto.FriendCreateDTO;
+import com.slipper.modules.friend.model.req.FriendDeleteReqVO;
 import com.slipper.modules.friend.service.FriendService;
-import com.slipper.modules.room.model.dto.RoomCreateDTO;
+import com.slipper.modules.grouping.entity.GroupingEntity;
+import com.slipper.modules.grouping.service.GroupingService;
 import com.slipper.modules.room.service.RoomService;
+import com.slipper.modules.roomFriend.service.RoomFriendService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,70 +35,108 @@ import java.util.List;
 public class FriendServiceImpl extends ServiceImplX<FriendMapper, FriendEntity> implements FriendService {
 
     @Resource
+    private GroupingService groupingService;
+    @Resource
     private RoomService roomService;
-
-
-    @Override
-    public boolean validateFriendMy(Long userId, Long friendId) {
-        LambdaQueryWrapper<FriendEntity> wrapper = new LambdaQueryWrapper<FriendEntity>()
-                .eq(FriendEntity::getUserId, userId)
-                .eq(FriendEntity::getFriendId, friendId);
-        return baseMapper.selectOne(wrapper) != null;
-    }
+    @Resource
+    private RoomFriendService roomFriendService;
 
     @Override
-    public boolean validateFriendOther(Long userId, Long friendId) {
-        LambdaQueryWrapper<FriendEntity> wrapper = new LambdaQueryWrapper<FriendEntity>()
-                .eq(FriendEntity::getUserId, friendId)
-                .eq(FriendEntity::getFriendId, userId);
-        return baseMapper.selectOne(wrapper) != null;
-    }
+    public void create(FriendCreateDTO dto) {
+        List<FriendEntity> list = new ArrayList<>();
 
-    @Override
-    public boolean validateFriendEachOther(Long userId, Long friendId) {
-        LambdaQueryWrapper<FriendEntity> wrapper = new LambdaQueryWrapper<>();
-        wrapper.and(w -> w.eq(FriendEntity::getUserId, userId).eq(FriendEntity::getFriendId, friendId))
-                .or(w -> w.eq(FriendEntity::getUserId, friendId).eq(FriendEntity::getFriendId, userId));
-        Long count = baseMapper.selectCount(wrapper);
-        return count == 2;
-    }
+        FriendEntity user = this.generateFriend(
+                dto.getUserId(),
+                dto.getUserGroupingId(),
+                dto.getUserRemark(),
+                dto.getTargetId()
+        );
+        if (ObjectUtil.isNotNull(user)) {
+            list.add(user);
+        }
 
-    @Override
-    public Long queryCountByGroupId(Long groupId) {
-        LambdaQueryWrapper<FriendEntity> wrapper = new LambdaQueryWrapperX<FriendEntity>()
-                .eq(FriendEntity::getGroupId, groupId);
-        return baseMapper.selectCount(wrapper);
-    }
+        FriendEntity friend = this.generateFriend(
+                dto.getTargetId(),
+                dto.getTargetGroupingId(),
+                dto.getTargetRemark(),
+                dto.getUserId()
+        );
+        if (ObjectUtil.isNotNull(friend)) {
+            list.add(friend);
+        }
 
-    @Override
-    public boolean validateGroupExistFriend(Long groupId) {
-        return this.queryCountByGroupId(groupId) > 0;
-    }
+        // 新增好友
+        baseMapper.insertBatch(list);
 
+        // 新增好友房间
+        roomService.createFriendRoom(dto.getUserId(), dto.getTargetId());
+
+        // todo: Websocket 通知用户...
+        ArrayList<String> userIds = new ArrayList<>();
+        userIds.add(dto.getUserId().toString());
+        userIds.add(dto.getTargetId().toString());
+        WebSocketUsers.sendMessage(
+                new WsResponseDTO<>()
+                        .setType(WsMessageTypeEnum.AGREE_FRIEND_APPLY.getCode()),
+                userIds);
+
+    }
 
     @Transactional(rollbackFor = RunException.class)
     @Override
-    public void beFriend(FriendCreateDTO friendCreateDTO) {
-        // 建立好友关系
-        FriendEntity userFriend = new FriendEntity()
-                .setUserId(friendCreateDTO.getUserId())
-                .setFriendId(friendCreateDTO.getTargetId())
-                .setGroupId(friendCreateDTO.getUserGroupId())
-                .setRemark(friendCreateDTO.getUserRemark());
-        FriendEntity targetEntity = new FriendEntity()
-                .setUserId(friendCreateDTO.getTargetId())
-                .setFriendId(friendCreateDTO.getUserId())
-                .setGroupId(friendCreateDTO.getTargetGroupId())
-                .setRemark(friendCreateDTO.getTargetRemark());
-        List<FriendEntity> list = new ArrayList<>();
-        list.add(userFriend);
-        list.add(targetEntity);
-        baseMapper.insertBatch(list);
-        // 创建好友房间
-        RoomCreateDTO roomCreateDTO = new RoomCreateDTO()
-                .setSourceUserId(friendCreateDTO.getUserId())
-                .setTargetUserId(friendCreateDTO.getTargetId())
-                .setType(RoomTypeEnum.FRIEND.getCode());
-        roomService.create(roomCreateDTO);
+    public void delete(FriendDeleteReqVO reqVO) {
+        LambdaQueryWrapper<FriendEntity> wrapper = new LambdaQueryWrapperX<FriendEntity>()
+                .eq(FriendEntity::getUserId, SecurityUtils.getLoginUserId())
+                .eq(FriendEntity::getFriendId, reqVO.getUserId());
+        baseMapper.delete(wrapper);
+        // 变更房间状态
+        roomFriendService.updateStatus(SecurityUtils.getLoginUserId(), reqVO.getUserId(), StatusEnum.DISABLE);
+    }
+
+    @Override
+    public Boolean validateFriend(Long sourceId, Long targetId) {
+        LambdaQueryWrapper<FriendEntity> wrapper = new LambdaQueryWrapper<FriendEntity>()
+                .eq(FriendEntity::getUserId, sourceId)
+                .eq(FriendEntity::getFriendId, targetId);
+        return baseMapper.selectOne(wrapper) != null;
+    }
+
+    @Override
+    public Boolean validateFriendBoth(Long sourceId, Long targetId) {
+        LambdaQueryWrapper<FriendEntity> wrapper = new LambdaQueryWrapper<FriendEntity>()
+                .and(w -> w.eq(FriendEntity::getUserId, sourceId).eq(FriendEntity::getFriendId, targetId))
+                .or(w -> w.eq(FriendEntity::getUserId, targetId).eq(FriendEntity::getFriendId, sourceId));
+        return baseMapper.selectCount(wrapper) == 2;
+    }
+
+    /**
+     * 生成好友对象 判断使用有效的分组ID
+     * @param userId 用户ID
+     * @param groupingId 分组ID
+     * @param remark 备注
+     * @param friendId 好友用户ID
+     * @return
+     */
+    private FriendEntity generateFriend(Long userId, Long groupingId, String remark, Long friendId) {
+        LambdaQueryWrapper<FriendEntity> userWrapper = new LambdaQueryWrapperX<FriendEntity>()
+                .eq(FriendEntity::getUserId, userId)
+                .eq(FriendEntity::getFriendId, friendId);
+        FriendEntity user = baseMapper.selectOne(userWrapper);
+        // 若不存在 则新增
+        if (ObjectUtil.isNull(user)) {
+            FriendEntity friendEntity = new FriendEntity()
+                    .setUserId(userId)
+                    .setFriendId(friendId)
+                    .setGroupingId(groupingId)
+                    .setRemark(remark);
+            // 校验分组 若不存在则使用默认固定的分组
+            Boolean groupingBool = groupingService.validateIsExist(groupingId);
+            if (!groupingBool) {
+                GroupingEntity groupingEntity = groupingService.queryFixed(userId);
+                friendEntity.setGroupingId(groupingEntity.getId());
+            }
+            return friendEntity;
+        }
+        return null;
     }
 }

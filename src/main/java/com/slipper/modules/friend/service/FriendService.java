@@ -3,9 +3,7 @@ package com.slipper.modules.friend.service;
 import com.slipper.core.mybatisplus.expend.service.IServiceX;
 import com.slipper.modules.friend.entity.FriendEntity;
 import com.slipper.modules.friend.model.dto.FriendCreateDTO;
-import com.slipper.modules.friend.model.res.FriendResVO;
-
-import java.util.List;
+import com.slipper.modules.friend.model.req.FriendDeleteReqVO;
 
 /**
  * 好友
@@ -14,47 +12,32 @@ import java.util.List;
 public interface FriendService extends IServiceX<FriendEntity> {
 
     /**
-     * 校验是否我的好友
-     * @param userId 用户ID
-     * @param friendId 好友ID
-     * @return
+     * 新增好友关系
+     * @param dto 好友参数
      */
-    boolean validateFriendMy(Long userId, Long friendId);
+    void create(FriendCreateDTO dto);
 
     /**
-     * 校验是否是对方好友
-     * @param userId 用户ID
-     * @param friendId 好友ID
+     * 删除好友关系
+     * @param reqVO 参数
+     */
+    void delete(FriendDeleteReqVO reqVO);
+
+    /**
+     * 校验是否是好友： target 是否是 source 的好友
+     * @param sourceId 用户ID
+     * @param targetId 目标用户ID
      * @return
      */
-    boolean validateFriendOther(Long userId, Long friendId);
+    Boolean validateFriend(Long sourceId, Long targetId);
 
     /**
      * 校验是否互为好友
-     * @param userId 用户ID
-     * @param friendId 好友ID
+     * @param sourceId 用户ID
+     * @param targetId 目标用户ID
      * @return
      */
-    boolean validateFriendEachOther(Long userId, Long friendId);
+    Boolean validateFriendBoth(Long sourceId, Long targetId);
 
-    /**
-     * 分组ID查询好友数量
-     * @param groupId 分组ID
-     * @return
-     */
-    Long queryCountByGroupId(Long groupId);
-
-    /**
-     * 校验分组是否存在好友
-     * @param groupId 分组ID
-     * @return
-     */
-    boolean validateGroupExistFriend(Long groupId);
-
-    /**
-     * 新增好友关系
-     * @param friendCreateDTO 参数
-     */
-    void beFriend(FriendCreateDTO friendCreateDTO);
 
 }

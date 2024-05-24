@@ -67,7 +67,7 @@ public class ServiceImplX<M extends BaseMapperX<T>, T> extends ServiceImpl<M, T>
      * @return
      */
     @Override
-    public boolean validateIsExists(Serializable id) {
+    public boolean validateIsExist(Serializable id) {
         T entity = baseMapper.selectById(id);
         return entity != null;
     }
@@ -78,7 +78,7 @@ public class ServiceImplX<M extends BaseMapperX<T>, T> extends ServiceImpl<M, T>
      * @return
      */
     @Override
-    public T validateExists(Serializable id) {
+    public T validateExist(Serializable id) {
         T entity = baseMapper.selectById(id);
         if (entity == null) {
             throw new RunException(ResultCodeEnum.NOT_EXIST);
@@ -93,7 +93,7 @@ public class ServiceImplX<M extends BaseMapperX<T>, T> extends ServiceImpl<M, T>
      * @return
      */
     @Override
-    public boolean validateIsExists(SFunction<T, ?> selectEqColumnFn, Object selectEqColumnValue) {
+    public boolean validateIsExist(SFunction<T, ?> selectEqColumnFn, Object selectEqColumnValue) {
         LambdaQueryWrapper<T> wrapper = new LambdaQueryWrapperX<T>()
                 .eq(selectEqColumnFn, selectEqColumnValue);
         T entity = baseMapper.selectOne(wrapper);
@@ -106,7 +106,7 @@ public class ServiceImplX<M extends BaseMapperX<T>, T> extends ServiceImpl<M, T>
      * @return
      */
     @Override
-    public boolean validateExists(SFunction<T, ?> selectEqColumnFn, Object selectEqColumnValue) {
+    public boolean validateExist(SFunction<T, ?> selectEqColumnFn, Object selectEqColumnValue) {
         LambdaQueryWrapper<T> wrapper = new LambdaQueryWrapperX<T>()
                 .eq(selectEqColumnFn, selectEqColumnValue);
         T entity = baseMapper.selectOne(wrapper);

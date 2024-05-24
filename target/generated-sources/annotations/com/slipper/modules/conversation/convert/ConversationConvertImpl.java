@@ -1,11 +1,26 @@
 package com.slipper.modules.conversation.convert;
 
+import com.slipper.modules.conversation.entity.ConversationEntity;
+import com.slipper.modules.conversation.model.dto.ConversationCreateDTO;
 import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-12-16T10:45:35+0800",
+    date = "2024-05-22T16:29:49+0800",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 1.8.0_291 (Oracle Corporation)"
 )
 public class ConversationConvertImpl implements ConversationConvert {
+
+    @Override
+    public ConversationEntity convert(ConversationCreateDTO bean) {
+        if ( bean == null ) {
+            return null;
+        }
+
+        ConversationEntity conversationEntity = new ConversationEntity();
+
+        conversationEntity.setRoomId( bean.getRoomId() );
+
+        return conversationEntity;
+    }
 }

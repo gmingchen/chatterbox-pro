@@ -1,41 +1,33 @@
 package com.slipper.modules.room.convert;
 
-import com.slipper.modules.room.entity.RoomEntity;
-import com.slipper.modules.room.model.dto.RoomCreateDTO;
-import com.slipper.modules.roomFriend.model.dto.RoomFriendCreateDTO;
+import com.slipper.modules.room.model.req.RoomGroupCreateReqVO;
+import com.slipper.modules.roomGroup.model.dto.RoomGroupCreateDTO;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-12-16T10:45:35+0800",
+    date = "2024-05-22T16:29:49+0800",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 1.8.0_291 (Oracle Corporation)"
 )
 public class RoomConvertImpl implements RoomConvert {
 
     @Override
-    public RoomEntity convert(RoomCreateDTO bean) {
+    public RoomGroupCreateDTO convert(RoomGroupCreateReqVO bean) {
         if ( bean == null ) {
             return null;
         }
 
-        RoomEntity roomEntity = new RoomEntity();
+        RoomGroupCreateDTO roomGroupCreateDTO = new RoomGroupCreateDTO();
 
-        roomEntity.setType( bean.getType() );
-
-        return roomEntity;
-    }
-
-    @Override
-    public RoomFriendCreateDTO convertFriend(RoomCreateDTO bean) {
-        if ( bean == null ) {
-            return null;
+        roomGroupCreateDTO.setName( bean.getName() );
+        roomGroupCreateDTO.setAvatar( bean.getAvatar() );
+        Set<Long> set = bean.getUserIds();
+        if ( set != null ) {
+            roomGroupCreateDTO.setUserIds( new LinkedHashSet<Long>( set ) );
         }
 
-        RoomFriendCreateDTO roomFriendCreateDTO = new RoomFriendCreateDTO();
-
-        roomFriendCreateDTO.setSourceUserId( bean.getSourceUserId() );
-        roomFriendCreateDTO.setTargetUserId( bean.getTargetUserId() );
-
-        return roomFriendCreateDTO;
+        return roomGroupCreateDTO;
     }
 }

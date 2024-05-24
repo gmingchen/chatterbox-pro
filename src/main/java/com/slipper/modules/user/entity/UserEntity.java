@@ -16,11 +16,6 @@ import java.time.LocalDateTime;
 @TableName("user")
 public class UserEntity extends BasePO {
     /**
-     * ID
-     */
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
-    /**
      * 昵称
      */
     private String nickname;
@@ -33,19 +28,23 @@ public class UserEntity extends BasePO {
      */
     private Integer sex;
     /**
+     * 邮箱
+     */
+    private String email;
+    /**
+     * 微信openid（保留字段）
+     */
+    private String openId;
+    /**
      * 是否在线：0-离线 1-在线
      */
     private Integer online;
     /**
-     * 状态：0-禁用 1-启用
-     */
-    private Integer status;
-    /**
-     * 微信openid
-     */
-    private String openId;
-    /**
      * 最后 上|下 线时间
      */
     private LocalDateTime lastAt;
+    /**
+     * 状态：0-禁用 1-启用
+     */
+    private Integer status;
 }

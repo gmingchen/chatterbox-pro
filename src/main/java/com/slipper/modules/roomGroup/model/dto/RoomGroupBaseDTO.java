@@ -17,9 +17,9 @@ public class RoomGroupBaseDTO implements Serializable {
     /**
      * 群名
      */
-    private Long name;
+    private String name;
     /**
      * 群头像
      */
-    private Long avatar;
+    private String avatar;
 }

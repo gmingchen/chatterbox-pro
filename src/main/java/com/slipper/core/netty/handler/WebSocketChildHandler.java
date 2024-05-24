@@ -1,6 +1,5 @@
 package com.slipper.core.netty.handler;
 
-import com.slipper.core.netty.core.WsMessageContext;
 import com.slipper.core.netty.service.NettyService;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;

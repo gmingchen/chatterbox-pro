@@ -37,14 +37,14 @@ public interface IServiceX<T> extends IService<T> {
      * @param id ID
      * @return 布尔值
      */
-    boolean validateIsExists(Serializable id);
+    boolean validateIsExist(Serializable id);
 
     /**
      * 校验是否存在
      * @param id ID
      * @return
      */
-    T validateExists(Serializable id);
+    T validateExist(Serializable id);
 
 
     /**
@@ -53,7 +53,7 @@ public interface IServiceX<T> extends IService<T> {
      * @param selectEqColumnValue 查询的值
      * @return
      */
-    boolean validateIsExists(SFunction<T, ?> selectEqColumnFn, Object selectEqColumnValue);
+    boolean validateIsExist(SFunction<T, ?> selectEqColumnFn, Object selectEqColumnValue);
 
     /**
      * 校验是否存在
@@ -61,6 +61,6 @@ public interface IServiceX<T> extends IService<T> {
      * @param selectEqColumnValue 查询的值
      * @return
      */
-    boolean validateExists(SFunction<T, ?> selectEqColumnFn, Object selectEqColumnValue);
+    boolean validateExist(SFunction<T, ?> selectEqColumnFn, Object selectEqColumnValue);
 
 }

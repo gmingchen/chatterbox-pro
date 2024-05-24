@@ -3,18 +3,12 @@ package com.slipper.modules.user.controller;
 import com.slipper.common.pojo.PageResult;
 import com.slipper.common.pojo.Result;
 import com.slipper.core.repeat.annotation.Repeat;
-import com.slipper.modules.group.model.req.GroupCreateReqVO;
-import com.slipper.modules.group.model.req.GroupDeleteReqVO;
-import com.slipper.modules.group.model.req.GroupSortReqVO;
-import com.slipper.modules.group.model.req.GroupUpdateReqVO;
-import com.slipper.modules.group.model.res.GroupResVO;
-import com.slipper.modules.group.service.GroupService;
-import com.slipper.modules.message.model.req.MessagePageReqVO;
-import com.slipper.modules.message.model.res.MessageResVO;
-import com.slipper.modules.user.model.req.UserOnlineReqVO;
-import com.slipper.modules.user.model.req.UserPageReqVO;
+import com.slipper.modules.captcha.model.req.CaptchaReqVO;
+import com.slipper.modules.user.model.dto.UserBaseDTO;
+import com.slipper.modules.user.model.req.UserSearchReqVO;
+import com.slipper.modules.user.model.req.UserUpdateEmailReqVO;
 import com.slipper.modules.user.model.req.UserUpdateReqVO;
-import com.slipper.modules.user.model.res.UserPageResVO;
+import com.slipper.modules.user.model.res.UserSearchResVO;
 import com.slipper.modules.user.service.UserService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -34,37 +28,48 @@ public class UserController {
     private UserService userService;
 
     /**
-     * 分页列表
-     * @param reqVO 参数
+     * 更新用户基础信息
      * @return
      */
-    @GetMapping("/page")
-    public Result<PageResult<UserPageResVO>> page(@Validated UserPageReqVO reqVO) {
-        return Result.success(
-                userService.page(reqVO)
-        );
-    }
-
-    /**
-     * 编辑资料
-     * @param reqVO 参数
-     * @return
-     */
+    @Repeat()
     @PostMapping("/update")
-    public Result update(@RequestBody @Validated UserUpdateReqVO reqVO) {
+    public Result<?> update(@RequestBody @Validated UserUpdateReqVO reqVO) {
         userService.update(reqVO);
         return Result.success();
     }
 
     /**
-     * 编辑在线状态
-     * @param reqVO 参数
+     * 获取更新邮箱验证码
      * @return
      */
-    @PostMapping("/online")
-    public Result online(@RequestBody @Validated UserOnlineReqVO reqVO) {
-        userService.online(reqVO);
+    @Repeat(60)
+    @GetMapping("/update/email/captcha")
+    public Result<?> getUpdateEmailCaptcha(@Validated CaptchaReqVO reqVO) {
+        userService.updateEmailCaptcha(reqVO);
         return Result.success();
+    }
+
+    /**
+     * 更新邮箱
+     * @return
+     */
+    @Repeat()
+    @PostMapping("/update/email")
+    public Result<?> updateEmail(@RequestBody @Validated UserUpdateEmailReqVO reqVO) {
+        userService.updateEmail(reqVO);
+        return Result.success();
+    }
+
+    /**
+     * 搜索用户
+     * @return
+     */
+    @Repeat()
+    @GetMapping("/search")
+    public Result<PageResult<UserSearchResVO>> search(@Validated UserSearchReqVO reqVO) {
+        return Result.success(
+                userService.queryByNicknameOrEmail(reqVO)
+        );
     }
 
 }

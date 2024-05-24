@@ -5,8 +5,6 @@ import com.slipper.core.validator.constraints.Enum;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 /**
@@ -20,18 +18,8 @@ public class WsRequestDTO implements Serializable {
      */
     private static final long serialVersionUID = 1L;
     /**
-     * 请求类型 0-心跳 1-发送消息
+     * 请求类型 0-心跳
      */
     @Enum(WsMessageTypeEnum.class)
     private Integer type;
-    /**
-     * 消息确认字段
-     */
-    @NotBlank(message = "ack不能为空")
-    private String ack;
-    /**
-     * 请求主要内容
-     */
-    @Valid
-    private WsMessageDTO body;
 }

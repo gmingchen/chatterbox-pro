@@ -17,21 +17,21 @@ public class FriendCreateDTO implements Serializable {
      */
     private Long userId;
     /**
-     * 目标用户ID
-     */
-    private Long targetId;
-    /**
      * 用户分组ID
      */
-    private Long userGroupId;
+    private Long userGroupingId;
     /**
      * 用户备注
      */
     private String userRemark;
     /**
+     * 目标用户ID
+     */
+    private Long targetId;
+    /**
      * 目标用户分组ID
      */
-    private Long targetGroupId;
+    private Long targetGroupingId;
     /**
      * 目标用户备注
      */

@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * 用户基础信息对象
+ * 用户基础信息
  * @author gumingchen
  */
 @Data

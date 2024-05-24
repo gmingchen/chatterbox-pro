@@ -1,9 +1,7 @@
 package com.slipper.common.enums;
 
 import com.slipper.core.netty.core.WsMessageStrategy;
-import com.slipper.core.netty.core.groupChat.GroupChatMessage;
 import com.slipper.core.netty.core.heartbeat.HeartbeatMessage;
-import com.slipper.core.netty.core.privateChat.PrivateChatMessage;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -20,14 +18,6 @@ public enum WsMessageStrategyEnum implements EnumIntArray {
      * 心跳
      */
     HEARTBEAT(WsMessageTypeEnum.HEARTBEAT.getCode(), HeartbeatMessage.class),
-    /**
-     * 私聊
-     */
-    PRIVATE_CHAT(WsMessageTypeEnum.PRIVATE_CHAT_MESSAGE.getCode(), PrivateChatMessage.class),
-    /**
-     * 群聊
-     */
-    GROUP_CHAT(WsMessageTypeEnum.GROUP_CHAT_MESSAGE.getCode(), GroupChatMessage.class),
     ;
     /**
      * 类型值

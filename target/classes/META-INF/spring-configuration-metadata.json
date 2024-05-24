@@ -1,22 +1,39 @@
 {
   "groups": [
     {
+      "name": "file",
+      "type": "com.slipper.core.file.config.FileConfig",
+      "sourceType": "com.slipper.core.file.config.FileConfig"
+    },
+    {
       "name": "jwt",
       "type": "com.slipper.core.jwt.config.JsonWebTokenConfig",
       "sourceType": "com.slipper.core.jwt.config.JsonWebTokenConfig"
     },
     {
+      "name": "mail",
+      "type": "com.slipper.core.mail.config.MailConfig",
+      "sourceType": "com.slipper.core.mail.config.MailConfig"
+    },
+    {
       "name": "netty",
       "type": "com.slipper.core.netty.config.NettyConfig",
       "sourceType": "com.slipper.core.netty.config.NettyConfig"
-    },
-    {
-      "name": "wechat",
-      "type": "com.slipper.core.wechat.config.WechatConfig",
-      "sourceType": "com.slipper.core.wechat.config.WechatConfig"
     }
   ],
   "properties": [
+    {
+      "name": "file.path",
+      "type": "java.lang.String",
+      "description": "存储路径",
+      "sourceType": "com.slipper.core.file.config.FileConfig"
+    },
+    {
+      "name": "file.url",
+      "type": "java.lang.String",
+      "description": "访问路径",
+      "sourceType": "com.slipper.core.file.config.FileConfig"
+    },
     {
       "name": "jwt.expire",
       "type": "java.lang.Long",
@@ -30,41 +47,52 @@
       "sourceType": "com.slipper.core.jwt.config.JsonWebTokenConfig"
     },
     {
+      "name": "mail.email",
+      "type": "java.lang.String",
+      "description": "邮箱地址",
+      "sourceType": "com.slipper.core.mail.config.MailConfig"
+    },
+    {
+      "name": "mail.host",
+      "type": "java.lang.String",
+      "description": "主机",
+      "sourceType": "com.slipper.core.mail.config.MailConfig"
+    },
+    {
+      "name": "mail.password",
+      "type": "java.lang.String",
+      "description": "密码",
+      "sourceType": "com.slipper.core.mail.config.MailConfig"
+    },
+    {
+      "name": "mail.port",
+      "type": "java.lang.Integer",
+      "description": "端口",
+      "sourceType": "com.slipper.core.mail.config.MailConfig"
+    },
+    {
+      "name": "mail.protocol",
+      "type": "java.lang.String",
+      "description": "协议",
+      "sourceType": "com.slipper.core.mail.config.MailConfig"
+    },
+    {
+      "name": "mail.username",
+      "type": "java.lang.String",
+      "description": "用户名",
+      "sourceType": "com.slipper.core.mail.config.MailConfig"
+    },
+    {
       "name": "netty.port",
       "type": "java.lang.Integer",
       "description": "WebSocket-netty Server port",
-      "sourceType": "com.slipper.core.netty.config.NettyConfig",
-      "defaultValue": 0
+      "sourceType": "com.slipper.core.netty.config.NettyConfig"
     },
     {
       "name": "netty.url",
       "type": "java.lang.String",
       "description": "WebSocket Url",
       "sourceType": "com.slipper.core.netty.config.NettyConfig"
-    },
-    {
-      "name": "wechat.aes-key",
-      "type": "java.lang.String",
-      "description": "aesKey",
-      "sourceType": "com.slipper.core.wechat.config.WechatConfig"
-    },
-    {
-      "name": "wechat.app-id",
-      "type": "java.lang.String",
-      "description": "AppId",
-      "sourceType": "com.slipper.core.wechat.config.WechatConfig"
-    },
-    {
-      "name": "wechat.app-secret",
-      "type": "java.lang.String",
-      "description": "AppSecret",
-      "sourceType": "com.slipper.core.wechat.config.WechatConfig"
-    },
-    {
-      "name": "wechat.token",
-      "type": "java.lang.String",
-      "description": "token",
-      "sourceType": "com.slipper.core.wechat.config.WechatConfig"
     }
   ],
   "hints": []

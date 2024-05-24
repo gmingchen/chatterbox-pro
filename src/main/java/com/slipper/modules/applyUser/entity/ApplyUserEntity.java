@@ -1,7 +1,5 @@
 package com.slipper.modules.applyUser.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.slipper.common.po.BasePO;
 import lombok.Data;
@@ -15,11 +13,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("apply__user")
 public class ApplyUserEntity extends BasePO {
-    /**
-     * ID
-     */
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
     /**
      * 申请ID
      */

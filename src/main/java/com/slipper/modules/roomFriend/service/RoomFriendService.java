@@ -1,7 +1,7 @@
 package com.slipper.modules.roomFriend.service;
 
+import com.slipper.common.enums.StatusEnum;
 import com.slipper.core.mybatisplus.expend.service.IServiceX;
-import com.slipper.modules.room.entity.RoomEntity;
 import com.slipper.modules.roomFriend.entity.RoomFriendEntity;
 import com.slipper.modules.roomFriend.model.dto.RoomFriendCreateDTO;
 
@@ -12,24 +12,48 @@ import com.slipper.modules.roomFriend.model.dto.RoomFriendCreateDTO;
 public interface RoomFriendService extends IServiceX<RoomFriendEntity> {
 
     /**
-     * 新增
-     * @param createDTO 参数
+     * 新增好友房间
+     * @param dto 新增参数
      * @return
      */
-    RoomFriendEntity create(RoomFriendCreateDTO createDTO);
+    Long create(RoomFriendCreateDTO dto);
 
     /**
-     * 通过会话ID查询好友房间
-     * @param conversationId 会话ID
+     * 更新房间状态
+     * @param id ID
+     * @param status 状态
+     */
+    void updateStatus(Long id, StatusEnum status);
+    /**
+     * 更新房间状态
+     * @param sourceId 用户ID
+     * @param targetId 目标用户ID
+     * @param status 状态
+     */
+    void updateStatus(Long sourceId, Long targetId, StatusEnum status);
+
+    /**
+     * 校验好友房间是否存在
+     * @param sourceId 用户ID
+     * @param targetId 目标用户ID
      * @return
      */
-    RoomFriendEntity queryByConversationId(Long conversationId);
+    Boolean validateIsExistByUserId(Long sourceId, Long targetId);
 
     /**
-     * 通过用户的ID查询房间
+     * 校验房间成员
+     * @param roomId 房间ID
      * @param userId 用户ID
-     * @param friendId 好友ID
      * @return
      */
-    RoomFriendEntity queryByUserId(Long userId, Long friendId);
+    Boolean validateMember(Long roomId, Long userId);
+
+    /**
+     * 通过用户ID查询好友房间
+     * @param sourceId 用户ID
+     * @param targetId 目标用户ID
+     * @return
+     */
+    RoomFriendEntity queryByUserId(Long sourceId, Long targetId);
+
 }

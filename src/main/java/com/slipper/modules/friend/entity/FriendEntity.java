@@ -1,7 +1,5 @@
 package com.slipper.modules.friend.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.slipper.common.po.BasePO;
 import lombok.Data;
@@ -16,11 +14,6 @@ import lombok.experimental.Accessors;
 @TableName("friend")
 public class FriendEntity extends BasePO {
     /**
-     * ID
-     */
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
-    /**
      * 用户ID
      */
     private Long userId;
@@ -31,7 +24,7 @@ public class FriendEntity extends BasePO {
     /**
      * 分组ID
      */
-    private Long groupId;
+    private Long groupingId;
     /**
      * 备注
      */

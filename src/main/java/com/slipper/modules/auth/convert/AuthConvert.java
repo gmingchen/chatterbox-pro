@@ -1,5 +1,6 @@
 package com.slipper.modules.auth.convert;
 
+import com.slipper.modules.auth.model.req.AuthRegisterReqVO;
 import com.slipper.modules.user.entity.UserEntity;
 import com.slipper.modules.user.model.dto.LoginUserDTO;
 import com.slipper.modules.user.model.dto.UserCreateDTO;
@@ -14,6 +15,8 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface AuthConvert {
     AuthConvert INSTANCE = Mappers.getMapper(AuthConvert.class);
+
+    UserCreateDTO convert(AuthRegisterReqVO bean);
 
     LoginUserDTO convert(UserEntity bean);
 }

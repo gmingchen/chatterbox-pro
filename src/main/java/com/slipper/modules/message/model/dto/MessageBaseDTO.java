@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 /**
  * @author gumingchen
  */
-@AllArgsConstructor
 @Data
 public class MessageBaseDTO implements Serializable {
     private static final long serialVersionUID = 1L;

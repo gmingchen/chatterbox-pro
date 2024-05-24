@@ -1,46 +1,39 @@
 package com.slipper.modules.user.model.dto;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.slipper.common.enums.DesensitizationEnum;
+import com.slipper.core.serializer.Desensitization;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.apache.ibatis.type.JdbcType;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
+ * 登录用户
  * @author gumingchen
  */
 @Accessors(chain = true)
 @Data
-public class LoginUserDTO implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class LoginUserDTO extends UserBaseDTO {
     /**
-     * ID
+     * 邮箱
      */
-    private Long id;
+    @Desensitization(DesensitizationEnum.EMAIL)
+    private String email;
     /**
-     * 昵称
+     * 最后 上|下 线时间
      */
-    private String nickname;
+    private LocalDateTime lastAt;
     /**
-     * 密码
+     * 创建时间
      */
-    private String avatar;
-    /**
-     * 性别：0-女 1-男 2-未知
-     */
-    private Integer sex;
-    /**
-     * 是否在线：0-离线 1-在线
-     */
-    private Integer online;
+    private LocalDateTime createdAt;
     /**
      * 状态：0-禁用 1-启用
      */
     private Integer status;
-    /**
-     * 微信openid
-     */
-    private String openId;
     /**
      * Token 凭证
      */

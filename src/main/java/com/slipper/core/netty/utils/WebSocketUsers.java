@@ -1,5 +1,7 @@
 package com.slipper.core.netty.utils;
 
+import cn.hutool.json.JSONUtil;
+import com.slipper.core.netty.dto.WsResponseDTO;
 import io.netty.channel.Channel;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.util.internal.PlatformDependent;
@@ -7,10 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentMap;
 
 /**
@@ -90,9 +89,10 @@ public class WebSocketUsers {
 
     /**
      * 群发消息
-     * @param message 消息内容
+     * @param messageObj 消息
      */
-    public static void sendMessage(String message) {
+    public static <T> void sendMessage(WsResponseDTO<T> messageObj) {
+        String message = JSONUtil.toJsonStr(messageObj);
         Collection<Channel> values = USERS.values();
         for (Channel value : values) {
             value.write(new TextWebSocketFrame(message));
@@ -102,10 +102,11 @@ public class WebSocketUsers {
 
     /**
      * 指定某些人发送消息
-     * @param message  消息
+     * @param messageObj 消息
      * @param keys key数组
      */
-    public static void sendMessage(String message, List<String> keys) {
+    public static <T> void sendMessage(WsResponseDTO<T> messageObj, List<String> keys) {
+        String message = JSONUtil.toJsonStr(messageObj);
         for (String key : keys) {
             Channel channel = USERS.get(key);
             if (channel != null) {
@@ -117,10 +118,13 @@ public class WebSocketUsers {
 
     /**
      * 指定某些人发送消息
-     * @param message  消息
-     * @param keys key数组
+     * @param messageObj 消息
+     * @param key key
      */
-    public static void sendMessage(String message, String ...keys) {
-        sendMessage(message, keys);
+    public static <T> void sendMessage(WsResponseDTO<T> messageObj, String key) {
+        List<String> keys = new ArrayList<>();
+        keys.add(key);
+       sendMessage(messageObj, keys);
     }
+
 }

@@ -1,5 +1,6 @@
 package com.slipper.core.jwt.utils;
 
+import com.slipper.common.constant.Constant;
 import com.slipper.core.jwt.config.JsonWebTokenConfig;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -35,7 +36,7 @@ public class JwtUtils {
         headerMap.put("typ", "JWT");
         // 荷载信息
         Map<String, Object> claimsMap = new HashMap<>(1);
-        claimsMap.put("id", id);
+        claimsMap.put(Constant.JWT_KEY, id);
 
         Date now = new Date();
 
@@ -82,6 +83,31 @@ public class JwtUtils {
     public Claims getClaims(String token) {
         return getClaims(token, jsonWebTokenConfig.getSecret());
     }
+
+    /**
+     * 获取荷载信息值
+     * @param token jwt
+     * @param secret 秘钥
+     * @param clazz 类型
+     * @param <T> 类型
+     * @return
+     */
+    public <T> T getClaimsValue(String token, String secret, Class<T> clazz) {
+        Claims claims = getClaims(token, secret);
+        return claims.get(Constant.JWT_KEY, clazz);
+    }
+
+    /**
+     * 获取荷载信息值
+     * @param token jwt
+     * @param clazz 类型
+     * @param <T> 类型
+     * @return
+     */
+    public <T> T getClaimsValue(String token, Class<T> clazz) {
+        return getClaimsValue(token, jsonWebTokenConfig.getSecret(), clazz);
+    }
+
 
     /**
      * 获取过期时间

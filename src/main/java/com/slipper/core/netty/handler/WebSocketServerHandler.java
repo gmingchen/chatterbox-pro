@@ -1,29 +1,20 @@
 package com.slipper.core.netty.handler;
 
 import cn.hutool.json.JSONUtil;
-import com.google.gson.Gson;
 import com.slipper.common.constant.WebSocketConstant;
-import com.slipper.common.enums.WsMessageStrategyEnum;
-import com.slipper.core.netty.core.WsMessageContext;
-import com.slipper.core.netty.dto.WsRequestDTO;
+import com.slipper.common.enums.UserOnlineStatusEnum;
 import com.slipper.core.netty.dto.WsResponseDTO;
 import com.slipper.core.netty.service.NettyService;
 import com.slipper.core.netty.utils.WebSocketUsers;
 import com.slipper.modules.user.model.dto.LoginUserDTO;
-import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.handler.codec.http.websocketx.*;
-import io.netty.util.AttributeKey;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.msgpack.MessagePack;
 
 import java.io.IOException;
-import java.util.Date;
-import java.util.Optional;
 
 /**
  * WebSocketServer端处理器
@@ -93,6 +84,9 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
         WebSocketUsers.remove(channel);
         // 关闭通道
         channel.close();
+        // 更新用户在线状态
+        LoginUserDTO loginUserDTO = channel.attr(WebSocketConstant.ATTRIBUTE_KEY).get();
+        nettyService.updateOnline(loginUserDTO.getId(), UserOnlineStatusEnum.OFFLINE);
     }
 
     /**
@@ -168,6 +162,8 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
             } else {
                 // 握手响应
                 socketServerHandShaker.handshake(connectChannel, req);
+                // 更新用户在线状态
+                nettyService.updateOnline(loginUserDTO.getId(), UserOnlineStatusEnum.ONLINE);
             }
         } else {
             // 断开连接
@@ -184,8 +180,6 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
         Channel channel = channelHandlerContext.channel();
         // region 纯文本消息
         if (frame instanceof TextWebSocketFrame) {
-            // 获取当前用户信息
-            LoginUserDTO loginUserDTO = channel.attr(WebSocketConstant.ATTRIBUTE_KEY).get();
             // 获取消息内容
             String message = ((TextWebSocketFrame) frame).text();
             nettyService.messageHandle(channel, message);

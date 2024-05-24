@@ -1,13 +1,21 @@
 package com.slipper.modules.auth.service.impl;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.slipper.common.constant.RedisConstant;
-import com.slipper.core.jwt.utils.JwtUtils;
+import com.slipper.common.enums.ResultCodeEnum;
+import com.slipper.common.enums.StatusEnum;
 import com.slipper.core.redis.utils.RedisUtils;
+import com.slipper.core.security.utils.SecurityUtils;
 import com.slipper.exception.RunException;
 import com.slipper.modules.auth.convert.AuthConvert;
+import com.slipper.modules.auth.model.req.AuthLoginReqVO;
+import com.slipper.modules.auth.model.req.AuthLogoutReqVO;
+import com.slipper.modules.auth.model.req.AuthRegisterReqVO;
 import com.slipper.modules.auth.service.AuthService;
-import com.slipper.modules.group.model.dto.GroupCreateDTO;
-import com.slipper.modules.group.service.GroupService;
+import com.slipper.modules.captcha.model.req.CaptchaReqVO;
+import com.slipper.modules.captcha.service.CaptchaService;
+import com.slipper.modules.token.model.dto.TokenDTO;
+import com.slipper.modules.token.service.TokenService;
 import com.slipper.modules.user.entity.UserEntity;
 import com.slipper.modules.user.model.dto.LoginUserDTO;
 import com.slipper.modules.user.model.dto.UserCreateDTO;
@@ -16,76 +24,110 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.time.LocalDateTime;
-import java.util.Optional;
 
 /**
  * @author gumingchen
  */
 @Service("authService")
 public class AuthServiceImpl implements AuthService {
-
+    @Resource
+    private CaptchaService captchaService;
     @Resource
     private UserService userService;
     @Resource
-    private GroupService groupService;
-    @Resource
-    private RedisUtils redisUtils;
-    @Resource
-    private JwtUtils jwtUtils;
+    private TokenService tokenService;
 
-    @Transactional(rollbackFor = RunException.class)
     @Override
-    public UserEntity register(String openId) {
-        // 创建用户
-        UserCreateDTO userCreateDTO = new UserCreateDTO()
-                .setOpenId(openId)
-                .setNickname("")
-                .setAvatar("")
-                .setSex(2)
-                .setOnline(1)
-                .setLastAt(LocalDateTime.now());
-        UserEntity user = userService.create(userCreateDTO);
-        // 初始化用户分组
-        GroupCreateDTO groupCreateDTO = new GroupCreateDTO()
-                .setUserId(user.getId())
-                .setName("我的好友")
-                .setFixed(1);
-        groupService.create(groupCreateDTO);
-
-        return user;
+    public void registerCaptcha(CaptchaReqVO reqVO) {
+        int length = 6;
+        long seconds = 60 * 5L;
+        captchaService.send(reqVO.getEmail(), length, RedisConstant.CAPTCHA_REGISTER, seconds);
     }
 
     @Transactional(rollbackFor = RunException.class)
     @Override
-    public LoginUserDTO login() {
-        // 获取用户信息 用户不存在则执行注册逻辑
-        UserEntity user = Optional.ofNullable(userService.queryByOpenId("openId"))
-                .orElse(this.register(""));
+    public TokenDTO register(AuthRegisterReqVO reqVO) {
+        // 校验验证码
+        captchaService.validate(reqVO.getCaptcha(), reqVO.getEmail(), RedisConstant.CAPTCHA_REGISTER);
+        // 新增用户
+        UserCreateDTO convert = AuthConvert.INSTANCE.convert(reqVO);
+        Long userId = userService.create(convert);
+        // 生成登录凭证
+        return tokenService.generate(userId);
+    }
 
-        LoginUserDTO loginUserDTO = AuthConvert.INSTANCE.convert(user);
-        // 创建token
-        String token = jwtUtils.generate(loginUserDTO.getId());
-        LocalDateTime expiredAt = jwtUtils.getExpire(token);
-        // 设置token
-        loginUserDTO.setToken(token).setExpireAt(expiredAt);
-        // 登录信息存入redis
-        String key = RedisConstant.LOGIN_USER_INFO + token;
-        // 获取有效时长
-        long expire = jwtUtils.getExpireDuration(token);
-        redisUtils.set(key, loginUserDTO, expire);
+    @Override
+    public void loginCaptcha(CaptchaReqVO reqVO) {
+        int length = 6;
+        long seconds = 60 * 5L;
+        captchaService.send(reqVO.getEmail(), length, RedisConstant.CAPTCHA_LOGIN, seconds);
+    }
 
+    @Transactional(rollbackFor = RunException.class)
+    @Override
+    public TokenDTO login(AuthLoginReqVO reqVO) {
+        // 校验验证码
+        captchaService.validate(reqVO.getCaptcha(), reqVO.getEmail(), RedisConstant.CAPTCHA_LOGIN);
+        // 查询用户信息
+        UserEntity userEntity = userService.queryByEmail(reqVO.getEmail());
+        if (ObjectUtil.isNull(userEntity)) {
+            throw new RunException(ResultCodeEnum.LOGIN_USER_NOT_EXIST);
+        } else if (userEntity.getStatus().equals(StatusEnum.DISABLE.getCode())) {
+            throw new RunException(ResultCodeEnum.USER_DISABLED);
+        }
+        // 生成登录凭证
+        return tokenService.generate(userEntity.getId());
+    }
+
+    @Override
+    public void logoff() {
+        // 销毁登录凭证
+        tokenService.destruction(SecurityUtils.getLoginUserId());
+    }
+
+    @Override
+    public void logoutCaptcha(CaptchaReqVO reqVO) {
+        int length = 6;
+        long seconds = 60 * 5L;
+        captchaService.send(reqVO.getEmail(), length, RedisConstant.CAPTCHA_LOGOUT, seconds);
+    }
+
+    @Override
+    public void logout(AuthLogoutReqVO reqVO) {
+        // 校验验证码
+        captchaService.validate(reqVO.getCaptcha(), SecurityUtils.getLoginUser().getEmail(), RedisConstant.CAPTCHA_LOGOUT);
+
+        this.logoff();
+        userService.removeById(SecurityUtils.getLoginUserId());
+    }
+
+    @Override
+    public Boolean validateToken(String token) {
+        return tokenService.validate(token);
+    }
+
+    @Override
+    public LoginUserDTO queryUser(String token) {
+        // 获取 Token 对象
+        TokenDTO tokenDTO = tokenService.getTokenInfo(token);
+        // 获取用户信息
+        UserEntity userEntity = userService.getById(tokenDTO.getUserId());
+        LoginUserDTO loginUserDTO = AuthConvert.INSTANCE.convert(userEntity);
+        loginUserDTO.setToken(tokenDTO.getToken());
+        loginUserDTO.setExpireAt(tokenDTO.getExpiredAt());
         return loginUserDTO;
+//        // 获取用户信息
+//        String key = RedisConstant.LOGIN_USER_INFO + tokenDTO.getUserId();
+//        return redisUtils.get(key, LoginUserDTO.class).orElseGet(() -> {
+//                    // 获取用户信息
+//                    UserEntity userEntity = userService.getById(tokenDTO.getUserId());
+//                    LoginUserDTO loginUserDTO = AuthConvert.INSTANCE.convert(userEntity);
+//                    loginUserDTO.setToken(tokenDTO.getToken());
+//                    loginUserDTO.setExpireAt(tokenDTO.getExpiredAt());
+//                    // 存储到 redis
+//                    redisUtils.set(key, loginUserDTO);
+//                    return loginUserDTO;
+//        });
     }
 
-    @Override
-    public LoginUserDTO queryLoginUser(String token) {
-        String key = RedisConstant.LOGIN_USER_INFO + token;
-        return redisUtils.get(key, LoginUserDTO.class).orElse(null);
-    }
-
-    @Override
-    public boolean validateToken(String token) {
-        return jwtUtils.validate(token);
-    }
 }

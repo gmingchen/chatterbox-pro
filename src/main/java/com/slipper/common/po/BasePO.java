@@ -1,8 +1,6 @@
 package com.slipper.common.po;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.apache.ibatis.type.JdbcType;
@@ -17,6 +15,11 @@ import java.time.LocalDateTime;
 @Data
 public class BasePO implements Serializable {
     private static final long serialVersionUID = 1L;
+    /**
+     * ID
+     */
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
     /**
      * 创建时间
      */

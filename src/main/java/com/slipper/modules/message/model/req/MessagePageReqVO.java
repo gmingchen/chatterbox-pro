@@ -15,4 +15,8 @@ public class MessagePageReqVO extends PageParam {
      */
     @NotNull(message = "房间ID不能为空")
     private Long roomId;
+    /**
+     * 上一条消息的ID
+     */
+    private Long lastId;
 }

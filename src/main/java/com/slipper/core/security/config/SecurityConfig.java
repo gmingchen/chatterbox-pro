@@ -42,10 +42,14 @@ public class SecurityConfig {
                 .and().authorizeRequests()
                 // 可匿名访问的接口配置
                 .antMatchers(
+                        // 登录注册验证码
+                        "/auth/captcha/**",
+                        // 注册
+                        "/auth/register",
                         // 登录
-                        "/app/auth/login",
-                        // 退出登录
-                        "/app/auth/logout"
+                        "/auth/login",
+                        // 头像上传
+                        "/file/upload/avatar"
                 ).permitAll()
                 // 其他接口必须登录才可访问
                 .and().authorizeRequests()

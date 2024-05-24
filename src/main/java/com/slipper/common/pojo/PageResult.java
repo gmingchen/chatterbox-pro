@@ -33,12 +33,6 @@ public class PageResult<T> implements Serializable {
      */
     private String requestId;
 
-    public PageResult(Long total) {
-        this.total = 0L;
-        this.pages = 0L;
-        this.list = list;
-    }
-
     public PageResult(Long total, Long pages, List<T> list) {
         this.total = total;
         this.pages = pages;

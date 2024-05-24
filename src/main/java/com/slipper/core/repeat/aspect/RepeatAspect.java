@@ -8,6 +8,7 @@ import com.slipper.core.redis.utils.RedisUtils;
 import com.slipper.core.repeat.annotation.Repeat;
 import com.slipper.core.security.utils.SecurityUtils;
 import com.slipper.exception.RunException;
+import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -44,7 +45,10 @@ public class RepeatAspect {
         // 请求URL
         String url = HttpContextUtils.getRequestUrl();
         // 存储Redis的Key
-        String key = RedisConstant.REPEAT + url + "-" + token;
+        String key = RedisConstant.REPEAT + url;
+        if (StringUtils.isNotBlank(token)) {
+            key += "-" + token;
+        }
         // 获取请求参数
         String params = Utils.getParams(point.getArgs());
         if (params == null) {
