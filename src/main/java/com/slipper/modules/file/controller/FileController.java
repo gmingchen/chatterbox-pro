@@ -3,6 +3,8 @@ package com.slipper.modules.file.controller;
 import com.slipper.common.pojo.Result;
 import com.slipper.core.repeat.annotation.Repeat;
 import com.slipper.modules.file.model.req.FileUploadAvatarReqVO;
+import com.slipper.modules.file.model.req.FileUploadFileReqVO;
+import com.slipper.modules.file.model.req.FileUploadImageReqVO;
 import com.slipper.modules.file.service.FileService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,9 +30,35 @@ public class FileController {
      */
     @Repeat()
     @PostMapping("/upload/avatar")
-    public Result<String> applyFriend(@Validated FileUploadAvatarReqVO reqVO) {
+    public Result<String> uploadAvatar(@Validated FileUploadAvatarReqVO reqVO) {
         return Result.success(
                 fileService.uploadAvatar(reqVO)
+        );
+    }
+
+
+    /**
+     * 上传图片消息
+     * @return
+     */
+    @Repeat()
+    @PostMapping("/upload/image")
+    public Result<String> uploadImage(@Validated FileUploadImageReqVO reqVO) {
+        return Result.success(
+                fileService.uploadImage(reqVO)
+        );
+    }
+
+
+    /**
+     * 上传图片以外的文件消息
+     * @return
+     */
+    @Repeat()
+    @PostMapping("/upload/file")
+    public Result<String> uploadFile(@Validated FileUploadFileReqVO reqVO) {
+        return Result.success(
+                fileService.uploadFile(reqVO)
         );
     }
 

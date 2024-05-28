@@ -370,16 +370,6 @@ q
 Asrc/main/java/com/slipper/modules/apply/service/ApplyService.java,7\a\7a64a46bb4bd4ee1d8e5010f7478dc6f5a78489a
 h
 8src/main/java/com/slipper/core/file/utils/FileUtils.java,7\2\72672d9170b611586ffc4e758e509d1896304669
-o
-?src/main/java/com/slipper/modules/file/service/FileService.java,f\7\f7ef57ba32e1415e0d8c8062fd25759f88442bf2
-x
-Hsrc/main/java/com/slipper/modules/file/service/impl/FileServiceImpl.java,2\2\227b015e7b650a0f1d727170bde00650c1bbe88e
-u
-Esrc/main/java/com/slipper/modules/file/controller/FileController.java,9\5\95bbc5bffde268dc06697cc5dcaff65d6eab6dbc
-s
-Csrc/main/java/com/slipper/modules/file/model/dto/FileUploadDTO.java,e\5\e546032180560c512c6093fb57d57c1675bde24d
-{
-Ksrc/main/java/com/slipper/modules/file/model/req/FileUploadAvatarReqVO.java,5\f\5f824fff3d5e810e9da32689005dbbe81ea35895
 j
 :src/main/java/com/slipper/core/file/config/FileConfig.java,9\3\937002544e4613a7975e30d6bb93654d83300356
 r
@@ -398,8 +388,6 @@ q
 Asrc/main/java/com/slipper/modules/friend/model/dto/FriendDTO.java,1\d\1d0c5824012a4d2f26bc2e143a82129cb762fd04
 }
 Msrc/main/java/com/slipper/modules/grouping/model/res/GroupingFriendResVO.java,6\e\6ef6072c93952dab40fc6c63bdacae1d6b1b4cad
-j
-:src/main/java/com/slipper/common/enums/ResultCodeEnum.java,0\c\0cc21489f0dab8aabb81830fcaf2c7a3773999a9
 u
 Esrc/main/java/com/slipper/modules/user/controller/UserController.java,e\a\ea5b3f03c0aed077951534869c683ca076433979
 u
