@@ -25,4 +25,9 @@ public class Constant {
      * 图片类型
      */
     public static final String[] IMAGE_TYPE = {"IMAGE/JPG", "IMAGE/PNG", "IMAGE/GIF", "IMAGE/JPEG"};
+    /**
+     * 音频类型
+     */
+    public static final String[] AUDIO_TYPE = {"AUDIO/MP3", "AUDIO/MP4", "AUDIO/MPEG"};
 }
+

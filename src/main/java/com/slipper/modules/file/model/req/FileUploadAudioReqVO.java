@@ -7,6 +7,6 @@ import lombok.Data;
  * @author gumingchen
  */
 @Data
-public class FileUploadVoiceReqVO extends FileUploadDTO {
+public class FileUploadAudioReqVO extends FileUploadDTO {
 
 }

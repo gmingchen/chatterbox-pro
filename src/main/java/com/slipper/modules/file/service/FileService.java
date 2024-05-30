@@ -3,7 +3,7 @@ package com.slipper.modules.file.service;
 import com.slipper.modules.file.model.req.FileUploadAvatarReqVO;
 import com.slipper.modules.file.model.req.FileUploadFileReqVO;
 import com.slipper.modules.file.model.req.FileUploadImageReqVO;
-import com.slipper.modules.file.model.req.FileUploadVoiceReqVO;
+import com.slipper.modules.file.model.req.FileUploadAudioReqVO;
 
 /**
  * 文件
@@ -37,6 +37,6 @@ public interface FileService {
      * @param reqVO
      * @return
      */
-    String upload(FileUploadVoiceReqVO reqVO);
+    String upload(FileUploadAudioReqVO reqVO);
 
 }

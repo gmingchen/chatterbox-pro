@@ -56,4 +56,11 @@ public interface RoomFriendService extends IServiceX<RoomFriendEntity> {
      */
     RoomFriendEntity queryByUserId(Long sourceId, Long targetId);
 
+    /**
+     * 通过房间ID查询好友房间
+     * @param roomId
+     * @return
+     */
+    RoomFriendEntity queryByRoomId(Long roomId);
+
 }

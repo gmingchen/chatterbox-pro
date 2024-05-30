@@ -15,15 +15,18 @@
             <result property="avatar" column="avatar"/>
             <result property="sex" column="sex"/>
             <result property="online" column="online"/>
+            <result property="email" column="email"/>
+            <result property="lastAt" column="last_at"/>
+            <result property="createdAt" column="created_at"/>
         </collection>
     </resultMap>
 <!--    List<GroupingFriendResVO> queryList(@Param("userId") Long userId);-->
     <select id="queryList" resultMap="GroupingFriendMap">
         SELECT g.id, g.name, g.fixed,
                f.id AS friend_id, f.remark, f.friend_id AS user_id,
-               u.nickname, u.avatar, u.sex, u.online
+               u.nickname, u.avatar, u.sex, u.online, u.email, u.last_at, u.created_at
         FROM `grouping` AS g
-        LEFT JOIN friend AS f ON f.grouping_id = g.id
+        LEFT JOIN friend AS f ON f.grouping_id = g.id AND f.deleted = 0
         LEFT JOIN user AS u ON u.id = f.friend_id
         WHERE g.deleted = 0 AND g.user_id = #{ userId }
         ORDER BY g.fixed DESC, u.nickname ASC, f.created_at DESC

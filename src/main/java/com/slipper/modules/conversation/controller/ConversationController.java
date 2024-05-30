@@ -26,7 +26,7 @@ public class ConversationController {
      * 会话列表
      * @return
      */
-    @Repeat
+//    @Repeat
     @GetMapping("/list")
     public Result<List<ConversationResVO>> list() {
         return Result.success(

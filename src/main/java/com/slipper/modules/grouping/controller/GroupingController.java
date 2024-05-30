@@ -63,7 +63,7 @@ public class GroupingController {
      * 获取分组好友列表
      * @return
      */
-    @Repeat()
+//    @Repeat()
     @GetMapping("/friend")
     public Result<List<GroupingFriendResVO>> queryGroupingFriend() {
         return Result.success(

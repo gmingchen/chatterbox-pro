@@ -1,8 +1,10 @@
 package com.slipper.modules.message.service.impl;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.slipper.common.enums.MessageTypeEnum;
+import com.slipper.common.enums.ResultCodeEnum;
 import com.slipper.common.enums.RoomTypeEnum;
 import com.slipper.common.enums.WsMessageTypeEnum;
 import com.slipper.common.pojo.PageResult;
@@ -14,6 +16,7 @@ import com.slipper.core.security.utils.SecurityUtils;
 import com.slipper.exception.RunException;
 import com.slipper.modules.conversation.model.res.ConversationResVO;
 import com.slipper.modules.conversation.service.ConversationService;
+import com.slipper.modules.friend.service.FriendService;
 import com.slipper.modules.message.entity.MessageEntity;
 import com.slipper.modules.message.mapper.MessageMapper;
 import com.slipper.modules.message.model.req.MessageCreateReqVO;
@@ -22,6 +25,8 @@ import com.slipper.modules.message.model.res.MessageResVO;
 import com.slipper.modules.message.service.MessageService;
 import com.slipper.modules.room.entity.RoomEntity;
 import com.slipper.modules.room.service.RoomService;
+import com.slipper.modules.roomFriend.entity.RoomFriendEntity;
+import com.slipper.modules.roomFriend.service.RoomFriendService;
 import com.slipper.modules.user.service.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,9 +44,13 @@ public class MessageServiceImpl extends ServiceImplX<MessageMapper, MessageEntit
     @Resource
     private RoomService roomService;
     @Resource
+    private RoomFriendService roomFriendService;
+    @Resource
     private UserService userService;
     @Resource
     private ConversationService conversationService;
+    @Resource
+    private FriendService friendService;
 
     @Override
     public PageResult<MessageResVO> page(MessagePageReqVO reqVO) {
@@ -65,6 +74,15 @@ public class MessageServiceImpl extends ServiceImplX<MessageMapper, MessageEntit
     public ConversationResVO create(MessageCreateReqVO reqVO) {
         // 校验是否是房间成员
         roomService.validateRoomMember(reqVO.getRoomId(), SecurityUtils.getLoginUserId());
+
+        // 校验好友关系
+        RoomFriendEntity roomFriendEntity = roomFriendService.queryByRoomId(reqVO.getRoomId());
+        if(roomFriendEntity != null) {
+            boolean friendBool = friendService.validateFriendBoth(roomFriendEntity.getSourceUserId(), roomFriendEntity.getTargetUserId());
+            if (!friendBool) {
+                throw new RunException(ResultCodeEnum.NOT_FRIEND);
+            }
+        }
 
         // 新增消息
         MessageEntity messageEntity = new MessageEntity()

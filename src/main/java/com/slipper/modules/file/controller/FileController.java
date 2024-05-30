@@ -2,6 +2,7 @@ package com.slipper.modules.file.controller;
 
 import com.slipper.common.pojo.Result;
 import com.slipper.core.repeat.annotation.Repeat;
+import com.slipper.modules.file.model.req.FileUploadAudioReqVO;
 import com.slipper.modules.file.model.req.FileUploadAvatarReqVO;
 import com.slipper.modules.file.model.req.FileUploadFileReqVO;
 import com.slipper.modules.file.model.req.FileUploadImageReqVO;
@@ -32,10 +33,9 @@ public class FileController {
     @PostMapping("/upload/avatar")
     public Result<String> uploadAvatar(@Validated FileUploadAvatarReqVO reqVO) {
         return Result.success(
-                fileService.uploadAvatar(reqVO)
+                fileService.upload(reqVO)
         );
     }
-
 
     /**
      * 上传图片消息
@@ -45,10 +45,9 @@ public class FileController {
     @PostMapping("/upload/image")
     public Result<String> uploadImage(@Validated FileUploadImageReqVO reqVO) {
         return Result.success(
-                fileService.uploadImage(reqVO)
+                fileService.upload(reqVO)
         );
     }
-
 
     /**
      * 上传图片以外的文件消息
@@ -58,8 +57,19 @@ public class FileController {
     @PostMapping("/upload/file")
     public Result<String> uploadFile(@Validated FileUploadFileReqVO reqVO) {
         return Result.success(
-                fileService.uploadFile(reqVO)
+                fileService.upload(reqVO)
         );
     }
 
+    /**
+     * 上传音频文件消息
+     * @return
+     */
+    @Repeat()
+    @PostMapping("/upload/audio")
+    public Result<String> uploadAudio(@Validated FileUploadAudioReqVO reqVO) {
+        return Result.success(
+                fileService.upload(reqVO)
+        );
+    }
 }

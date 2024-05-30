@@ -62,4 +62,11 @@ public class RoomFriendServiceImpl extends ServiceImplX<RoomFriendMapper, RoomFr
                 .or(w -> w.eq(RoomFriendEntity::getSourceUserId, targetId).eq(RoomFriendEntity::getTargetUserId, sourceId));
         return baseMapper.selectOne(wrapper);
     }
+
+    @Override
+    public RoomFriendEntity queryByRoomId(Long roomId) {
+        LambdaQueryWrapper<RoomFriendEntity> wrapper = new LambdaQueryWrapperX<RoomFriendEntity>()
+                .eq(RoomFriendEntity::getRoomId, roomId);
+        return baseMapper.selectOne(wrapper);
+    }
 }
