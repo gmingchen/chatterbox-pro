@@ -188,8 +188,6 @@ q
 Asrc/main/java/com/slipper/modules/friend/entity/FriendEntity.java,e\6\e65f8be04a5dd8e6daa2a6ab0c9facb7e8857c3f
 x
 Hsrc/main/java/com/slipper/core/mybatisplus/expend/service/IServiceX.java,2\f\2f41ad227549e1b4c78c2cc48aa43f4e72b3f02b
-w
-Gsrc/main/java/com/slipper/modules/apply/model/req/ApplyFriendReqVO.java,b\4\b4315b83e87a50270f1dc457e6051260171aa614
 }
 Msrc/main/java/com/slipper/modules/apply/model/req/ApplyReviewFriendReqVO.java,2\b\2bdb082d656f8a53fa73268e9b3316c7cf7cc505
 w
@@ -238,8 +236,6 @@ Esrc/main/java/com/slipper/modules/auth/model/req/AuthLogoutReqVO.java,1\7\17e0
 Ksrc/main/java/com/slipper/modules/roomFriend/convert/RoomFriendConvert.java,b\a\bab1e6fb655da9d21a88ad7c50074f9767dadb18
 d
 4src/main/java/com/slipper/common/pojo/PageParam.java,4\3\439834602fb73df33c55ded98abc36e80fe0e262
-o
-?src/main/java/com/slipper/modules/user/convert/UserConvert.java,8\d\8d430427b21cfbac91ba7a1a4f1535983706abd8
 f
 6src/main/java/com/slipper/common/enums/StatusEnum.java,2\6\2634bf57142d83fa257199c7650ae3e4878c082e
 s
@@ -254,8 +250,6 @@ y
 Isrc/main/java/com/slipper/modules/friend/controller/FriendController.java,5\1\5105ac2c854e80387f265fcb38e7698eb47a9b74
 m
 =src/main/java/com/slipper/modules/room/mapper/RoomMapper.java,1\0\100ec11757be0a8b465c02bd23c40fc9075d344f
-w
-Gsrc/main/java/com/slipper/modules/apply/controller/ApplyController.java,6\5\65ce4a913e4e089d1caff5753a7d251346f5dd26
 
 Osrc/main/java/com/slipper/modules/conversation/convert/ConversationConvert.java,1\c\1cf462eda97dd4296153155a68c4608973195f3e
 {
@@ -344,8 +338,6 @@ z
 Jsrc/main/java/com/slipper/modules/room/model/req/RoomGroupUpdateReqVO.java,1\5\153317abefbe1536ba64efd08fe75b9587643a55
 q
 Asrc/main/java/com/slipper/modules/apply/service/ApplyService.java,7\a\7a64a46bb4bd4ee1d8e5010f7478dc6f5a78489a
-h
-8src/main/java/com/slipper/core/file/utils/FileUtils.java,7\2\72672d9170b611586ffc4e758e509d1896304669
 j
 :src/main/java/com/slipper/core/file/config/FileConfig.java,9\3\937002544e4613a7975e30d6bb93654d83300356
 r

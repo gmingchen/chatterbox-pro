@@ -8,6 +8,8 @@ import com.slipper.modules.captcha.model.req.CaptchaReqVO;
 import com.slipper.modules.user.entity.UserEntity;
 import com.slipper.modules.user.model.dto.UserBaseDTO;
 import com.slipper.modules.user.model.dto.UserCreateDTO;
+import com.slipper.modules.user.model.dto.UserInfoDTO;
+import com.slipper.modules.user.model.req.UserInfoReqVO;
 import com.slipper.modules.user.model.req.UserSearchReqVO;
 import com.slipper.modules.user.model.req.UserUpdateEmailReqVO;
 import com.slipper.modules.user.model.req.UserUpdateReqVO;
@@ -27,6 +29,13 @@ public interface UserService extends IServiceX<UserEntity> {
      * @return
      */
     Long create(UserCreateDTO dto);
+
+    /**
+     * 通过用户ID查询信息
+     * @param reqVO 参数
+     * @return
+     */
+    UserInfoDTO queryById(UserInfoReqVO reqVO);
 
     /**
      * 通过邮箱查询用户

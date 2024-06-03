@@ -4,6 +4,7 @@ import com.slipper.common.pojo.PageResult;
 import com.slipper.modules.user.entity.UserEntity;
 import com.slipper.modules.user.model.dto.LoginUserDTO;
 import com.slipper.modules.user.model.dto.UserCreateDTO;
+import com.slipper.modules.user.model.dto.UserInfoDTO;
 import com.slipper.modules.user.model.req.UserUpdateReqVO;
 import com.slipper.modules.user.model.res.UserSearchResVO;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-22T16:29:49+0800",
+    date = "2024-06-03T16:58:51+0800",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 1.8.0_291 (Oracle Corporation)"
 )
 public class UserConvertImpl implements UserConvert {
@@ -67,6 +68,27 @@ public class UserConvertImpl implements UserConvert {
         loginUserDTO.setStatus( bean.getStatus() );
 
         return loginUserDTO;
+    }
+
+    @Override
+    public UserInfoDTO convertInfo(UserEntity bean) {
+        if ( bean == null ) {
+            return null;
+        }
+
+        UserInfoDTO userInfoDTO = new UserInfoDTO();
+
+        userInfoDTO.setId( bean.getId() );
+        userInfoDTO.setNickname( bean.getNickname() );
+        userInfoDTO.setAvatar( bean.getAvatar() );
+        userInfoDTO.setSex( bean.getSex() );
+        userInfoDTO.setOnline( bean.getOnline() );
+        userInfoDTO.setEmail( bean.getEmail() );
+        userInfoDTO.setLastAt( bean.getLastAt() );
+        userInfoDTO.setCreatedAt( bean.getCreatedAt() );
+        userInfoDTO.setStatus( bean.getStatus() );
+
+        return userInfoDTO;
     }
 
     @Override

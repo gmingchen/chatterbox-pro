@@ -5,6 +5,8 @@ import com.slipper.common.pojo.Result;
 import com.slipper.core.repeat.annotation.Repeat;
 import com.slipper.modules.captcha.model.req.CaptchaReqVO;
 import com.slipper.modules.user.model.dto.UserBaseDTO;
+import com.slipper.modules.user.model.dto.UserInfoDTO;
+import com.slipper.modules.user.model.req.UserInfoReqVO;
 import com.slipper.modules.user.model.req.UserSearchReqVO;
 import com.slipper.modules.user.model.req.UserUpdateEmailReqVO;
 import com.slipper.modules.user.model.req.UserUpdateReqVO;
@@ -69,6 +71,18 @@ public class UserController {
     public Result<PageResult<UserSearchResVO>> search(@Validated UserSearchReqVO reqVO) {
         return Result.success(
                 userService.queryByNicknameOrEmail(reqVO)
+        );
+    }
+
+    /**
+     * ID查询用户信息
+     * @return
+     */
+    @Repeat()
+    @GetMapping("/info")
+    public Result<UserInfoDTO> info(@Validated UserInfoReqVO reqVO) {
+        return Result.success(
+                userService.queryById(reqVO)
         );
     }
 

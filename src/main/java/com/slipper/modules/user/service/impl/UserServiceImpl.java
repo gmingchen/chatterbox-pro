@@ -20,6 +20,8 @@ import com.slipper.modules.user.entity.UserEntity;
 import com.slipper.modules.user.mapper.UserMapper;
 import com.slipper.modules.user.model.dto.LoginUserDTO;
 import com.slipper.modules.user.model.dto.UserCreateDTO;
+import com.slipper.modules.user.model.dto.UserInfoDTO;
+import com.slipper.modules.user.model.req.UserInfoReqVO;
 import com.slipper.modules.user.model.req.UserSearchReqVO;
 import com.slipper.modules.user.model.req.UserUpdateEmailReqVO;
 import com.slipper.modules.user.model.req.UserUpdateReqVO;
@@ -31,6 +33,7 @@ import org.springframework.validation.annotation.Validated;
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Optional;
 
 /**
  * @author gumingchen
@@ -69,6 +72,13 @@ public class UserServiceImpl extends ServiceImplX<UserMapper, UserEntity> implem
 
 
         return userEntity.getId();
+    }
+
+    @Override
+    public UserInfoDTO queryById(UserInfoReqVO reqVO) {
+        return Optional.ofNullable(baseMapper.selectById(reqVO.getId()))
+                .map(UserConvert.INSTANCE::convertInfo)
+                .orElse(new UserInfoDTO());
     }
 
     @Override
