@@ -43,9 +43,6 @@ l
 LICENSE,0\3\0398ccd0f49298b10a3d76a47800d2ebecd49859
 4
 mvnw,5\d\5d837c4ed85ecaaf932c506e80ff5d7b9f3d590d
-:
-
-.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
 B
 chatterbox-pro.iml,f\d\fdb33f86def2387519cf8de023dd43c88d376a17
 t
