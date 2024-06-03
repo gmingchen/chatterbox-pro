@@ -12325,3 +12325,395 @@ com.slipper.exception.RunException: 操作太频繁,请稍后重试！
 2024-06-03 16:47:04.882 DEBUG 19204 --- [http-nio-8820-exec-27] c.s.m.user.mapper.UserMapper.selectPage  : <==      Total: 20
 2024-06-03 16:58:43.276  INFO 19204 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
 2024-06-03 16:58:43.286  INFO 19204 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2024-06-03 16:58:58.343  INFO 17196 --- [main] com.slipper.SlipperApplication           : Starting SlipperApplication using Java 1.8.0_291 on SZ-PC-PDC-135 with PID 17196 (E:\github\chatterbox-pro\target\classes started by gumingchen in E:\github\chatterbox-pro)
+2024-06-03 16:58:58.347 DEBUG 17196 --- [main] com.slipper.SlipperApplication           : Running with Spring Boot v2.7.18, Spring v5.3.31
+2024-06-03 16:58:58.347  INFO 17196 --- [main] com.slipper.SlipperApplication           : The following 1 profile is active: "dev"
+2024-06-03 16:58:59.280  INFO 17196 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2024-06-03 16:58:59.283  INFO 17196 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-06-03 16:58:59.346  INFO 17196 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 46 ms. Found 0 Redis repository interfaces.
+2024-06-03 16:59:00.137  INFO 17196 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8820 (http)
+2024-06-03 16:59:00.145  INFO 17196 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-06-03 16:59:00.146  INFO 17196 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.83]
+2024-06-03 16:59:00.305  INFO 17196 --- [main] o.a.c.c.C.[.[localhost].[/chatterbox]    : Initializing Spring embedded WebApplicationContext
+2024-06-03 16:59:00.305  INFO 17196 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1900 ms
+2024-06-03 16:59:00.858  INFO 17196 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2024-06-03 16:59:01.594 ERROR 17196 --- [main] c.alibaba.druid.filter.stat.StatFilter   : slow sql 133 millis. SELECT 1[]
+2024-06-03 16:59:02.533  INFO 17196 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2024-06-03 16:59:03.391 DEBUG 17196 --- [main] c.s.c.s.f.TokenAuthenticationFilter      : Filter 'tokenAuthenticationFilter' configured for use
+2024-06-03 16:59:04.144  INFO 17196 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@64d53f0d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1b10f60e, org.springframework.security.web.context.SecurityContextPersistenceFilter@29592929, org.springframework.security.web.header.HeaderWriterFilter@7381d6f0, org.springframework.web.filter.CorsFilter@4b916cc2, org.springframework.security.web.authentication.logout.LogoutFilter@5b55c3d6, com.slipper.core.security.filter.TokenAuthenticationFilter@377e90b0, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4bdef487, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5ea9373e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7f5e9949, org.springframework.security.web.session.SessionManagementFilter@21688427, org.springframework.security.web.access.ExceptionTranslationFilter@59014efe, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@1760e688]
+2024-06-03 16:59:04.519  INFO 17196 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8820 (http) with context path '/chatterbox'
+2024-06-03 16:59:04.527  INFO 17196 --- [main] com.slipper.SlipperApplication           : Started SlipperApplication in 6.693 seconds (JVM running for 8.165)
+2024-06-03 16:59:04.611  INFO 17196 --- [task-executor-1] com.slipper.core.netty.WebSocketServer   : 🤝[服务器启动端口]: 8821
+
+2024-06-03 17:00:15.665  INFO 17196 --- [http-nio-8820-exec-2] o.a.c.c.C.[.[localhost].[/chatterbox]    : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-06-03 17:00:15.665  INFO 17196 --- [http-nio-8820-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-06-03 17:00:15.666  INFO 17196 --- [http-nio-8820-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-06-03 17:00:16.030 ERROR 17196 --- [http-nio-8820-exec-2] o.a.c.c.C.[.[.[.[dispatcherServlet]      : Servlet.service() for servlet [dispatcherServlet] in context with path [/chatterbox] threw exception
+
+java.lang.NullPointerException: null
+	at com.slipper.core.jwt.utils.JwtUtils.getClaimsValue(JwtUtils.java:97)
+	at com.slipper.core.jwt.utils.JwtUtils.getClaimsValue(JwtUtils.java:108)
+	at com.slipper.modules.token.service.impl.TokenServiceImpl.getTokenInfo(TokenServiceImpl.java:64)
+	at com.slipper.modules.token.service.impl.TokenServiceImpl.validate(TokenServiceImpl.java:49)
+	at com.slipper.modules.auth.service.impl.AuthServiceImpl.validateToken(AuthServiceImpl.java:106)
+	at com.slipper.modules.auth.service.impl.AuthServiceImpl$$FastClassBySpringCGLIB$$7c8ca339.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy.invokeMethod(CglibAopProxy.java:386)
+	at org.springframework.aop.framework.CglibAopProxy.access$000(CglibAopProxy.java:85)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:703)
+	at com.slipper.modules.auth.service.impl.AuthServiceImpl$$EnhancerBySpringCGLIB$$346ae245.validateToken(<generated>)
+	at com.slipper.core.security.filter.TokenAuthenticationFilter.doFilterInternal(TokenAuthenticationFilter.java:43)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:112)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:82)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:221)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:186)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at com.slipper.filter.stream.InputStreamFilter.doFilter(InputStreamFilter.java:19)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1794)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2024-06-03 17:00:16.044 DEBUG 17196 --- [http-nio-8820-exec-2] c.s.c.s.h.AuthenticationEntryPointImpl   : [访问 URL http://localhost:8820/chatterbox/error 时，凭证已过期]
+2024-06-03 17:00:27.159 DEBUG 17196 --- [http-nio-8820-exec-3] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:00:27.223 DEBUG 17196 --- [http-nio-8820-exec-3] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:00:27.247 DEBUG 17196 --- [http-nio-8820-exec-3] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:00:27.475 DEBUG 17196 --- [http-nio-8820-exec-3] c.s.m.u.m.UserMapper.selectPage_mpCount  : ==>  Preparing: SELECT COUNT(*) AS total FROM user WHERE deleted = 0 AND (id <> ? AND (nickname LIKE ? OR email = ?))
+2024-06-03 17:00:27.478 DEBUG 17196 --- [http-nio-8820-exec-3] c.s.m.u.m.UserMapper.selectPage_mpCount  : ==> Parameters: 1(Long), %好%(String), 好(String)
+2024-06-03 17:00:27.486 DEBUG 17196 --- [http-nio-8820-exec-3] c.s.m.u.m.UserMapper.selectPage_mpCount  : <==      Total: 1
+2024-06-03 17:00:27.489 DEBUG 17196 --- [http-nio-8820-exec-3] c.s.m.user.mapper.UserMapper.selectPage  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE deleted=0 AND (id <> ? AND (nickname LIKE ? OR email = ?)) LIMIT ?
+2024-06-03 17:00:27.491 DEBUG 17196 --- [http-nio-8820-exec-3] c.s.m.user.mapper.UserMapper.selectPage  : ==> Parameters: 1(Long), %好%(String), 好(String), 20(Long)
+2024-06-03 17:00:27.506 DEBUG 17196 --- [http-nio-8820-exec-3] c.s.m.user.mapper.UserMapper.selectPage  : <==      Total: 20
+2024-06-03 17:00:54.403 ERROR 17196 --- [http-nio-8820-exec-5] o.a.c.c.C.[.[.[.[dispatcherServlet]      : Servlet.service() for servlet [dispatcherServlet] in context with path [/chatterbox] threw exception
+
+java.lang.NullPointerException: null
+	at com.slipper.core.jwt.utils.JwtUtils.getClaimsValue(JwtUtils.java:97)
+	at com.slipper.core.jwt.utils.JwtUtils.getClaimsValue(JwtUtils.java:108)
+	at com.slipper.modules.token.service.impl.TokenServiceImpl.getTokenInfo(TokenServiceImpl.java:64)
+	at com.slipper.modules.token.service.impl.TokenServiceImpl.validate(TokenServiceImpl.java:49)
+	at com.slipper.modules.auth.service.impl.AuthServiceImpl.validateToken(AuthServiceImpl.java:106)
+	at com.slipper.modules.auth.service.impl.AuthServiceImpl$$FastClassBySpringCGLIB$$7c8ca339.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy.invokeMethod(CglibAopProxy.java:386)
+	at org.springframework.aop.framework.CglibAopProxy.access$000(CglibAopProxy.java:85)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:703)
+	at com.slipper.modules.auth.service.impl.AuthServiceImpl$$EnhancerBySpringCGLIB$$346ae245.validateToken(<generated>)
+	at com.slipper.core.security.filter.TokenAuthenticationFilter.doFilterInternal(TokenAuthenticationFilter.java:43)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:112)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:82)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:221)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:186)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at com.slipper.filter.stream.InputStreamFilter.doFilter(InputStreamFilter.java:19)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1794)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2024-06-03 17:00:54.404 DEBUG 17196 --- [http-nio-8820-exec-5] c.s.c.s.h.AuthenticationEntryPointImpl   : [访问 URL http://localhost:8820/chatterbox/error 时，凭证已过期]
+2024-06-03 17:01:18.198 DEBUG 17196 --- [http-nio-8820-exec-7] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:01:18.198 DEBUG 17196 --- [http-nio-8820-exec-7] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:01:18.208 DEBUG 17196 --- [http-nio-8820-exec-7] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:01:18.233 DEBUG 17196 --- [http-nio-8820-exec-7] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:01:18.234 DEBUG 17196 --- [http-nio-8820-exec-7] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:01:18.246 DEBUG 17196 --- [http-nio-8820-exec-7] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:04:32.430 DEBUG 17196 --- [http-nio-8820-exec-10] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:04:32.431 DEBUG 17196 --- [http-nio-8820-exec-10] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:04:32.442 DEBUG 17196 --- [http-nio-8820-exec-10] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:04:32.479 DEBUG 17196 --- [http-nio-8820-exec-10] c.s.m.g.m.GroupingMapper.selectList      : ==>  Preparing: SELECT id, user_id, name, sort, fixed, created_at, updated_at, deleted FROM `grouping` WHERE deleted = 0 AND user_id = 1 ORDER BY sort ASC, created_at ASC
+2024-06-03 17:04:32.481 DEBUG 17196 --- [http-nio-8820-exec-10] c.s.m.g.m.GroupingMapper.selectList      : ==> Parameters: 
+2024-06-03 17:04:32.492 DEBUG 17196 --- [http-nio-8820-exec-10] c.s.m.g.m.GroupingMapper.selectList      : <==      Total: 1
+2024-06-03 17:04:58.089 DEBUG 17196 --- [http-nio-8820-exec-12] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:04:58.090 DEBUG 17196 --- [http-nio-8820-exec-12] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:04:58.098 DEBUG 17196 --- [http-nio-8820-exec-12] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:04:58.101 DEBUG 17196 --- [http-nio-8820-exec-12] c.s.m.g.mapper.GroupingMapper.queryList  : ==>  Preparing: SELECT g.id, g.name, g.fixed, f.id AS friend_id, f.remark, f.friend_id AS user_id, u.nickname, u.avatar, u.sex, u.online, u.email, u.last_at, u.created_at FROM `grouping` AS g LEFT JOIN friend AS f ON f.grouping_id = g.id AND f.deleted = 0 LEFT JOIN user AS u ON u.id = f.friend_id WHERE g.deleted = 0 AND g.user_id = ? ORDER BY g.fixed DESC, u.nickname ASC, f.created_at DESC
+2024-06-03 17:04:58.106 DEBUG 17196 --- [http-nio-8820-exec-12] c.s.m.g.mapper.GroupingMapper.queryList  : ==> Parameters: 1(Long)
+2024-06-03 17:04:58.119 DEBUG 17196 --- [http-nio-8820-exec-12] c.s.m.g.mapper.GroupingMapper.queryList  : <==      Total: 1
+2024-06-03 17:05:03.115 ERROR 17196 --- [Druid-ConnectionPool-Destroy-1896062177] c.alibaba.druid.filter.stat.StatFilter   : slow sql 237 millis. SELECT 1[]
+2024-06-03 17:05:04.225 DEBUG 17196 --- [http-nio-8820-exec-13] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:05:04.226 DEBUG 17196 --- [http-nio-8820-exec-13] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:05:04.238 DEBUG 17196 --- [http-nio-8820-exec-13] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:05:04.239 DEBUG 17196 --- [http-nio-8820-exec-13] c.s.m.g.mapper.GroupingMapper.queryList  : ==>  Preparing: SELECT g.id, g.name, g.fixed, f.id AS friend_id, f.remark, f.friend_id AS user_id, u.nickname, u.avatar, u.sex, u.online, u.email, u.last_at, u.created_at FROM `grouping` AS g LEFT JOIN friend AS f ON f.grouping_id = g.id AND f.deleted = 0 LEFT JOIN user AS u ON u.id = f.friend_id WHERE g.deleted = 0 AND g.user_id = ? ORDER BY g.fixed DESC, u.nickname ASC, f.created_at DESC
+2024-06-03 17:05:04.240 DEBUG 17196 --- [http-nio-8820-exec-13] c.s.m.g.mapper.GroupingMapper.queryList  : ==> Parameters: 1(Long)
+2024-06-03 17:05:04.249 DEBUG 17196 --- [http-nio-8820-exec-13] c.s.m.g.mapper.GroupingMapper.queryList  : <==      Total: 1
+2024-06-03 17:06:35.340 DEBUG 17196 --- [http-nio-8820-exec-14] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:06:35.340 DEBUG 17196 --- [http-nio-8820-exec-14] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:06:35.350 DEBUG 17196 --- [http-nio-8820-exec-14] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:06:35.379 DEBUG 17196 --- [http-nio-8820-exec-14] c.s.m.u.m.UserMapper.selectPage_mpCount  : ==>  Preparing: SELECT COUNT(*) AS total FROM user WHERE deleted = 0 AND (id <> ? AND (nickname LIKE ? OR email = ?))
+2024-06-03 17:06:35.380 DEBUG 17196 --- [http-nio-8820-exec-14] c.s.m.u.m.UserMapper.selectPage_mpCount  : ==> Parameters: 1(Long), %好%(String), 好(String)
+2024-06-03 17:06:35.389 DEBUG 17196 --- [http-nio-8820-exec-14] c.s.m.u.m.UserMapper.selectPage_mpCount  : <==      Total: 1
+2024-06-03 17:06:35.390 DEBUG 17196 --- [http-nio-8820-exec-14] c.s.m.user.mapper.UserMapper.selectPage  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE deleted=0 AND (id <> ? AND (nickname LIKE ? OR email = ?)) LIMIT ?
+2024-06-03 17:06:35.391 DEBUG 17196 --- [http-nio-8820-exec-14] c.s.m.user.mapper.UserMapper.selectPage  : ==> Parameters: 1(Long), %好%(String), 好(String), 20(Long)
+2024-06-03 17:06:35.402 DEBUG 17196 --- [http-nio-8820-exec-14] c.s.m.user.mapper.UserMapper.selectPage  : <==      Total: 20
+2024-06-03 17:06:42.555 DEBUG 17196 --- [http-nio-8820-exec-15] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:06:42.556 DEBUG 17196 --- [http-nio-8820-exec-15] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:06:42.565 DEBUG 17196 --- [http-nio-8820-exec-15] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:06:43.145 DEBUG 17196 --- [http-nio-8820-exec-16] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:06:43.147 DEBUG 17196 --- [http-nio-8820-exec-16] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:06:43.159 DEBUG 17196 --- [http-nio-8820-exec-16] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:06:43.161 DEBUG 17196 --- [http-nio-8820-exec-16] c.s.m.g.mapper.GroupingMapper.queryList  : ==>  Preparing: SELECT g.id, g.name, g.fixed, f.id AS friend_id, f.remark, f.friend_id AS user_id, u.nickname, u.avatar, u.sex, u.online, u.email, u.last_at, u.created_at FROM `grouping` AS g LEFT JOIN friend AS f ON f.grouping_id = g.id AND f.deleted = 0 LEFT JOIN user AS u ON u.id = f.friend_id WHERE g.deleted = 0 AND g.user_id = ? ORDER BY g.fixed DESC, u.nickname ASC, f.created_at DESC
+2024-06-03 17:06:43.162 DEBUG 17196 --- [http-nio-8820-exec-16] c.s.m.g.mapper.GroupingMapper.queryList  : ==> Parameters: 1(Long)
+2024-06-03 17:06:43.170 DEBUG 17196 --- [http-nio-8820-exec-16] c.s.m.g.mapper.GroupingMapper.queryList  : <==      Total: 1
+2024-06-03 17:06:46.955 DEBUG 17196 --- [http-nio-8820-exec-17] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:06:46.956 DEBUG 17196 --- [http-nio-8820-exec-17] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:06:46.967 DEBUG 17196 --- [http-nio-8820-exec-17] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:06:46.995 DEBUG 17196 --- [http-nio-8820-exec-17] c.s.m.u.m.UserMapper.selectPage_mpCount  : ==>  Preparing: SELECT COUNT(*) AS total FROM user WHERE deleted = 0 AND (id <> ? AND (nickname LIKE ? OR email = ?))
+2024-06-03 17:06:46.996 DEBUG 17196 --- [http-nio-8820-exec-17] c.s.m.u.m.UserMapper.selectPage_mpCount  : ==> Parameters: 1(Long), %好%(String), 好(String)
+2024-06-03 17:06:47.003 DEBUG 17196 --- [http-nio-8820-exec-17] c.s.m.u.m.UserMapper.selectPage_mpCount  : <==      Total: 1
+2024-06-03 17:06:47.004 DEBUG 17196 --- [http-nio-8820-exec-17] c.s.m.user.mapper.UserMapper.selectPage  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE deleted=0 AND (id <> ? AND (nickname LIKE ? OR email = ?)) LIMIT ?
+2024-06-03 17:06:47.004 DEBUG 17196 --- [http-nio-8820-exec-17] c.s.m.user.mapper.UserMapper.selectPage  : ==> Parameters: 1(Long), %好%(String), 好(String), 20(Long)
+2024-06-03 17:06:47.014 DEBUG 17196 --- [http-nio-8820-exec-17] c.s.m.user.mapper.UserMapper.selectPage  : <==      Total: 20
+2024-06-03 17:06:48.150 DEBUG 17196 --- [http-nio-8820-exec-18] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:06:48.151 DEBUG 17196 --- [http-nio-8820-exec-18] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:06:48.158 DEBUG 17196 --- [http-nio-8820-exec-18] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:06:48.182 DEBUG 17196 --- [http-nio-8820-exec-18] c.s.m.g.m.GroupingMapper.selectList      : ==>  Preparing: SELECT id, user_id, name, sort, fixed, created_at, updated_at, deleted FROM `grouping` WHERE deleted = 0 AND user_id = 1 ORDER BY sort ASC, created_at ASC
+2024-06-03 17:06:48.183 DEBUG 17196 --- [http-nio-8820-exec-18] c.s.m.g.m.GroupingMapper.selectList      : ==> Parameters: 
+2024-06-03 17:06:48.190 DEBUG 17196 --- [http-nio-8820-exec-18] c.s.m.g.m.GroupingMapper.selectList      : <==      Total: 1
+2024-06-03 17:13:41.076 DEBUG 17196 --- [http-nio-8820-exec-19] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:13:41.078 DEBUG 17196 --- [http-nio-8820-exec-19] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:13:41.088 DEBUG 17196 --- [http-nio-8820-exec-19] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:13:47.950 DEBUG 17196 --- [http-nio-8820-exec-20] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:13:47.950 DEBUG 17196 --- [http-nio-8820-exec-20] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:13:47.961 DEBUG 17196 --- [http-nio-8820-exec-20] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:13:59.096 DEBUG 17196 --- [http-nio-8820-exec-21] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:13:59.097 DEBUG 17196 --- [http-nio-8820-exec-21] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:13:59.108 DEBUG 17196 --- [http-nio-8820-exec-21] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:14:04.266 DEBUG 17196 --- [http-nio-8820-exec-22] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:14:04.266 DEBUG 17196 --- [http-nio-8820-exec-22] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:14:04.282 DEBUG 17196 --- [http-nio-8820-exec-22] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:14:27.973 DEBUG 17196 --- [http-nio-8820-exec-23] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:14:27.973 DEBUG 17196 --- [http-nio-8820-exec-23] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:14:27.983 DEBUG 17196 --- [http-nio-8820-exec-23] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:15:01.185 DEBUG 17196 --- [http-nio-8820-exec-24] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:15:01.186 DEBUG 17196 --- [http-nio-8820-exec-24] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:15:01.195 DEBUG 17196 --- [http-nio-8820-exec-24] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:22:12.976 DEBUG 17196 --- [http-nio-8820-exec-25] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:22:12.977 DEBUG 17196 --- [http-nio-8820-exec-25] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:22:12.987 DEBUG 17196 --- [http-nio-8820-exec-25] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:22:26.829 DEBUG 17196 --- [http-nio-8820-exec-26] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:22:26.830 DEBUG 17196 --- [http-nio-8820-exec-26] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:22:26.841 DEBUG 17196 --- [http-nio-8820-exec-26] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:22:37.823 DEBUG 17196 --- [http-nio-8820-exec-27] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:22:37.824 DEBUG 17196 --- [http-nio-8820-exec-27] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:22:37.833 DEBUG 17196 --- [http-nio-8820-exec-27] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:22:38.751 DEBUG 17196 --- [http-nio-8820-exec-28] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:22:38.751 DEBUG 17196 --- [http-nio-8820-exec-28] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:22:38.762 DEBUG 17196 --- [http-nio-8820-exec-28] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:22:38.764 DEBUG 17196 --- [http-nio-8820-exec-28] c.s.m.g.mapper.GroupingMapper.queryList  : ==>  Preparing: SELECT g.id, g.name, g.fixed, f.id AS friend_id, f.remark, f.friend_id AS user_id, u.nickname, u.avatar, u.sex, u.online, u.email, u.last_at, u.created_at FROM `grouping` AS g LEFT JOIN friend AS f ON f.grouping_id = g.id AND f.deleted = 0 LEFT JOIN user AS u ON u.id = f.friend_id WHERE g.deleted = 0 AND g.user_id = ? ORDER BY g.fixed DESC, u.nickname ASC, f.created_at DESC
+2024-06-03 17:22:38.765 DEBUG 17196 --- [http-nio-8820-exec-28] c.s.m.g.mapper.GroupingMapper.queryList  : ==> Parameters: 1(Long)
+2024-06-03 17:22:38.774 DEBUG 17196 --- [http-nio-8820-exec-28] c.s.m.g.mapper.GroupingMapper.queryList  : <==      Total: 1
+2024-06-03 17:22:41.064 DEBUG 17196 --- [http-nio-8820-exec-29] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:22:41.064 DEBUG 17196 --- [http-nio-8820-exec-29] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:22:41.076 DEBUG 17196 --- [http-nio-8820-exec-29] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:22:41.107 DEBUG 17196 --- [http-nio-8820-exec-29] c.s.m.u.m.UserMapper.selectPage_mpCount  : ==>  Preparing: SELECT COUNT(*) AS total FROM user WHERE deleted = 0 AND (id <> ? AND (nickname LIKE ? OR email = ?))
+2024-06-03 17:22:41.108 DEBUG 17196 --- [http-nio-8820-exec-29] c.s.m.u.m.UserMapper.selectPage_mpCount  : ==> Parameters: 1(Long), %好%(String), 好(String)
+2024-06-03 17:22:41.117 DEBUG 17196 --- [http-nio-8820-exec-29] c.s.m.u.m.UserMapper.selectPage_mpCount  : <==      Total: 1
+2024-06-03 17:22:41.118 DEBUG 17196 --- [http-nio-8820-exec-29] c.s.m.user.mapper.UserMapper.selectPage  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE deleted=0 AND (id <> ? AND (nickname LIKE ? OR email = ?)) LIMIT ?
+2024-06-03 17:22:41.119 DEBUG 17196 --- [http-nio-8820-exec-29] c.s.m.user.mapper.UserMapper.selectPage  : ==> Parameters: 1(Long), %好%(String), 好(String), 20(Long)
+2024-06-03 17:22:41.207 DEBUG 17196 --- [http-nio-8820-exec-29] c.s.m.user.mapper.UserMapper.selectPage  : <==      Total: 20
+2024-06-03 17:22:42.775 DEBUG 17196 --- [http-nio-8820-exec-30] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:22:42.776 DEBUG 17196 --- [http-nio-8820-exec-30] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:22:42.786 DEBUG 17196 --- [http-nio-8820-exec-30] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:22:42.814 DEBUG 17196 --- [http-nio-8820-exec-30] c.s.m.g.m.GroupingMapper.selectList      : ==>  Preparing: SELECT id, user_id, name, sort, fixed, created_at, updated_at, deleted FROM `grouping` WHERE deleted = 0 AND user_id = 1 ORDER BY sort ASC, created_at ASC
+2024-06-03 17:22:42.815 DEBUG 17196 --- [http-nio-8820-exec-30] c.s.m.g.m.GroupingMapper.selectList      : ==> Parameters: 
+2024-06-03 17:22:42.825 DEBUG 17196 --- [http-nio-8820-exec-30] c.s.m.g.m.GroupingMapper.selectList      : <==      Total: 1
+2024-06-03 17:23:30.719 DEBUG 17196 --- [http-nio-8820-exec-1] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:23:30.720 DEBUG 17196 --- [http-nio-8820-exec-1] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:23:30.730 DEBUG 17196 --- [http-nio-8820-exec-1] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:23:30.756 DEBUG 17196 --- [http-nio-8820-exec-1] c.s.m.g.m.GroupingMapper.selectList      : ==>  Preparing: SELECT id, user_id, name, sort, fixed, created_at, updated_at, deleted FROM `grouping` WHERE deleted = 0 AND user_id = 1 ORDER BY sort ASC, created_at ASC
+2024-06-03 17:23:30.756 DEBUG 17196 --- [http-nio-8820-exec-1] c.s.m.g.m.GroupingMapper.selectList      : ==> Parameters: 
+2024-06-03 17:23:30.768 DEBUG 17196 --- [http-nio-8820-exec-1] c.s.m.g.m.GroupingMapper.selectList      : <==      Total: 1
+2024-06-03 17:30:40.119 DEBUG 17196 --- [http-nio-8820-exec-2] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:30:40.120 DEBUG 17196 --- [http-nio-8820-exec-2] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:30:40.130 DEBUG 17196 --- [http-nio-8820-exec-2] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:30:40.539 DEBUG 17196 --- [http-nio-8820-exec-3] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:30:40.540 DEBUG 17196 --- [http-nio-8820-exec-3] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:30:40.550 DEBUG 17196 --- [http-nio-8820-exec-3] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:30:40.551 DEBUG 17196 --- [http-nio-8820-exec-3] c.s.m.g.mapper.GroupingMapper.queryList  : ==>  Preparing: SELECT g.id, g.name, g.fixed, f.id AS friend_id, f.remark, f.friend_id AS user_id, u.nickname, u.avatar, u.sex, u.online, u.email, u.last_at, u.created_at FROM `grouping` AS g LEFT JOIN friend AS f ON f.grouping_id = g.id AND f.deleted = 0 LEFT JOIN user AS u ON u.id = f.friend_id WHERE g.deleted = 0 AND g.user_id = ? ORDER BY g.fixed DESC, u.nickname ASC, f.created_at DESC
+2024-06-03 17:30:40.552 DEBUG 17196 --- [http-nio-8820-exec-3] c.s.m.g.mapper.GroupingMapper.queryList  : ==> Parameters: 1(Long)
+2024-06-03 17:30:40.560 DEBUG 17196 --- [http-nio-8820-exec-3] c.s.m.g.mapper.GroupingMapper.queryList  : <==      Total: 1
+2024-06-03 17:30:42.826 DEBUG 17196 --- [http-nio-8820-exec-4] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:30:42.826 DEBUG 17196 --- [http-nio-8820-exec-4] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:30:42.833 DEBUG 17196 --- [http-nio-8820-exec-4] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:30:42.859 DEBUG 17196 --- [http-nio-8820-exec-4] c.s.m.u.m.UserMapper.selectPage_mpCount  : ==>  Preparing: SELECT COUNT(*) AS total FROM user WHERE deleted = 0 AND (id <> ? AND (nickname LIKE ? OR email = ?))
+2024-06-03 17:30:42.860 DEBUG 17196 --- [http-nio-8820-exec-4] c.s.m.u.m.UserMapper.selectPage_mpCount  : ==> Parameters: 1(Long), %好%(String), 好(String)
+2024-06-03 17:30:42.868 DEBUG 17196 --- [http-nio-8820-exec-4] c.s.m.u.m.UserMapper.selectPage_mpCount  : <==      Total: 1
+2024-06-03 17:30:42.869 DEBUG 17196 --- [http-nio-8820-exec-4] c.s.m.user.mapper.UserMapper.selectPage  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE deleted=0 AND (id <> ? AND (nickname LIKE ? OR email = ?)) LIMIT ?
+2024-06-03 17:30:42.870 DEBUG 17196 --- [http-nio-8820-exec-4] c.s.m.user.mapper.UserMapper.selectPage  : ==> Parameters: 1(Long), %好%(String), 好(String), 20(Long)
+2024-06-03 17:30:42.881 DEBUG 17196 --- [http-nio-8820-exec-4] c.s.m.user.mapper.UserMapper.selectPage  : <==      Total: 20
+2024-06-03 17:30:44.120 DEBUG 17196 --- [http-nio-8820-exec-5] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:30:44.120 DEBUG 17196 --- [http-nio-8820-exec-5] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:30:44.129 DEBUG 17196 --- [http-nio-8820-exec-5] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:30:44.154 DEBUG 17196 --- [http-nio-8820-exec-5] c.s.m.g.m.GroupingMapper.selectList      : ==>  Preparing: SELECT id, user_id, name, sort, fixed, created_at, updated_at, deleted FROM `grouping` WHERE deleted = 0 AND user_id = 1 ORDER BY sort ASC, created_at ASC
+2024-06-03 17:30:44.154 DEBUG 17196 --- [http-nio-8820-exec-5] c.s.m.g.m.GroupingMapper.selectList      : ==> Parameters: 
+2024-06-03 17:30:44.162 DEBUG 17196 --- [http-nio-8820-exec-5] c.s.m.g.m.GroupingMapper.selectList      : <==      Total: 1
+2024-06-03 17:30:55.082 DEBUG 17196 --- [http-nio-8820-exec-6] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:30:55.083 DEBUG 17196 --- [http-nio-8820-exec-6] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:30:55.093 DEBUG 17196 --- [http-nio-8820-exec-6] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:30:55.647 DEBUG 17196 --- [http-nio-8820-exec-7] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:30:55.648 DEBUG 17196 --- [http-nio-8820-exec-7] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:30:55.661 DEBUG 17196 --- [http-nio-8820-exec-7] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:30:55.663 DEBUG 17196 --- [http-nio-8820-exec-7] c.s.m.g.mapper.GroupingMapper.queryList  : ==>  Preparing: SELECT g.id, g.name, g.fixed, f.id AS friend_id, f.remark, f.friend_id AS user_id, u.nickname, u.avatar, u.sex, u.online, u.email, u.last_at, u.created_at FROM `grouping` AS g LEFT JOIN friend AS f ON f.grouping_id = g.id AND f.deleted = 0 LEFT JOIN user AS u ON u.id = f.friend_id WHERE g.deleted = 0 AND g.user_id = ? ORDER BY g.fixed DESC, u.nickname ASC, f.created_at DESC
+2024-06-03 17:30:55.663 DEBUG 17196 --- [http-nio-8820-exec-7] c.s.m.g.mapper.GroupingMapper.queryList  : ==> Parameters: 1(Long)
+2024-06-03 17:30:55.673 DEBUG 17196 --- [http-nio-8820-exec-7] c.s.m.g.mapper.GroupingMapper.queryList  : <==      Total: 1
+2024-06-03 17:30:57.943 DEBUG 17196 --- [http-nio-8820-exec-8] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:30:57.943 DEBUG 17196 --- [http-nio-8820-exec-8] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:30:57.953 DEBUG 17196 --- [http-nio-8820-exec-8] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:30:57.986 DEBUG 17196 --- [http-nio-8820-exec-8] c.s.m.u.m.UserMapper.selectPage_mpCount  : ==>  Preparing: SELECT COUNT(*) AS total FROM user WHERE deleted = 0 AND (id <> ? AND (nickname LIKE ? OR email = ?))
+2024-06-03 17:30:57.986 DEBUG 17196 --- [http-nio-8820-exec-8] c.s.m.u.m.UserMapper.selectPage_mpCount  : ==> Parameters: 1(Long), %好%(String), 好(String)
+2024-06-03 17:30:57.995 DEBUG 17196 --- [http-nio-8820-exec-8] c.s.m.u.m.UserMapper.selectPage_mpCount  : <==      Total: 1
+2024-06-03 17:30:57.996 DEBUG 17196 --- [http-nio-8820-exec-8] c.s.m.user.mapper.UserMapper.selectPage  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE deleted=0 AND (id <> ? AND (nickname LIKE ? OR email = ?)) LIMIT ?
+2024-06-03 17:30:57.996 DEBUG 17196 --- [http-nio-8820-exec-8] c.s.m.user.mapper.UserMapper.selectPage  : ==> Parameters: 1(Long), %好%(String), 好(String), 20(Long)
+2024-06-03 17:30:58.007 DEBUG 17196 --- [http-nio-8820-exec-8] c.s.m.user.mapper.UserMapper.selectPage  : <==      Total: 20
+2024-06-03 17:30:59.090 DEBUG 17196 --- [http-nio-8820-exec-9] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:30:59.091 DEBUG 17196 --- [http-nio-8820-exec-9] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:30:59.101 DEBUG 17196 --- [http-nio-8820-exec-9] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:30:59.130 DEBUG 17196 --- [http-nio-8820-exec-9] c.s.m.g.m.GroupingMapper.selectList      : ==>  Preparing: SELECT id, user_id, name, sort, fixed, created_at, updated_at, deleted FROM `grouping` WHERE deleted = 0 AND user_id = 1 ORDER BY sort ASC, created_at ASC
+2024-06-03 17:30:59.130 DEBUG 17196 --- [http-nio-8820-exec-9] c.s.m.g.m.GroupingMapper.selectList      : ==> Parameters: 
+2024-06-03 17:30:59.140 DEBUG 17196 --- [http-nio-8820-exec-9] c.s.m.g.m.GroupingMapper.selectList      : <==      Total: 1
+2024-06-03 17:31:53.426 DEBUG 17196 --- [http-nio-8820-exec-10] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:31:53.426 DEBUG 17196 --- [http-nio-8820-exec-10] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:31:53.434 DEBUG 17196 --- [http-nio-8820-exec-10] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:31:53.457 DEBUG 17196 --- [http-nio-8820-exec-10] c.s.m.g.m.GroupingMapper.selectList      : ==>  Preparing: SELECT id, user_id, name, sort, fixed, created_at, updated_at, deleted FROM `grouping` WHERE deleted = 0 AND user_id = 1 ORDER BY sort ASC, created_at ASC
+2024-06-03 17:31:53.458 DEBUG 17196 --- [http-nio-8820-exec-10] c.s.m.g.m.GroupingMapper.selectList      : ==> Parameters: 
+2024-06-03 17:31:53.466 DEBUG 17196 --- [http-nio-8820-exec-10] c.s.m.g.m.GroupingMapper.selectList      : <==      Total: 1
+2024-06-03 17:32:15.688 DEBUG 17196 --- [http-nio-8820-exec-11] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:32:15.689 DEBUG 17196 --- [http-nio-8820-exec-11] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:32:15.700 DEBUG 17196 --- [http-nio-8820-exec-11] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:32:16.298 DEBUG 17196 --- [http-nio-8820-exec-12] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:32:16.299 DEBUG 17196 --- [http-nio-8820-exec-12] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:32:16.309 DEBUG 17196 --- [http-nio-8820-exec-12] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:32:16.310 DEBUG 17196 --- [http-nio-8820-exec-12] c.s.m.g.mapper.GroupingMapper.queryList  : ==>  Preparing: SELECT g.id, g.name, g.fixed, f.id AS friend_id, f.remark, f.friend_id AS user_id, u.nickname, u.avatar, u.sex, u.online, u.email, u.last_at, u.created_at FROM `grouping` AS g LEFT JOIN friend AS f ON f.grouping_id = g.id AND f.deleted = 0 LEFT JOIN user AS u ON u.id = f.friend_id WHERE g.deleted = 0 AND g.user_id = ? ORDER BY g.fixed DESC, u.nickname ASC, f.created_at DESC
+2024-06-03 17:32:16.311 DEBUG 17196 --- [http-nio-8820-exec-12] c.s.m.g.mapper.GroupingMapper.queryList  : ==> Parameters: 1(Long)
+2024-06-03 17:32:16.321 DEBUG 17196 --- [http-nio-8820-exec-12] c.s.m.g.mapper.GroupingMapper.queryList  : <==      Total: 1
+2024-06-03 17:32:27.888 DEBUG 17196 --- [http-nio-8820-exec-13] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:32:27.889 DEBUG 17196 --- [http-nio-8820-exec-13] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:32:27.900 DEBUG 17196 --- [http-nio-8820-exec-13] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:32:27.927 DEBUG 17196 --- [http-nio-8820-exec-13] c.s.m.u.m.UserMapper.selectPage_mpCount  : ==>  Preparing: SELECT COUNT(*) AS total FROM user WHERE deleted = 0 AND (id <> ? AND (nickname LIKE ? OR email = ?))
+2024-06-03 17:32:27.927 DEBUG 17196 --- [http-nio-8820-exec-13] c.s.m.u.m.UserMapper.selectPage_mpCount  : ==> Parameters: 1(Long), %好%(String), 好(String)
+2024-06-03 17:32:27.934 DEBUG 17196 --- [http-nio-8820-exec-13] c.s.m.u.m.UserMapper.selectPage_mpCount  : <==      Total: 1
+2024-06-03 17:32:27.935 DEBUG 17196 --- [http-nio-8820-exec-13] c.s.m.user.mapper.UserMapper.selectPage  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE deleted=0 AND (id <> ? AND (nickname LIKE ? OR email = ?)) LIMIT ?
+2024-06-03 17:32:27.936 DEBUG 17196 --- [http-nio-8820-exec-13] c.s.m.user.mapper.UserMapper.selectPage  : ==> Parameters: 1(Long), %好%(String), 好(String), 20(Long)
+2024-06-03 17:32:27.947 DEBUG 17196 --- [http-nio-8820-exec-13] c.s.m.user.mapper.UserMapper.selectPage  : <==      Total: 20
+2024-06-03 17:32:29.222 DEBUG 17196 --- [http-nio-8820-exec-14] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:32:29.223 DEBUG 17196 --- [http-nio-8820-exec-14] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:32:29.232 DEBUG 17196 --- [http-nio-8820-exec-14] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:32:29.257 DEBUG 17196 --- [http-nio-8820-exec-14] c.s.m.g.m.GroupingMapper.selectList      : ==>  Preparing: SELECT id, user_id, name, sort, fixed, created_at, updated_at, deleted FROM `grouping` WHERE deleted = 0 AND user_id = 1 ORDER BY sort ASC, created_at ASC
+2024-06-03 17:32:29.257 DEBUG 17196 --- [http-nio-8820-exec-14] c.s.m.g.m.GroupingMapper.selectList      : ==> Parameters: 
+2024-06-03 17:32:29.265 DEBUG 17196 --- [http-nio-8820-exec-14] c.s.m.g.m.GroupingMapper.selectList      : <==      Total: 1
+2024-06-03 17:33:09.966 DEBUG 17196 --- [http-nio-8820-exec-15] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:33:09.967 DEBUG 17196 --- [http-nio-8820-exec-15] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:33:09.976 DEBUG 17196 --- [http-nio-8820-exec-15] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:33:10.005 DEBUG 17196 --- [http-nio-8820-exec-15] c.s.m.g.m.GroupingMapper.selectList      : ==>  Preparing: SELECT id, user_id, name, sort, fixed, created_at, updated_at, deleted FROM `grouping` WHERE deleted = 0 AND user_id = 1 ORDER BY sort ASC, created_at ASC
+2024-06-03 17:33:10.005 DEBUG 17196 --- [http-nio-8820-exec-15] c.s.m.g.m.GroupingMapper.selectList      : ==> Parameters: 
+2024-06-03 17:33:10.014 DEBUG 17196 --- [http-nio-8820-exec-15] c.s.m.g.m.GroupingMapper.selectList      : <==      Total: 1
+2024-06-03 17:33:41.223 DEBUG 17196 --- [http-nio-8820-exec-16] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:33:41.224 DEBUG 17196 --- [http-nio-8820-exec-16] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:33:41.231 DEBUG 17196 --- [http-nio-8820-exec-16] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:33:41.257 DEBUG 17196 --- [http-nio-8820-exec-16] c.s.m.g.m.GroupingMapper.selectList      : ==>  Preparing: SELECT id, user_id, name, sort, fixed, created_at, updated_at, deleted FROM `grouping` WHERE deleted = 0 AND user_id = 1 ORDER BY sort ASC, created_at ASC
+2024-06-03 17:33:41.257 DEBUG 17196 --- [http-nio-8820-exec-16] c.s.m.g.m.GroupingMapper.selectList      : ==> Parameters: 
+2024-06-03 17:33:41.266 DEBUG 17196 --- [http-nio-8820-exec-16] c.s.m.g.m.GroupingMapper.selectList      : <==      Total: 1
+2024-06-03 17:33:46.655 DEBUG 17196 --- [http-nio-8820-exec-17] c.s.m.user.mapper.UserMapper.selectById  : ==>  Preparing: SELECT id,nickname,avatar,sex,email,open_id,online,last_at,status,created_at,updated_at,deleted FROM user WHERE id=? AND deleted=0
+2024-06-03 17:33:46.655 DEBUG 17196 --- [http-nio-8820-exec-17] c.s.m.user.mapper.UserMapper.selectById  : ==> Parameters: 1(Long)
+2024-06-03 17:33:46.663 DEBUG 17196 --- [http-nio-8820-exec-17] c.s.m.user.mapper.UserMapper.selectById  : <==      Total: 1
+2024-06-03 17:33:46.686 DEBUG 17196 --- [http-nio-8820-exec-17] c.s.m.g.m.GroupingMapper.selectList      : ==>  Preparing: SELECT id, user_id, name, sort, fixed, created_at, updated_at, deleted FROM `grouping` WHERE deleted = 0 AND user_id = 1 ORDER BY sort ASC, created_at ASC
+2024-06-03 17:33:46.686 DEBUG 17196 --- [http-nio-8820-exec-17] c.s.m.g.m.GroupingMapper.selectList      : ==> Parameters: 
+2024-06-03 17:33:46.695 DEBUG 17196 --- [http-nio-8820-exec-17] c.s.m.g.m.GroupingMapper.selectList      : <==      Total: 1
+2024-06-03 19:03:09.019 ERROR 17196 --- [Druid-ConnectionPool-Destroy-1896062177] c.alibaba.druid.filter.stat.StatFilter   : slow sql 102 millis. SELECT 1[]
+2024-06-03 19:03:09.157 ERROR 17196 --- [Druid-ConnectionPool-Destroy-1896062177] c.alibaba.druid.filter.stat.StatFilter   : slow sql 103 millis. SELECT 1[]
