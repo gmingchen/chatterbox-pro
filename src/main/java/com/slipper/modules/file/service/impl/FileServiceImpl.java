@@ -84,7 +84,7 @@ public class FileServiceImpl implements FileService {
      */
     private void validateFileType(MultipartFile file, String[] accepts) {
         String fileType = file.getContentType().toUpperCase();
-        if (Arrays.asList(accepts).contains(fileType)) {
+        if (!Arrays.asList(accepts).contains(fileType)) {
             throw new RunException(ResultCodeEnum.FILE_TYPE_ERROR);
         }
     }
