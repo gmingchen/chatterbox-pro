@@ -58,6 +58,7 @@ public class ApplyServiceImpl extends ServiceImplX<ApplyMapper, ApplyEntity> imp
         // 校验申请
         LambdaQueryWrapper<ApplyEntity> wrapper = new LambdaQueryWrapperX<ApplyEntity>()
                 .eq(ApplyEntity::getUserId, SecurityUtils.getLoginUserId())
+                .eq(ApplyEntity::getTargetId, reqVO.getTargetId())
                 .eq(ApplyEntity::getType, ApplyTypeEnum.FRIEND.getCode())
                 .eq(ApplyEntity::getStatus, ApplyStatusEnum.AUDIT.getCode());
         boolean applyBool = baseMapper.selectCount(wrapper) == 0;
@@ -96,6 +97,12 @@ public class ApplyServiceImpl extends ServiceImplX<ApplyMapper, ApplyEntity> imp
             List<Long> ids = new ArrayList<>();
             ids.add(reqVO.getTargetId());
             applyUserService.create(applyEntity.getId(), ids);
+
+            // todo: Websocket 通知用户...有好友申请
+            WebSocketUsers.sendMessage(
+                    new WsResponseDTO<>()
+                            .setType(WsMessageTypeEnum.FRIEND_APPLY.getCode()),
+                    CollectionUtils.mapList(ids, Object::toString));
         }
 
         return applyEntity.getId();

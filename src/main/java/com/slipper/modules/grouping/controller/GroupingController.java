@@ -51,7 +51,7 @@ public class GroupingController {
      * 获取分组选择列表
      * @return
      */
-    @Repeat()
+//    @Repeat()
     @GetMapping("/select")
     public Result<List<GroupingSelectResVO>> selectList() {
         return Result.success(

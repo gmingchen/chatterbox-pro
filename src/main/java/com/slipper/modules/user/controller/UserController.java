@@ -66,7 +66,7 @@ public class UserController {
      * 搜索用户
      * @return
      */
-    @Repeat()
+//    @Repeat()
     @GetMapping("/search")
     public Result<PageResult<UserSearchResVO>> search(@Validated UserSearchReqVO reqVO) {
         return Result.success(
@@ -78,7 +78,7 @@ public class UserController {
      * ID查询用户信息
      * @return
      */
-    @Repeat()
+//    @Repeat()
     @GetMapping("/info")
     public Result<UserInfoDTO> info(@Validated UserInfoReqVO reqVO) {
         return Result.success(

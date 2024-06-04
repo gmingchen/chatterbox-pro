@@ -62,7 +62,7 @@
     <select id="queryList" resultMap="ConversationMap">
         <include refid="ConversationSql" />
             AND c.user_id = #{ userId }
-        ORDER BY m.created_at DESC
+        ORDER BY m.created_at DESC, c.created_at DESC
     </select>
 
     <select id="queryInfo" resultMap="ConversationMap">

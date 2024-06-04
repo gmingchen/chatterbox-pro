@@ -113,11 +113,15 @@ public class MessageServiceImpl extends ServiceImplX<MessageMapper, MessageEntit
         // 新增会话
         List<Long> ids = conversationService.create(reqVO.getRoomId(), userIds);
         List<ConversationResVO> conversationResVOList = conversationService.queryListByIds(ids);
-        // todo: Websocket 通知用户...
+        RoomEntity room = roomService.getById(reqVO.getRoomId());
+        Integer type = room.getType().equals(RoomTypeEnum.GROUP.getCode())
+                ? WsMessageTypeEnum.GROUP_CHAT_MESSAGE.getCode()
+                : WsMessageTypeEnum.PRIVATE_CHAT_MESSAGE.getCode();
+        // todo: Websocket 通知用户...有新消息
         for (ConversationResVO conversationResVO : conversationResVOList) {
             WebSocketUsers.sendMessage(
                     new WsResponseDTO<ConversationResVO>()
-                            .setType(WsMessageTypeEnum.PRIVATE_CHAT_MESSAGE.getCode())
+                            .setType(type)
                     .setBody(conversationResVO),
                     conversationResVO.getUserId().toString());
         }
