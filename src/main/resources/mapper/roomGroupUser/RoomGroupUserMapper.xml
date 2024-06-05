@@ -21,7 +21,7 @@
         <if test="lastId != null">
             AND rgu.id <![CDATA[ > ]]> #{ lastId }
         </if>
-        ORDER BY rgu.id ASC
+        ORDER BY rgu.created_at ASC
         LIMIT #{ size }
     </select>
 

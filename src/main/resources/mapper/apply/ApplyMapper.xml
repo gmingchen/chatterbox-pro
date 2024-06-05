@@ -3,4 +3,60 @@
 
 <mapper namespace="com.slipper.modules.apply.mapper.ApplyMapper">
 
+    <resultMap id="ApplyMap" type="com.slipper.modules.apply.model.res.ApplyInfoRes">
+        <id property="id" column="id" />
+        <result property="userId" column="user_id" />
+        <result property="content" column="content" />
+        <result property="type" column="type" />
+        <result property="targetId" column="target_id" />
+        <result property="status" column="status" />
+        <association property="user" javaType="com.slipper.modules.user.model.dto.UserBaseDTO">
+            <id property="id" column="target_user_id" />
+            <result property="nickname" column="nickname" />
+            <result property="avatar" column="avatar" />
+            <result property="sex" column="sex" />
+            <result property="online" column="online" />
+        </association>
+        <association property="group" javaType="com.slipper.modules.roomGroup.model.dto.RoomGroupBaseDTO">
+            <id property="id" column="target_group_id" />
+            <result property="name" column="group_name" />
+            <result property="avatar" column="group_avatar" />
+        </association>
+        <association property="reviewUser" javaType="com.slipper.modules.user.model.dto.UserBaseDTO">
+            <id property="id" column="review_id" />
+            <result property="nickname" column="review_nickname" />
+            <result property="avatar" column="review_avatar" />
+            <result property="sex" column="review_sex" />
+            <result property="online" column="review_online" />
+        </association>
+    </resultMap>
+
+    <sql id="ApplySql">
+        SELECT a.id, a.user_id, a.content, a.type, a.target_id, a.status, a.created_at,
+               u.id AS target_user_id, u.nickname, u.avatar, u.sex, u.online,
+               rg.id AS target_group_id, rg.name AS group_name, rg.avatar AS group_avatar,
+               ru.id AS review_id, ru.nickname AS review_nickname, ru.avatar AS review_avatar, ru.sex AS review_sex,
+               ru.online AS review_online
+        FROM apply AS a
+            LEFT JOIN apply__user AS au ON au.apply_id = a.id
+            LEFT JOIN user AS u ON u.id = a.target_id AND a.type = 0
+            LEFT JOIN room_group AS rg ON rg.id = a.target_id AND a.type = 1
+            LEFT JOIN user AS ru ON ru.id = a.updater
+        WHERE a.deleted = 0
+    </sql>
+
+    <select id="queryPageByLastId" resultMap="ApplyMap">
+        <include refid="ApplySql" />
+        AND au.user_id = #{ userId }
+        <if test="lastId != null">
+            AND rgu.id <![CDATA[ > ]]> #{ lastId }
+        </if>
+        ORDER BY a.created_at DESC
+        LIMIT #{ size }
+    </select>
+
+    <select id="queryInfo" resultMap="ApplyMap">
+        <include refid="ApplySql" />
+        AND a.id = #{ id }
+    </select>
 </mapper>

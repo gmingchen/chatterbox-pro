@@ -17,7 +17,9 @@ import com.slipper.modules.apply.convert.ApplyConvert;
 import com.slipper.modules.apply.entity.ApplyEntity;
 import com.slipper.modules.apply.mapper.ApplyMapper;
 import com.slipper.modules.apply.model.req.ApplyFriendReqVO;
+import com.slipper.modules.apply.model.req.ApplyPageReqVO;
 import com.slipper.modules.apply.model.req.ApplyReviewFriendReqVO;
+import com.slipper.modules.apply.model.res.ApplyInfoRes;
 import com.slipper.modules.apply.service.ApplyService;
 import com.slipper.modules.applyUser.service.ApplyUserService;
 import com.slipper.modules.conversation.model.res.ConversationResVO;
@@ -168,5 +170,10 @@ public class ApplyServiceImpl extends ServiceImplX<ApplyMapper, ApplyEntity> imp
                 .eq(ApplyEntity::getStatus, ApplyStatusEnum.AUDIT.getCode())
                 .eq(ApplyEntity::getType, applyTypeEnum.getCode());
         return baseMapper.selectOne(wrapper);
+    }
+
+    @Override
+    public List<ApplyInfoRes> queryPageByLastId(ApplyPageReqVO reqVO) {
+        return baseMapper.queryPageByLastId(reqVO.getSize(), SecurityUtils.getLoginUserId(), reqVO.getLastId());
     }
 }

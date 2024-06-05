@@ -3,6 +3,7 @@ package com.slipper.modules.message.model.req;
 import com.slipper.common.enums.MessageTypeEnum;
 import com.slipper.core.validator.constraints.Enum;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -12,6 +13,7 @@ import java.io.Serializable;
  * @author gumingchen
  */
 @Data
+@Accessors(chain = true)
 public class MessageCreateReqVO implements Serializable {
     private static final long serialVersionUID = 1L;
     /**

@@ -5,6 +5,7 @@ import com.slipper.core.mybatisplus.expend.service.IServiceX;
 import com.slipper.modules.conversation.model.dto.ConversationCreateDTO;
 import com.slipper.modules.conversation.model.res.ConversationResVO;
 import com.slipper.modules.message.entity.MessageEntity;
+import com.slipper.modules.message.model.dto.MessageCreateDTO;
 import com.slipper.modules.message.model.req.MessageCreateReqVO;
 import com.slipper.modules.message.model.req.MessagePageReqVO;
 import com.slipper.modules.message.model.res.MessageResVO;
@@ -40,9 +41,14 @@ public interface MessageService extends IServiceX<MessageEntity> {
 
     /**
      * 新增
+     * @param dto 参数
+     * @return
+     */
+    ConversationResVO create(MessageCreateDTO dto);
+    /**
+     * 新增
      * @param reqVO 参数
      * @return
      */
     ConversationResVO create(MessageCreateReqVO reqVO);
-
 }

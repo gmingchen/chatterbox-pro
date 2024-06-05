@@ -4,8 +4,13 @@ import com.slipper.common.enums.ApplyTypeEnum;
 import com.slipper.core.mybatisplus.expend.service.IServiceX;
 import com.slipper.modules.apply.entity.ApplyEntity;
 import com.slipper.modules.apply.model.req.ApplyFriendReqVO;
+import com.slipper.modules.apply.model.req.ApplyPageReqVO;
 import com.slipper.modules.apply.model.req.ApplyReviewFriendReqVO;
 import com.slipper.modules.apply.model.req.ApplyReviewReqVO;
+import com.slipper.modules.apply.model.res.ApplyInfoRes;
+import com.slipper.modules.roomGroupUser.model.req.RoomUserPageReqVO;
+
+import java.util.List;
 
 /**
  * 申请
@@ -54,5 +59,12 @@ public interface ApplyService extends IServiceX<ApplyEntity> {
      * @return
      */
     ApplyEntity queryPendingReview(Long sourceId, Long targetId, ApplyTypeEnum applyTypeEnum);
+
+    /**
+     * 分页列表
+     * @param reqVO 参数
+     * @return
+     */
+    List<ApplyInfoRes> queryPageByLastId(ApplyPageReqVO reqVO);
 
 }

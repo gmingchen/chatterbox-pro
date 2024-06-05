@@ -3,6 +3,7 @@ package com.slipper.modules.user.service.impl;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.slipper.common.constant.RedisConstant;
+import com.slipper.common.enums.MessageTypeEnum;
 import com.slipper.common.enums.ResultCodeEnum;
 import com.slipper.common.enums.UserOnlineStatusEnum;
 import com.slipper.common.pojo.PageResult;
@@ -14,6 +15,9 @@ import com.slipper.modules.captcha.model.req.CaptchaReqVO;
 import com.slipper.modules.captcha.service.CaptchaService;
 import com.slipper.modules.conversation.service.ConversationService;
 import com.slipper.modules.grouping.service.GroupingService;
+import com.slipper.modules.message.model.dto.MessageCreateDTO;
+import com.slipper.modules.message.model.req.MessageCreateReqVO;
+import com.slipper.modules.message.service.MessageService;
 import com.slipper.modules.room.service.RoomService;
 import com.slipper.modules.user.convert.UserConvert;
 import com.slipper.modules.user.entity.UserEntity;
@@ -27,6 +31,7 @@ import com.slipper.modules.user.model.req.UserUpdateEmailReqVO;
 import com.slipper.modules.user.model.req.UserUpdateReqVO;
 import com.slipper.modules.user.model.res.UserSearchResVO;
 import com.slipper.modules.user.service.UserService;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -49,6 +54,8 @@ public class UserServiceImpl extends ServiceImplX<UserMapper, UserEntity> implem
     private RoomService roomService;
     @Resource
     private ConversationService conversationService;
+    @Resource
+    private MessageService messageService;
 
     @Override
     public Long create(@Validated UserCreateDTO dto) {
@@ -64,10 +71,16 @@ public class UserServiceImpl extends ServiceImplX<UserMapper, UserEntity> implem
         groupingService.createDefault(userEntity.getId());
         // 默认加入全员群
         roomService.addGroupRoomUser(1L, userEntity.getId());
-        // 新增全员群会话
+        // 新增全员群会话并发言
+        MessageCreateDTO messageCreateDTO = new MessageCreateDTO()
+                .setUserId(userEntity.getId())
+                .setRoomId(1L)
+                .setType(MessageTypeEnum.TEXT.getCode())
+                .setContent(dto.getNickname() + "加入群聊啦！");
         ArrayList<Long> userIds = new ArrayList<>();
         userIds.add(userEntity.getId());
         conversationService.create(1L, userIds);
+        messageService.create(messageCreateDTO);
         // todo: 还有其它默认...
 
 
