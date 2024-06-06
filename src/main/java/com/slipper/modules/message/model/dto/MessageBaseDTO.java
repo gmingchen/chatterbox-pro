@@ -31,7 +31,7 @@ public class MessageBaseDTO implements Serializable {
     /**
      * 语音资源路径
      */
-    private String voice;
+    private String audio;
     /**
      * 文件资源路径
      */

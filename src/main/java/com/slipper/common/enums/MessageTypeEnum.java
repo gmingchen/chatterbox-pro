@@ -17,7 +17,7 @@ public enum MessageTypeEnum implements EnumIntArray {
      */
     TEXT(0, "文本"),
     IMAGE(1, "图片"),
-    VOICE(2, "语音"),
+    AUDIO(2, "语音"),
     FILE(3, "文件"),
     ;
 

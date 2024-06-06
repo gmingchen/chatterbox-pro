@@ -61,7 +61,7 @@ public class MessageServiceImpl extends ServiceImplX<MessageMapper, MessageEntit
 
     @Override
     public List<MessageResVO> queryPageByLastId(MessagePageReqVO reqVO) {
-        return baseMapper.queryPageByLastId(reqVO.getSize(), reqVO.getRoomId(), reqVO.getLastId());
+        return baseMapper.queryPageByLastId(reqVO.getSize(), reqVO.getRoomId(), SecurityUtils.getLoginUserId(), reqVO.getLastId());
     }
 
     @Override
@@ -81,8 +81,8 @@ public class MessageServiceImpl extends ServiceImplX<MessageMapper, MessageEntit
             messageEntity.setText(dto.getContent());
         } else if (dto.getType().equals(MessageTypeEnum.IMAGE.getCode())) {
             messageEntity.setImage(dto.getContent());
-        } else if (dto.getType().equals(MessageTypeEnum.VOICE.getCode())) {
-            messageEntity.setVoice(dto.getContent());
+        } else if (dto.getType().equals(MessageTypeEnum.AUDIO.getCode())) {
+            messageEntity.setAudio(dto.getContent());
         } else if (dto.getType().equals(MessageTypeEnum.FILE.getCode())) {
             messageEntity.setFile(dto.getContent());
         }

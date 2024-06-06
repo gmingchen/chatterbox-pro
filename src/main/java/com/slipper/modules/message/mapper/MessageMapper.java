@@ -31,10 +31,11 @@ public interface MessageMapper extends BaseMapperX<MessageEntity> {
      * 分页列表
      * @param size 数量
      * @param roomId 房间ID
+     * @param userId 用户ID
      * @param lastId 上次查询上一条数据ID
      * @return
      */
-    List<MessageResVO> queryPageByLastId(@Param("size") Long size, @Param("roomId") Long roomId, @Param("lastId") Long lastId);
+    List<MessageResVO> queryPageByLastId(@Param("size") Long size, @Param("roomId") Long roomId, @Param("userId") Long userId, @Param("lastId") Long lastId);
 
     /**
      * 信息

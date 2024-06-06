@@ -12,7 +12,7 @@
             <result property="type" column="messageType" />
             <result property="text" column="messageText" />
             <result property="image" column="messageImage" />
-            <result property="voice" column="messageVoice" />
+            <result property="audio" column="messageAudio" />
             <result property="file" column="messageFile" />
             <result property="status" column="messageStatus" />
             <result property="createdAt" column="messageCreatedAt" />
@@ -40,7 +40,7 @@
     <sql id="ConversationSql">
         SELECT c.id, c.room_id, c.user_id,
                m.id AS messageId, m.type AS messageType, m.text AS messageText, m.image AS messageImage,
-               m.voice AS messageVoice, m.file AS messageFile, m.status AS messageStatus, m.created_at AS messageCreatedAt,
+               m.audio AS messageAudio, m.file AS messageFile, m.status AS messageStatus, m.created_at AS messageCreatedAt,
                mu.id AS messageUserId, mu.nickname AS messageNickname, mu.avatar AS messageAvatar, mu.sex AS messageSex,
                rg.id AS groupId, rg.name AS groupName, rg.avatar AS groupAvatar,
                f.id AS friendId, f.remark,

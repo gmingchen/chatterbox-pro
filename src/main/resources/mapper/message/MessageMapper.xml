@@ -3,12 +3,21 @@
 
 <mapper namespace="com.slipper.modules.message.mapper.MessageMapper">
 
-    <sql id="MessageSql">
-        SELECT m.id, m.type, m.text, m.image, m.voice, m.file, m.status, m.created_at,
+    <sql id="MessageFieldSql">
+        SELECT m.id, m.type, m.text, m.image, m.audio, m.file, m.status, m.created_at,
                u.id AS userId, u.nickname, u.avatar, u.sex
+    </sql>
+    <sql id="MessageTableSql">
         FROM message AS m
         LEFT JOIN user AS u ON u.id = m.user_id
+    </sql>
+    <sql id="MessageWhereSql">
         WHERE m.deleted = 0
+    </sql>
+    <sql id="MessageSql">
+        <include refid="MessageFieldSql"></include>
+        <include refid="MessageTableSql"></include>
+        <include refid="MessageWhereSql"></include>
     </sql>
 
 <!--    IPage<MessageResVO> queryPage(Page<MessageEntity> page, @Param("roomId") Long roomId);-->
@@ -18,10 +27,15 @@
         ORDER BY m.created_at DESC
     </select>
 
-<!--    IPage<MessageResVO> queryPageByLastId(@Param("size") Integer size, @Param("roomId") Long roomId, @Param("lastId") Long lastId);-->
+<!--    List<MessageResVO> queryPageByLastId(@Param("size") Long size, @Param("roomId") Long roomId, @Param("userId") Long userId, @Param("lastId") Long lastId);-->
     <select id="queryPageByLastId" resultType="com.slipper.modules.message.model.res.MessageResVO">
-        <include refid="MessageSql"></include>
-        AND m.room_id = #{ roomId }
+        <include refid="MessageFieldSql"></include>
+        <include refid="MessageTableSql"></include>
+        LEFT JOIN room_group AS rg ON rg.room_id = m.room_id AND rg.deleted = 0
+        LEFT JOIN room_group__user AS rgu ON rgu.user_id = #{ userId } AND rgu.room_group_id = rg.id
+        <include refid="MessageWhereSql"></include>
+            AND m.room_id = #{ roomId }
+            AND DATE_FORMAT(m.created_at,'%Y-%m-%d %H:%i:%s') <![CDATA[ >= ]]> DATE_FORMAT(rgu.created_at,'%Y-%m-%d %H:%i:%s')
         <if test="lastId != null">
             AND m.id <![CDATA[ < ]]> #{ lastId }
         </if>

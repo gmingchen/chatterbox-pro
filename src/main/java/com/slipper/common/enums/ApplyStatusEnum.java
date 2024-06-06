@@ -16,8 +16,8 @@ public enum ApplyStatusEnum implements EnumIntArray {
      * 申请
      */
     AUDIT(0, "待审核"),
-    PASS(1, "通过"),
-    REJECT(2, "拒绝"),
+    PASS(1, "已通过"),
+    REJECT(2, "已拒绝"),
     ;
 
     /**

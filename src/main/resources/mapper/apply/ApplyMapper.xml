@@ -10,6 +10,7 @@
         <result property="type" column="type" />
         <result property="targetId" column="target_id" />
         <result property="status" column="status" />
+        <result property="createdAt" column="created_at" />
         <association property="user" javaType="com.slipper.modules.user.model.dto.UserBaseDTO">
             <id property="id" column="target_user_id" />
             <result property="nickname" column="nickname" />
@@ -39,7 +40,7 @@
                ru.online AS review_online
         FROM apply AS a
             LEFT JOIN apply__user AS au ON au.apply_id = a.id
-            LEFT JOIN user AS u ON u.id = a.target_id AND a.type = 0
+            LEFT JOIN user AS u ON u.id = a.user_id AND a.type = 0
             LEFT JOIN room_group AS rg ON rg.id = a.target_id AND a.type = 1
             LEFT JOIN user AS ru ON ru.id = a.updater
         WHERE a.deleted = 0
