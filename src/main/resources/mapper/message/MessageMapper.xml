@@ -31,17 +31,18 @@
     <select id="queryPageByLastId" resultType="com.slipper.modules.message.model.res.MessageResVO">
         <include refid="MessageFieldSql"></include>
         <include refid="MessageTableSql"></include>
+        LEFT JOIN room AS r ON r.id = m.room_id
         LEFT JOIN room_group AS rg ON rg.room_id = m.room_id AND rg.deleted = 0
         LEFT JOIN room_group__user AS rgu ON rgu.user_id = #{ userId } AND rgu.room_group_id = rg.id
         <include refid="MessageWhereSql"></include>
             AND m.room_id = #{ roomId }
-            AND DATE_FORMAT(m.created_at,'%Y-%m-%d %H:%i:%s') <![CDATA[ >= ]]> DATE_FORMAT(rgu.created_at,'%Y-%m-%d %H:%i:%s')
         <if test="lastId != null">
             AND m.id <![CDATA[ < ]]> #{ lastId }
         </if>
         ORDER BY m.created_at DESC
         LIMIT #{ size }
     </select>
+<!--  AND DATE_FORMAT(m.created_at,'%Y-%m-%d %H:%i:%s') <![CDATA[ >= ]]> DATE_FORMAT(rgu.created_at,'%Y-%m-%d %H:%i:%s') -->
 
 <!--    MessageResVO queryInfo(@Param("id") Long id);-->
     <select id="queryInfo" resultType="com.slipper.modules.message.model.res.MessageResVO">
