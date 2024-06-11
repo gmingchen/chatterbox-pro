@@ -30,8 +30,8 @@ netty:
   url: ws://localhost:${netty.port}/${service.context-path}/websocket/{token}
 # 文件配置
 file:
-  path: E:\temp # 存储路径
-  url: http://admin.gumingchen.icu # 访问路径
+  path: /home/project/slipper/chatterbox/resource # 存储路径
+  url: https://chatterbox.gumingchen.icu/resource # 访问路径
 # 邮箱配置
 mail:
   email: gumingchen@foxmail.com # 邮箱地址
