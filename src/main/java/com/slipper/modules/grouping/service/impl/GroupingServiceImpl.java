@@ -67,4 +67,9 @@ public class GroupingServiceImpl extends ServiceImplX<GroupingMapper, GroupingEn
     public List<GroupingFriendResVO> queryList() {
         return baseMapper.queryList(SecurityUtils.getLoginUserId());
     }
+
+    @Override
+    public GroupingFriendResVO queryInfo(Long userId, Long friendId) {
+        return baseMapper.queryInfo(userId, friendId);
+    }
 }

@@ -8,6 +8,7 @@ import com.slipper.modules.apply.model.req.ApplyReviewFriendReqVO;
 import com.slipper.modules.apply.model.req.ApplyReviewReqVO;
 import com.slipper.modules.apply.model.res.ApplyInfoRes;
 import com.slipper.modules.apply.service.ApplyService;
+import com.slipper.modules.grouping.model.res.GroupingFriendResVO;
 import com.slipper.modules.roomGroupUser.model.req.RoomUserPageReqVO;
 import com.slipper.modules.roomGroupUser.model.res.RoomUserResVO;
 import org.springframework.validation.annotation.Validated;
@@ -45,9 +46,10 @@ public class ApplyController {
      */
     @Repeat()
     @PostMapping("/friend/review")
-    public Result<?> reviewFriend(@RequestBody @Validated ApplyReviewFriendReqVO reqVO) {
-        applyService.reviewFriend(reqVO);
-        return Result.success();
+    public Result<GroupingFriendResVO> reviewFriend(@RequestBody @Validated ApplyReviewFriendReqVO reqVO) {
+        return Result.success(
+                applyService.reviewFriend(reqVO)
+        );
     }
 
     /**

@@ -8,6 +8,7 @@ import com.slipper.modules.apply.model.req.ApplyPageReqVO;
 import com.slipper.modules.apply.model.req.ApplyReviewFriendReqVO;
 import com.slipper.modules.apply.model.req.ApplyReviewReqVO;
 import com.slipper.modules.apply.model.res.ApplyInfoRes;
+import com.slipper.modules.grouping.model.res.GroupingFriendResVO;
 import com.slipper.modules.roomGroupUser.model.req.RoomUserPageReqVO;
 
 import java.util.List;
@@ -48,8 +49,9 @@ public interface ApplyService extends IServiceX<ApplyEntity> {
     /**
      * 审核好友申请
      * @param reqVO 审核参数
+     * @return
      */
-    void reviewFriend(ApplyReviewFriendReqVO reqVO);
+    GroupingFriendResVO reviewFriend(ApplyReviewFriendReqVO reqVO);
 
     /**
      * 查询待审核的申请

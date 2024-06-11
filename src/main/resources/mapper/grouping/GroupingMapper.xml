@@ -20,15 +20,26 @@
             <result property="createdAt" column="created_at"/>
         </collection>
     </resultMap>
-<!--    List<GroupingFriendResVO> queryList(@Param("userId") Long userId);-->
-    <select id="queryList" resultMap="GroupingFriendMap">
+
+    <sql id="GroupingFriendSql">
         SELECT g.id, g.name, g.fixed,
                f.id AS friend_id, f.remark, f.friend_id AS user_id,
                u.nickname, u.avatar, u.sex, u.online, u.email, u.last_at, u.created_at
         FROM `grouping` AS g
-        LEFT JOIN friend AS f ON f.grouping_id = g.id AND f.deleted = 0
-        LEFT JOIN user AS u ON u.id = f.friend_id
+                 LEFT JOIN friend AS f ON f.grouping_id = g.id AND f.deleted = 0
+                 LEFT JOIN user AS u ON u.id = f.friend_id
+    </sql>
+
+<!--    List<GroupingFriendResVO> queryList(@Param("userId") Long userId);-->
+    <select id="queryList" resultMap="GroupingFriendMap">
+        <include refid="GroupingFriendSql" />
         WHERE g.deleted = 0 AND g.user_id = #{ userId }
         ORDER BY g.fixed DESC, u.nickname ASC, f.created_at DESC
+    </select>
+
+<!--    GroupingFriendResVO queryFriendInfo(Long userId, Long friendId);-->
+    <select id="queryInfo" resultMap="GroupingFriendMap">
+        <include refid="GroupingFriendSql" />
+        WHERE g.deleted = 0 AND g.user_id = #{ userId } AND u.id = #{ friendId }
     </select>
 </mapper>

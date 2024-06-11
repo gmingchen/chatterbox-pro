@@ -34,4 +34,12 @@ public interface GroupingMapper extends BaseMapperX<GroupingEntity> {
      */
     @InterceptorIgnore(dataPermission = "true")
     List<GroupingFriendResVO> queryList(@Param("userId") Long userId);
+
+    /**
+     * 查询分组好友信息
+     * @param userId 用户ID
+     * @return
+     */
+    @InterceptorIgnore(dataPermission = "true")
+    GroupingFriendResVO queryInfo(Long userId, Long friendId);
 }

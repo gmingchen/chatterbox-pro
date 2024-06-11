@@ -4,6 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.slipper.common.enums.StatusEnum;
 import com.slipper.common.enums.WsMessageTypeEnum;
+import com.slipper.common.utils.CollectionUtils;
 import com.slipper.core.mybatisplus.expend.service.ServiceImplX;
 import com.slipper.core.mybatisplus.expend.wrapper.LambdaQueryWrapperX;
 import com.slipper.core.netty.dto.WsResponseDTO;
@@ -71,15 +72,14 @@ public class FriendServiceImpl extends ServiceImplX<FriendMapper, FriendEntity> 
         // 新增好友房间
         roomService.createFriendRoom(dto.getUserId(), dto.getTargetId());
 
-        // todo: Websocket 通知用户...
-        ArrayList<String> userIds = new ArrayList<>();
-        userIds.add(dto.getUserId().toString());
-        userIds.add(dto.getTargetId().toString());
+        // todo: Websocket 通知用户...通过好友请求
+        ArrayList<Long> ids = new ArrayList<>();
+        ids.add(dto.getUserId());
         WebSocketUsers.sendMessage(
                 new WsResponseDTO<>()
-                        .setType(WsMessageTypeEnum.AGREE_FRIEND_APPLY.getCode()),
-                userIds);
-
+                        .setType(WsMessageTypeEnum.PASS_FRIEND_APPLY.getCode())
+                        .setBody(groupingService.queryInfo(dto.getUserId(), dto.getTargetId())),
+                CollectionUtils.mapList(ids, Object::toString));
     }
 
     @Transactional(rollbackFor = RunException.class)

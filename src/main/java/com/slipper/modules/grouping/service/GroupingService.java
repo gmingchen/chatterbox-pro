@@ -54,4 +54,12 @@ public interface GroupingService extends IServiceX<GroupingEntity> {
      */
     List<GroupingFriendResVO> queryList();
 
+    /**
+     * 查询分组好友信息
+     * @param userId 用户ID
+     * @param friendId 好友ID
+     * @return
+     */
+    GroupingFriendResVO queryInfo(Long userId, Long friendId);
+
 }

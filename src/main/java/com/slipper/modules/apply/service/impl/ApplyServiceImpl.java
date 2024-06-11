@@ -25,6 +25,7 @@ import com.slipper.modules.applyUser.service.ApplyUserService;
 import com.slipper.modules.conversation.model.res.ConversationResVO;
 import com.slipper.modules.friend.model.dto.FriendCreateDTO;
 import com.slipper.modules.friend.service.FriendService;
+import com.slipper.modules.grouping.model.res.GroupingFriendResVO;
 import com.slipper.modules.grouping.service.GroupingService;
 import com.slipper.modules.user.service.UserService;
 import org.springframework.stereotype.Service;
@@ -103,7 +104,8 @@ public class ApplyServiceImpl extends ServiceImplX<ApplyMapper, ApplyEntity> imp
             // todo: Websocket 通知用户...有好友申请
             WebSocketUsers.sendMessage(
                     new WsResponseDTO<>()
-                            .setType(WsMessageTypeEnum.FRIEND_APPLY.getCode()),
+                            .setType(WsMessageTypeEnum.FRIEND_APPLY.getCode())
+                            .setBody(baseMapper.queryInfo(applyEntity.getId())),
                     CollectionUtils.mapList(ids, Object::toString));
         }
 
@@ -138,15 +140,11 @@ public class ApplyServiceImpl extends ServiceImplX<ApplyMapper, ApplyEntity> imp
                 .setUpdater(targetId);
         apply.setId(applyId);
         baseMapper.updateById(apply);
-        // todo: Websocket 通知用户...
-        WebSocketUsers.sendMessage(
-                new WsResponseDTO<>()
-                        .setType(WsMessageTypeEnum.REFUSE_FRIEND_APPLY.getCode()),
-                targetId.toString());
     }
 
+    @Transactional(rollbackFor = RunException.class)
     @Override
-    public void reviewFriend(ApplyReviewFriendReqVO reqVO) {
+    public GroupingFriendResVO reviewFriend(ApplyReviewFriendReqVO reqVO) {
         ApplyEntity applyEntity = this.validateExist(reqVO.getId());
         // 校验是否已经审核
         if (!applyEntity.getStatus().equals(ApplyStatusEnum.AUDIT.getCode())) {
@@ -157,9 +155,11 @@ public class ApplyServiceImpl extends ServiceImplX<ApplyMapper, ApplyEntity> imp
                     applyEntity.getUserId(), applyEntity.getGroupingId(), applyEntity.getRemark(),
                     SecurityUtils.getLoginUserId(), reqVO.getGroupingId(), reqVO.getRemark()
             );
+            return groupingService.queryInfo(SecurityUtils.getLoginUserId(), applyEntity.getUserId());
         } else if (reqVO.getStatus().equals(ApplyStatusEnum.REJECT.getCode())) {
             this.rejectFriend(applyEntity.getId(), applyEntity.getUserId());
         }
+        return null;
     }
 
     @Override
