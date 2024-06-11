@@ -1,5 +1,5 @@
 service:
-  port: 8820
+  port: 8830
   context-path: /chatterbox
 # 主数据源
 database:
