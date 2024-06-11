@@ -1,5 +1,5 @@
 service:
-  port: 8820
+  port: 8830
   context-path: /chatterbox
 # 主数据源
 database:
@@ -26,14 +26,18 @@ jwt:
   expire: 604800 # 过期是时间（秒）
 # netty
 netty:
-  port: 8821
+  port: 8831
   url: ws://localhost:${netty.port}/${service.context-path}/websocket/{token}
+# 文件配置
+file:
+  path: E:\temp # 存储路径
+  url: http://admin.gumingchen.icu # 访问路径
 # 邮箱配置
 mail:
-  email: gumingchen@foxmail.com
-  username: gumingchen@foxmail.com
-  password: egjerfvcqakyjbgb
-  protocol: smtp
-  host: smtp.qq.com
-  port: port
+  email: gumingchen@foxmail.com # 邮箱地址
+  username: gumingchen@foxmail.com # 用户名
+  password: egjerfvcqakyjbgb # 密码
+  protocol: smtp # 协议
+  host: smtp.qq.com # 主机
+  port: 465 # 端口
 
