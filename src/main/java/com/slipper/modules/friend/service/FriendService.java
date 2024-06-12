@@ -39,5 +39,4 @@ public interface FriendService extends IServiceX<FriendEntity> {
      */
     Boolean validateFriendBoth(Long sourceId, Long targetId);
 
-
 }

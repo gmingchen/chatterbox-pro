@@ -10,6 +10,7 @@ import com.slipper.modules.captcha.service.CaptchaService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Locale;
 
 /**
  * @author gumingchen
@@ -51,7 +52,7 @@ public class CaptchaServiceImpl implements CaptchaService {
     public void validate(String captcha, String email, String key) {
         key += email;
         boolean bool = redisUtils.get(key, String.class)
-                .map(captcha::equals)
+                .map(i -> captcha.toUpperCase().equals(i))
                 .orElse(false);
         if (!bool) {
             throw new RunException(ResultCodeEnum.CAPTCHA_ERROR);

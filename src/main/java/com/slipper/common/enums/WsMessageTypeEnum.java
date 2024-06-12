@@ -28,7 +28,13 @@ public enum WsMessageTypeEnum implements EnumIntArray {
     AGREE_GROUP_APPLY(8, "同意群聊申请"),
     REFUSE_GROUP_APPLY(9, "拒绝群聊申请"),
     DELETE_GROUP_APPLY(10, "删除群聊"),
-    EXIT_GROUP_APPLY(11, "退出群聊"),
+
+    JOIN_GROUP(11, "加入群聊"),
+    EXIT_GROUP(12, "退出群聊"),
+
+    AUDIO_APPLY(13, "语音请求"),
+    AUDIO_ACCEPT(14, "接听语音"),
+    AUDIO_REJECT(15, "拒绝语音"),
 
     ERROR(20, "异常消息"),
     ;

@@ -26,4 +26,12 @@ public interface RoomGroupUserMapper extends BaseMapperX<RoomGroupUserEntity> {
      * @return
      */
     List<RoomUserResVO> queryPageByLastId(@Param("size") Long size, @Param("roomId") Long roomId, @Param("lastId") Long lastId);
+
+    /**
+     * 查询房间用户信息
+     * @param roomId
+     * @param userId
+     * @return
+     */
+    RoomUserResVO queryInfo(@Param("roomId") Long roomId, @Param("userId") Long userId);
 }

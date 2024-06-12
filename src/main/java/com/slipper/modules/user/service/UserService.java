@@ -75,5 +75,4 @@ public interface UserService extends IServiceX<UserEntity> {
      */
     PageResult<UserSearchResVO> queryByNicknameOrEmail(UserSearchReqVO reqVO);
 
-
 }

@@ -4,9 +4,12 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.slipper.common.enums.ResultCodeEnum;
 import com.slipper.common.enums.RoomTypeEnum;
 import com.slipper.common.enums.StatusEnum;
+import com.slipper.common.enums.WsMessageTypeEnum;
 import com.slipper.common.utils.CollectionUtils;
 import com.slipper.core.mybatisplus.expend.service.ServiceImplX;
 import com.slipper.core.mybatisplus.expend.wrapper.LambdaQueryWrapperX;
+import com.slipper.core.netty.dto.WsResponseDTO;
+import com.slipper.core.netty.utils.WebSocketUsers;
 import com.slipper.core.security.utils.SecurityUtils;
 import com.slipper.exception.RunException;
 import com.slipper.modules.conversation.model.res.ConversationResVO;
@@ -24,6 +27,7 @@ import com.slipper.modules.roomGroup.entity.RoomGroupEntity;
 import com.slipper.modules.roomGroup.model.dto.RoomGroupCreateDTO;
 import com.slipper.modules.roomGroup.service.RoomGroupService;
 import com.slipper.modules.roomGroupUser.entity.RoomGroupUserEntity;
+import com.slipper.modules.roomGroupUser.model.res.RoomUserResVO;
 import com.slipper.modules.roomGroupUser.service.RoomGroupUserService;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -95,7 +99,17 @@ public class RoomServiceImpl extends ServiceImplX<RoomMapper, RoomEntity> implem
         if (Boolean.TRUE.equals(bool)) {
             throw new RunException(ResultCodeEnum.IS_ROOM_MEMBER);
         }
+        List<Long> userIds = this.queryRoomUserId(roomId);
+
         roomGroupService.addUser(roomId, userId);
+
+        RoomUserResVO roomUserResVO = roomGroupUserService.queryInfo(roomId, userId);
+        // todo: Websocket 通知用户...用户加入群聊
+        WebSocketUsers.sendMessage(
+                new WsResponseDTO<RoomUserResVO>()
+                        .setType(WsMessageTypeEnum.JOIN_GROUP.getCode())
+                        .setBody(roomUserResVO),
+                CollectionUtils.mapList(userIds, Object::toString));
     }
 
     @Override

@@ -43,6 +43,7 @@ public enum ResultCodeEnum {
     FILE_UPLOAD_ERROR(4019, "文件上传失败！"),
     FILE_SIZE_EXCEED(4020, "文件大小超出限制！"),
     FILE_TYPE_ERROR(4021, "文件类型不正确"),
+    NOT_ONLINE(4022, "对方不在线"),
 
 
 

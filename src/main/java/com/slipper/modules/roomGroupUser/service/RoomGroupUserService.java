@@ -20,4 +20,12 @@ public interface RoomGroupUserService extends IServiceX<RoomGroupUserEntity> {
      */
     List<RoomUserResVO> queryPageByLastId(RoomUserPageReqVO reqVO);
 
+    /**
+     * ID查询信息
+     * @param roomId 房间ID
+     * @param userId 用户ID
+     * @return
+     */
+    RoomUserResVO queryInfo(Long roomId, Long userId);
+
 }

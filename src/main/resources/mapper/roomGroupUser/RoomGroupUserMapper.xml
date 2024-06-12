@@ -9,14 +9,18 @@
         WHERE deleted = 0 AND room_group_id = #{ roomGroupId }
     </select>
 
-    <!--    IPage<RoomUserResVO> queryPageByLastId(@Param("size") Integer size, @Param("roomId") Long roomId, @Param("lastId") Long lastId);-->
-    <select id="queryPageByLastId" resultType="com.slipper.modules.roomGroupUser.model.res.RoomUserResVO">
+    <sql id="RoomUserSql">
         SELECT rgu.id AS roomUserId, rgu.nickname AS roomUserNickname, rgu.role, rgu.status,
                rgu.room_group_id, rg.room_id,
                u.id, u.nickname, u.avatar, u.sex
         FROM room_group AS rg
-        LEFT JOIN room_group__user AS rgu ON rgu.room_group_id = rg.id AND rgu.deleted = 0
-        LEFT JOIN user AS u ON u.id = rgu.user_id
+                 LEFT JOIN room_group__user AS rgu ON rgu.room_group_id = rg.id AND rgu.deleted = 0
+                 LEFT JOIN user AS u ON u.id = rgu.user_id
+    </sql>
+
+    <!--    IPage<RoomUserResVO> queryPageByLastId(@Param("size") Integer size, @Param("roomId") Long roomId, @Param("lastId") Long lastId);-->
+    <select id="queryPageByLastId" resultType="com.slipper.modules.roomGroupUser.model.res.RoomUserResVO">
+        <include refid="RoomUserSql"></include>
         WHERE rg.deleted = 0 AND rg.room_id = #{ roomId }
         <if test="lastId != null">
             AND rgu.id <![CDATA[ > ]]> #{ lastId }
@@ -25,5 +29,10 @@
         LIMIT #{ size }
     </select>
 
+<!--    RoomUserResVO queryInfo(@Param("roomId") Long roomId, @Param("userId") Long userId);-->
+    <select id="queryInfo" resultType="com.slipper.modules.roomGroupUser.model.res.RoomUserResVO">
+        <include refid="RoomUserSql"></include>
+        WHERE rg.deleted = 0 AND rg.room_id = #{ roomId } AND rgu.user_id = #{ userId }
+    </select>
 
 </mapper>

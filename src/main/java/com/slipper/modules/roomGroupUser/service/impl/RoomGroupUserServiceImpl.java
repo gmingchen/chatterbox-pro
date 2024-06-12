@@ -21,4 +21,9 @@ public class RoomGroupUserServiceImpl extends ServiceImplX<RoomGroupUserMapper, 
     public List<RoomUserResVO> queryPageByLastId(RoomUserPageReqVO reqVO) {
         return baseMapper.queryPageByLastId(reqVO.getSize(), reqVO.getRoomId(), reqVO.getLastId());
     }
+
+    @Override
+    public RoomUserResVO queryInfo(Long roomId, Long userId) {
+        return baseMapper.queryInfo(roomId, userId);
+    }
 }
