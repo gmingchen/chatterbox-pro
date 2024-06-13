@@ -10,5 +10,5 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class MediaVoiceReqVO extends MediaDTO {
+public class MediaVoiceCallReqVO extends MediaDTO {
 }
