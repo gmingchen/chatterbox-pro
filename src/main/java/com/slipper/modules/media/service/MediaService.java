@@ -31,7 +31,7 @@ public interface MediaService {
      * 接受语音请求
      * @param reqVO 参数
      */
-    void accept(MediaVoiceAcceptReqVO reqVO);
+    void accept(MediaVideoReqVO reqVO);
 
     /**
      * 拒绝语音请求

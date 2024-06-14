@@ -44,7 +44,7 @@ public class MediaController {
      * @return
      */
     @PostMapping("/voice/accept")
-    public Result<?> voiceAccept(@RequestBody @Validated MediaVoiceAcceptReqVO reqVO) {
+    public Result<?> voiceAccept(@RequestBody @Validated MediaVideoReqVO reqVO) {
         mediaService.accept(reqVO);
         return Result.success();
     }

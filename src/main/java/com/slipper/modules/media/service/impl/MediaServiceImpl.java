@@ -64,14 +64,18 @@ public class MediaServiceImpl implements MediaService {
     }
 
     @Override
-    public void accept(MediaVoiceAcceptReqVO reqVO) {
+    public void accept(MediaVideoReqVO reqVO) {
         // 校验是否在线
         validateOnline(reqVO.getUserId());
+
+        MediaResVO mediaResVO = MediaConvert.INSTANCE.convert(userService.getById(SecurityUtils.getLoginUserId()));
+        mediaResVO.setDescription(reqVO.getDescription());
+
         // todo: Websocket 通知用户...接受好友语音请求
         WebSocketUsers.sendMessage(
                 new WsResponseDTO<>()
                         .setType(WsMessageTypeEnum.VOICE_ACCEPT.getCode())
-                        .setBody(SecurityUtils.getLoginUserId()),
+                        .setBody(mediaResVO),
                 reqVO.getUserId().toString());
     }
 
