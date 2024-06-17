@@ -5,7 +5,7 @@ service:
 database:
   ip: 139.196.182.46
   port: 3306
-  name: chatterbox
+  name: chatterbox-test
   username: root
   password: ll5271211314
   installation-path: /usr/local/software/mysql/mysql-8.0.29/bin/ # 数据库安装路径
@@ -16,7 +16,7 @@ database:
     password: gumingchen
 # redis
 redis:
-  database: 1
+  database: 3
   host: 139.196.182.46
   port: 6379
   password: ll5271211314

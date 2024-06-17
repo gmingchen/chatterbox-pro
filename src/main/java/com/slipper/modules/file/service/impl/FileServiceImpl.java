@@ -71,7 +71,7 @@ public class FileServiceImpl implements FileService {
      * @param accepts 类型
      */
     private void validateType(MultipartFile file, String[] accepts) {
-        String fileType = file.getContentType().toUpperCase();
+        String fileType = getType(file);
         if (!Arrays.asList(accepts).contains(fileType)) {
             throw new RunException(ResultCodeEnum.FILE_TYPE_ERROR);
         }
@@ -83,9 +83,19 @@ public class FileServiceImpl implements FileService {
      * @param accepts 类型
      */
     private void validateFileType(MultipartFile file, String[] accepts) {
-        String fileType = file.getContentType().toUpperCase();
+        String fileType = getType(file);
         if (!Arrays.asList(accepts).contains(fileType)) {
             throw new RunException(ResultCodeEnum.FILE_TYPE_ERROR);
         }
+    }
+
+    /**
+     * 获取文件类型
+     * @param file
+     * @return
+     */
+    private String getType(MultipartFile file) {
+        String name = file.getOriginalFilename();
+        return name.substring(name.lastIndexOf(".") + 1).toUpperCase();
     }
 }

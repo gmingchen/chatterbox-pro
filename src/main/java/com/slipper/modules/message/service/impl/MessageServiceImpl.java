@@ -1,6 +1,5 @@
 package com.slipper.modules.message.service.impl;
 
-import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.slipper.common.enums.MessageTypeEnum;
@@ -29,7 +28,6 @@ import com.slipper.modules.room.entity.RoomEntity;
 import com.slipper.modules.room.service.RoomService;
 import com.slipper.modules.roomFriend.entity.RoomFriendEntity;
 import com.slipper.modules.roomFriend.service.RoomFriendService;
-import com.slipper.modules.user.service.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

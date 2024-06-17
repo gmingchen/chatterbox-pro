@@ -5,7 +5,7 @@
 
     <sql id="MessageFieldSql">
         SELECT m.id, m.type, m.text, m.image, m.audio, m.file, m.status, m.created_at,
-               u.id AS userId, u.nickname, u.avatar, u.sex
+               u.id AS userId, u.nickname, u.avatar, u.sex, u.email
     </sql>
     <sql id="MessageTableSql">
         FROM message AS m

@@ -38,8 +38,9 @@ public interface GroupingMapper extends BaseMapperX<GroupingEntity> {
     /**
      * 查询分组好友信息
      * @param userId 用户ID
+     * @param friendId 好友ID
      * @return
      */
     @InterceptorIgnore(dataPermission = "true")
-    GroupingFriendResVO queryInfo(Long userId, Long friendId);
+    GroupingFriendResVO queryInfo(@Param("userId") Long userId, @Param("friendId") Long friendId);
 }
