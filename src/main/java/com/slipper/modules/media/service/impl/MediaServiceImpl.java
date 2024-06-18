@@ -64,7 +64,7 @@ public class MediaServiceImpl implements MediaService {
     }
 
     @Override
-    public void accept(MediaVideoReqVO reqVO) {
+    public void accept(MediaVoiceReqVO reqVO) {
         // 校验是否在线
         validateOnline(reqVO.getUserId());
 
@@ -105,8 +105,54 @@ public class MediaServiceImpl implements MediaService {
         // todo: Websocket 通知用户...好友视频请求
         WebSocketUsers.sendMessage(
                 new WsResponseDTO<>()
-                        .setType(WsMessageTypeEnum.VOICE_APPLY.getCode())
+                        .setType(WsMessageTypeEnum.VIDEO_APPLY.getCode())
                         .setBody(mediaResVO),
+                reqVO.getUserId().toString());
+    }
+
+    @Override
+    public void cancel(MediaVideoCancelReqVO reqVO) {
+        // todo: Websocket 通知用户...取消好友视频请求
+        WebSocketUsers.sendMessage(
+                new WsResponseDTO<>()
+                        .setType(WsMessageTypeEnum.VIDEO_CANCEL.getCode())
+                        .setBody(SecurityUtils.getLoginUserId()),
+                reqVO.getUserId().toString());
+    }
+
+    @Override
+    public void accept(MediaVideoReqVO reqVO) {
+        // 校验是否在线
+        validateOnline(reqVO.getUserId());
+
+        MediaResVO mediaResVO = MediaConvert.INSTANCE.convert(userService.getById(SecurityUtils.getLoginUserId()));
+        mediaResVO.setDescription(reqVO.getDescription());
+
+        // todo: Websocket 通知用户...接受好友视频请求
+        WebSocketUsers.sendMessage(
+                new WsResponseDTO<>()
+                        .setType(WsMessageTypeEnum.VIDEO_ACCEPT.getCode())
+                        .setBody(mediaResVO),
+                reqVO.getUserId().toString());
+    }
+
+    @Override
+    public void reject(MediaVideoRejectReqVO reqVO) {
+        // todo: Websocket 通知用户...拒绝好友视频请求
+        WebSocketUsers.sendMessage(
+                new WsResponseDTO<>()
+                        .setType(WsMessageTypeEnum.VIDEO_REJECT.getCode())
+                        .setBody(SecurityUtils.getLoginUserId()),
+                reqVO.getUserId().toString());
+    }
+
+    @Override
+    public void close(MediaVideoCloseReqVO reqVO) {
+        // todo: Websocket 通知用户...挂断好友语音通话
+        WebSocketUsers.sendMessage(
+                new WsResponseDTO<>()
+                        .setType(WsMessageTypeEnum.VIDEO_CLOSE.getCode())
+                        .setBody(SecurityUtils.getLoginUserId()),
                 reqVO.getUserId().toString());
     }
 

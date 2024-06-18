@@ -24,10 +24,18 @@ public class Constant {
     /**
      * 图片类型
      */
-    public static final String[] IMAGE_TYPE = {"IMAGE/JPG", "IMAGE/PNG", "IMAGE/GIF", "IMAGE/JPEG"};
+    public static final String[] IMAGE_TYPE = {"JPG", "PNG", "GIF", "JPEG"};
     /**
      * 音频类型
      */
-    public static final String[] AUDIO_TYPE = {"AUDIO/MP3", "AUDIO/MP4", "AUDIO/MPEG"};
+    public static final String[] AUDIO_TYPE = {"MP3", "MP4", "MPEG"};
+    /**
+     * 文件类型
+     */
+    public static final String[] FILE_TYPE = {"JPG", "PNG", "GIF", "JPEG",
+            "MP3", "MP4", "MPEG",
+            "DOC", "DOCX", "XLS", "XLSX", "PPT", "PPTX", "PDF",
+            "MP4", "MOV",
+            "TXT"};
 }
 

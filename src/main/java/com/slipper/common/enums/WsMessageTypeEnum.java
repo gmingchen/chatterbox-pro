@@ -38,7 +38,13 @@ public enum WsMessageTypeEnum implements EnumIntArray {
     VOICE_REJECT(16, "拒绝语音"),
     VOICE_CLOSE(17, "关闭语音"),
 
-    ERROR(20, "异常消息"),
+    VIDEO_APPLY(18, "视频请求"),
+    VIDEO_CANCEL(19, "取消视频请求"),
+    VIDEO_ACCEPT(20, "接听视频"),
+    VIDEO_REJECT(21, "拒绝视频"),
+    VIDEO_CLOSE(22, "关闭视频"),
+
+    ERROR(30, "异常消息"),
     ;
 
     /**

@@ -39,7 +39,7 @@
         <if test="lastId != null">
             AND m.id <![CDATA[ < ]]> #{ lastId }
         </if>
-        ORDER BY m.created_at DESC
+        ORDER BY m.created_at DESC, m.id DESC
         LIMIT #{ size }
     </select>
 <!--  AND DATE_FORMAT(m.created_at,'%Y-%m-%d %H:%i:%s') <![CDATA[ >= ]]> DATE_FORMAT(rgu.created_at,'%Y-%m-%d %H:%i:%s') -->

@@ -44,7 +44,7 @@ public class MediaController {
      * @return
      */
     @PostMapping("/voice/accept")
-    public Result<?> voiceAccept(@RequestBody @Validated MediaVideoReqVO reqVO) {
+    public Result<?> voiceAccept(@RequestBody @Validated MediaVoiceReqVO reqVO) {
         mediaService.accept(reqVO);
         return Result.success();
     }
@@ -69,15 +69,53 @@ public class MediaController {
         return Result.success();
     }
 
-
     /**
      * 视频请求
      * @param reqVO 参数
      * @return
      */
-    @PostMapping("/video")
+    @PostMapping("/video/call")
     public Result<?> audio(@RequestBody @Validated MediaVideoReqVO reqVO) {
         mediaService.call(reqVO);
+        return Result.success();
+    }/**
+     * 取消视频请求
+     * @param reqVO 参数
+     * @return
+     */
+    @PostMapping("/video/cancel")
+    public Result<?> videoCancel(@RequestBody @Validated MediaVideoCancelReqVO reqVO) {
+        mediaService.cancel(reqVO);
+        return Result.success();
+    }
+    /**
+     * 接受视频请求
+     * @param reqVO 参数
+     * @return
+     */
+    @PostMapping("/video/accept")
+    public Result<?> videoAccept(@RequestBody @Validated MediaVideoReqVO reqVO) {
+        mediaService.accept(reqVO);
+        return Result.success();
+    }
+    /**
+     * 拒绝视频请求
+     * @param reqVO 参数
+     * @return
+     */
+    @PostMapping("/video/reject")
+    public Result<?> videoReject(@RequestBody @Validated MediaVideoRejectReqVO reqVO) {
+        mediaService.reject(reqVO);
+        return Result.success();
+    }
+    /**
+     * 挂断视频通话
+     * @param reqVO 参数
+     * @return
+     */
+    @PostMapping("/video/close")
+    public Result<?> videoClose(@RequestBody @Validated MediaVideoCloseReqVO reqVO) {
+        mediaService.close(reqVO);
         return Result.success();
     }
 }

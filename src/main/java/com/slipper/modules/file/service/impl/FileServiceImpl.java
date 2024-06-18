@@ -41,7 +41,7 @@ public class FileServiceImpl implements FileService {
     @Override
     public String upload(FileUploadFileReqVO reqVO) {
         validateSize(reqVO.getFile(), 5L);
-//        validateFileType(reqVO.getFile(), Constant.IMAGE_TYPE);
+        validateFileType(reqVO.getFile(), Constant.FILE_TYPE);
         return fileUtils.upload(reqVO.getFile(), "file");
     }
 
