@@ -35,6 +35,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         ignores.add("/auth/captcha/login");
         ignores.add("/auth/login");
         ignores.add("/file/upload/avatar");
+        ignores.add("/auth/login/qq");
 
         String uri = request.getRequestURI().replace(request.getContextPath(), "");
         if (!ignores.contains(uri)) {

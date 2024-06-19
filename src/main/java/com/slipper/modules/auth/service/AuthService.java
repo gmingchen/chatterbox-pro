@@ -2,6 +2,7 @@ package com.slipper.modules.auth.service;
 
 import com.slipper.modules.auth.model.req.AuthLoginReqVO;
 import com.slipper.modules.auth.model.req.AuthLogoutReqVO;
+import com.slipper.modules.auth.model.req.AuthQqLoginReqVO;
 import com.slipper.modules.auth.model.req.AuthRegisterReqVO;
 import com.slipper.modules.captcha.model.req.CaptchaReqVO;
 import com.slipper.modules.token.model.dto.TokenDTO;
@@ -34,6 +35,13 @@ public interface AuthService {
      * @return 登录凭证对象
      */
     TokenDTO login(AuthLoginReqVO reqVO);
+
+    /**
+     * 登录
+     * @param reqVO
+     * @return
+     */
+    String login(AuthQqLoginReqVO reqVO);
 
     /**
      * 退出登录

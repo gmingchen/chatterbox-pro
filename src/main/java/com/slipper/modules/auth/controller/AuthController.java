@@ -5,11 +5,13 @@ import com.slipper.core.repeat.annotation.Repeat;
 import com.slipper.core.security.utils.SecurityUtils;
 import com.slipper.modules.auth.model.req.AuthLoginReqVO;
 import com.slipper.modules.auth.model.req.AuthLogoutReqVO;
+import com.slipper.modules.auth.model.req.AuthQqLoginReqVO;
 import com.slipper.modules.auth.model.req.AuthRegisterReqVO;
 import com.slipper.modules.auth.service.AuthService;
 import com.slipper.modules.captcha.model.req.CaptchaReqVO;
 import com.slipper.modules.token.model.dto.TokenDTO;
 import com.slipper.modules.user.model.dto.LoginUserDTO;
+import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -68,6 +70,16 @@ public class AuthController {
         return Result.success(
                 authService.login(reqVO)
         );
+    }
+
+    /**
+     * QQ登录
+     * @param reqVO 参数
+     * @return
+     */
+    @GetMapping("/login/qq")
+    public Result<AuthQqLoginReqVO> qqLogin(AuthQqLoginReqVO reqVO) {
+        return Result.success(reqVO);
     }
 
     /**

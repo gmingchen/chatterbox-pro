@@ -10,6 +10,7 @@ import com.slipper.exception.RunException;
 import com.slipper.modules.auth.convert.AuthConvert;
 import com.slipper.modules.auth.model.req.AuthLoginReqVO;
 import com.slipper.modules.auth.model.req.AuthLogoutReqVO;
+import com.slipper.modules.auth.model.req.AuthQqLoginReqVO;
 import com.slipper.modules.auth.model.req.AuthRegisterReqVO;
 import com.slipper.modules.auth.service.AuthService;
 import com.slipper.modules.captcha.model.req.CaptchaReqVO;
@@ -77,6 +78,11 @@ public class AuthServiceImpl implements AuthService {
         }
         // 生成登录凭证
         return tokenService.generate(userEntity.getId());
+    }
+
+    @Override
+    public String login(AuthQqLoginReqVO reqVO) {
+        return null;
     }
 
     @Override

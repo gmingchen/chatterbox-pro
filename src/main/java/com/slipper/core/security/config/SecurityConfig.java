@@ -48,6 +48,7 @@ public class SecurityConfig {
                         "/auth/register",
                         // 登录
                         "/auth/login",
+                        "/auth/login/**",
                         // 头像上传
                         "/file/upload/avatar"
                 ).permitAll()
