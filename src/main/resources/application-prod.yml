@@ -40,4 +40,7 @@ mail:
   protocol: smtp # 协议
   host: smtp.qq.com # 主机
   port: 465 # 端口
-
+# QQ
+qq:
+  appId: 102121863 # QQ互联 APP ID
+  appKey: dCYlkW4PaXHnAICr # QQ互联 APP Key
