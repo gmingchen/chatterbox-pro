@@ -37,11 +37,11 @@ public interface AuthService {
     TokenDTO login(AuthLoginReqVO reqVO);
 
     /**
-     * 登录
-     * @param reqVO
+     * QQ登录
+     * @param reqVO 登录参数
      * @return
      */
-    String login(AuthQqLoginReqVO reqVO);
+    TokenDTO login(AuthQqLoginReqVO reqVO);
 
     /**
      * 退出登录

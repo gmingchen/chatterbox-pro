@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 /**
- * qq登录回调参数
+ * qq登录参数
  * @author gumingchen
  */
 @Accessors(chain = true)
@@ -16,11 +16,8 @@ import java.io.Serializable;
 public class AuthQqLoginReqVO implements Serializable {
     private static final long serialVersionUID = 1L;
     /**
-     * Authorization Code
+     * accessToken
      */
-    private String code;
-    /**
-     * state
-     */
-    private String state;
+    @NotBlank(message = "accessToken不能为空")
+    private String accessToken;
 }

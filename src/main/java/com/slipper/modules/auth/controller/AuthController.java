@@ -78,8 +78,8 @@ public class AuthController {
      * @return
      */
     @GetMapping("/login/qq")
-    public Result<AuthQqLoginReqVO> qqLogin(AuthQqLoginReqVO reqVO) {
-        return Result.success(reqVO);
+    public Result<TokenDTO> qqLogin(@Validated AuthQqLoginReqVO reqVO) {
+        return Result.success(authService.login(reqVO));
     }
 
     /**

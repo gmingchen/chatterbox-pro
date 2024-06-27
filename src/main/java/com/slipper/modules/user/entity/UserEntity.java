@@ -32,6 +32,10 @@ public class UserEntity extends BasePO {
      */
     private String email;
     /**
+     * QQ openid
+     */
+    private String qqOpenId;
+    /**
      * 微信openid（保留字段）
      */
     private String openId;

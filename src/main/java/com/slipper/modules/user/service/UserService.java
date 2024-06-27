@@ -43,6 +43,12 @@ public interface UserService extends IServiceX<UserEntity> {
      * @return
      */
     UserEntity queryByEmail(String email);
+    /**
+     * 通过QQ openId查询用户
+     * @param openId openId
+     * @return
+     */
+    UserEntity queryByQqOpenId(String openId);
 
     /**
      * 更新基础信息

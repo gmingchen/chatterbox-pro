@@ -44,6 +44,7 @@ public enum ResultCodeEnum {
     FILE_SIZE_EXCEED(4020, "文件大小超出限制！"),
     FILE_TYPE_ERROR(4021, "文件类型不正确"),
     NOT_ONLINE(4022, "对方不在线"),
+    LOGIN_ERROR(4006, "登录失败，请重新登录！"),
 
 
 

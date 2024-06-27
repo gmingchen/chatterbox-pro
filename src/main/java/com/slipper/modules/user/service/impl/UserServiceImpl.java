@@ -102,6 +102,13 @@ public class UserServiceImpl extends ServiceImplX<UserMapper, UserEntity> implem
     }
 
     @Override
+    public UserEntity queryByQqOpenId(String openId) {
+        LambdaQueryWrapper<UserEntity> wrapper = new LambdaQueryWrapperX<UserEntity>()
+                .eq(UserEntity::getQqOpenId, openId);
+        return baseMapper.selectOne(wrapper);
+    }
+
+    @Override
     public void update(UserUpdateReqVO reqVO) {
         UserEntity userEntity = UserConvert.INSTANCE.convert(reqVO);
         userEntity.setId(SecurityUtils.getLoginUserId());
@@ -122,9 +129,9 @@ public class UserServiceImpl extends ServiceImplX<UserMapper, UserEntity> implem
         captchaService.validate(reqVO.getCaptcha(), reqVO.getNewEmail(), RedisConstant.CAPTCHA_UPDATE_EMAIL);
         // 校验原邮箱是否一致
         LoginUserDTO loginUserDTO = SecurityUtils.getLoginUser();
-        if (!loginUserDTO.getEmail().equals(reqVO.getOriginalEmail())) {
-            throw new RunException(ResultCodeEnum.ORIGINAL_EMAIL_ERROR);
-        }
+//        if (!loginUserDTO.getEmail().equals(reqVO.getOriginalEmail())) {
+//            throw new RunException(ResultCodeEnum.ORIGINAL_EMAIL_ERROR);
+//        }
         // 校验新邮箱是否存在
         UserEntity user = this.queryByEmail(reqVO.getNewEmail());
         if (ObjectUtil.isNotNull(user)) {

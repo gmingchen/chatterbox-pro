@@ -35,10 +35,9 @@ public class UserCreateDTO implements Serializable {
      * 邮箱
      */
     @Email(message = "邮箱格式不正确")
-    @NotBlank(message = "邮箱不能为空")
     private String email;
-//    /**
-//     * 微信openid（保留字段）
-//     */
-//    private String openId;
+    /**
+     * QQopenid
+     */
+    private String qqOpenId;
 }

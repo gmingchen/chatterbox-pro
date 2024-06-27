@@ -17,9 +17,9 @@ public class UserUpdateEmailReqVO implements Serializable {
     /**
      * 原邮箱
      */
-    @Email(message = "邮箱格式不正确")
-    @NotBlank(message = "原邮箱邮箱不能为空")
-    private String originalEmail;
+//    @Email(message = "邮箱格式不正确")
+//    @NotBlank(message = "原邮箱邮箱不能为空")
+//    private String originalEmail;
     /**
      * 新邮箱
      */
