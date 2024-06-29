@@ -41,7 +41,7 @@ public class FileController {
      * 上传图片消息
      * @return
      */
-    @Repeat()
+//    @Repeat()
     @PostMapping("/upload/image")
     public Result<String> uploadImage(@Validated FileUploadImageReqVO reqVO) {
         return Result.success(
@@ -53,7 +53,7 @@ public class FileController {
      * 上传图片以外的文件消息
      * @return
      */
-    @Repeat()
+//    @Repeat()
     @PostMapping("/upload/file")
     public Result<String> uploadFile(@Validated FileUploadFileReqVO reqVO) {
         return Result.success(
@@ -65,7 +65,7 @@ public class FileController {
      * 上传音频文件消息
      * @return
      */
-    @Repeat()
+//    @Repeat()
     @PostMapping("/upload/audio")
     public Result<String> uploadAudio(@Validated FileUploadAudioReqVO reqVO) {
         return Result.success(
