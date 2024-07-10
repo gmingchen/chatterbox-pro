@@ -24,7 +24,7 @@ public interface RoomService extends IServiceX<RoomEntity> {
 
     /**
      * 新增群房间
-     * @param dto 参数
+     * @param reqVO 参数
      * @return
      */
     ConversationResVO createGroupRoom(RoomGroupCreateReqVO reqVO);

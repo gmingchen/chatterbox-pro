@@ -3,4 +3,11 @@
 
 <mapper namespace="com.slipper.modules.friend.mapper.FriendMapper">
 
+<!--    List<Long> queryFriendIds(@Param("userId") Long userId);-->
+    <select id="queryFriendIds" resultType="Long">
+        SELECT friend_id
+        FROM friend
+        WHERE deleted = 0 AND user_id = #{ userId }
+    </select>
+
 </mapper>

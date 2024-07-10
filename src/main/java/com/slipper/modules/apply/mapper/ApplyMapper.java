@@ -32,4 +32,12 @@ public interface ApplyMapper extends BaseMapperX<ApplyEntity> {
      * @return
      */
     ApplyInfoRes queryInfo(@Param("id") Long id);
+
+    /**
+     * 更具状态查询数据
+     * @param userId 用户ID
+     * @param status 状态
+     * @return
+     */
+    Long queryCountByStatus(@Param("userId") Long userId, @Param("status") Integer status);
 }

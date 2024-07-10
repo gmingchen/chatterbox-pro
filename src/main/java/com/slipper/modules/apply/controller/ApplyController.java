@@ -62,4 +62,15 @@ public class ApplyController {
                 applyService.queryPageByLastId(reqVO)
         );
     }
+
+    /**
+     * 获取待审核数量
+     * @return
+     */
+    @GetMapping("/audit/count")
+    public Result<Long> auditCount() {
+        return Result.success(
+                applyService.queryAuditCount()
+        );
+    }
 }

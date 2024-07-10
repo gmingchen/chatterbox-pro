@@ -60,4 +60,14 @@
         <include refid="ApplySql" />
         AND a.id = #{ id }
     </select>
+
+    <select id="queryCountByStatus" resultType="Long">
+        SELECT count(*)
+        FROM apply AS a
+            LEFT JOIN apply__user AS au ON au.apply_id = a.id
+        WHERE a.deleted = 0
+          AND au.deleted = 0
+          AND au.user_id = #{ userId }
+          AND a.status = #{ status }
+    </select>
 </mapper>

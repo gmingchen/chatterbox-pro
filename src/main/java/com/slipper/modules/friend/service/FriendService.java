@@ -5,6 +5,8 @@ import com.slipper.modules.friend.entity.FriendEntity;
 import com.slipper.modules.friend.model.dto.FriendCreateDTO;
 import com.slipper.modules.friend.model.req.FriendDeleteReqVO;
 
+import java.util.List;
+
 /**
  * 好友
  * @author gumingchen
@@ -38,5 +40,12 @@ public interface FriendService extends IServiceX<FriendEntity> {
      * @return
      */
     Boolean validateFriendBoth(Long sourceId, Long targetId);
+
+    /**
+     * 查询所有好友ID
+     * @param userId 用户ID
+     * @return
+     */
+    List<Long> queryFriendIds(Long userId);
 
 }

@@ -44,6 +44,9 @@ public enum WsMessageTypeEnum implements EnumIntArray {
     VIDEO_REJECT(21, "拒绝视频"),
     VIDEO_CLOSE(22, "关闭视频"),
 
+    USER_ONLINE(23, "用户上线"),
+    USER_OFFLINE(24, "用户下线"),
+
     ERROR(30, "异常消息"),
     ;
 

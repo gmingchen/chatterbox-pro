@@ -12,7 +12,7 @@
     <sql id="RoomUserSql">
         SELECT rgu.id AS roomUserId, rgu.nickname AS roomUserNickname, rgu.role, rgu.status,
                rgu.room_group_id, rg.room_id,
-               u.id, u.nickname, u.avatar, u.sex
+               u.id, u.nickname, u.avatar, u.sex, u.online
         FROM room_group AS rg
                  LEFT JOIN room_group__user AS rgu ON rgu.room_group_id = rg.id AND rgu.deleted = 0
                  LEFT JOIN user AS u ON u.id = rgu.user_id
@@ -33,6 +33,34 @@
     <select id="queryInfo" resultType="com.slipper.modules.roomGroupUser.model.res.RoomUserResVO">
         <include refid="RoomUserSql"></include>
         WHERE rg.deleted = 0 AND rg.room_id = #{ roomId } AND rgu.user_id = #{ userId }
+    </select>
+
+<!--    Long queryRoomGroupUserCount(@Param("roomId") Long roomId);-->
+    <select id="queryRoomGroupUserCount" resultType="Long">
+        SELECT count(*)
+        FROM room_group AS rg
+             LEFT JOIN room_group__user AS rgu ON rgu.room_group_id = rg.id AND rgu.deleted = 0
+        WHERE rg.room_id = #{ roomId }
+    </select>
+
+<!--    queryRoomGroupOnlineUserCount-->
+    <select id="queryRoomGroupOnlineUserCount" resultType="Long">
+        SELECT count(*)
+        FROM room_group AS rg
+            LEFT JOIN room_group__user AS rgu ON rgu.room_group_id = rg.id AND rgu.deleted = 0
+            LEFT JOIN user AS u ON u.id = rgu.user_id AND u.deleted = 0
+        WHERE rg.room_id = #{ roomId } AND u.online = 1
+    </select>
+
+<!--    List<Long> queryGroupUserIds(@Param("userId") Long userId);-->
+    <select id="queryGroupUserIds" resultType="Long">
+        SELECT user_id
+        FROM room_group__user
+        WHERE deleted = 0 AND user_id != #{ userId } AND room_group_id in (
+            SELECT room_group_id
+            FROM room_group__user
+            WHERE deleted = 0 AND user_id = #{ userId }
+        )
     </select>
 
 </mapper>

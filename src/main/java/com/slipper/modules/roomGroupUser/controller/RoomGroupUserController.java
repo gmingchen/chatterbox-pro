@@ -1,7 +1,9 @@
 package com.slipper.modules.roomGroupUser.controller;
 
 import com.slipper.common.pojo.Result;
+import com.slipper.modules.roomGroupUser.model.req.RoomUserCountReqVO;
 import com.slipper.modules.roomGroupUser.model.req.RoomUserPageReqVO;
+import com.slipper.modules.roomGroupUser.model.res.RoomUserCountResVO;
 import com.slipper.modules.roomGroupUser.model.res.RoomUserResVO;
 import com.slipper.modules.roomGroupUser.service.RoomGroupUserService;
 import org.springframework.validation.annotation.Validated;
@@ -33,4 +35,14 @@ public class RoomGroupUserController {
         );
     }
 
+    /**
+     * 获取群组用户数量
+     * @return
+     */
+    @GetMapping("/count")
+    public Result<RoomUserCountResVO> count(@Validated RoomUserCountReqVO reqVO) {
+        return Result.success(
+                roomGroupUserService.queryRoomGroupUserCount(reqVO)
+        );
+    }
 }

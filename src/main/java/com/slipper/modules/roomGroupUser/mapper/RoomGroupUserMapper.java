@@ -34,4 +34,24 @@ public interface RoomGroupUserMapper extends BaseMapperX<RoomGroupUserEntity> {
      * @return
      */
     RoomUserResVO queryInfo(@Param("roomId") Long roomId, @Param("userId") Long userId);
+
+    /**
+     * 查询群房间用户数量
+     * @param roomId
+     * @return
+     */
+    Long queryRoomGroupUserCount(@Param("roomId") Long roomId);
+    /**
+     * 查询群房间在线用户数量
+     * @param roomId
+     * @return
+     */
+    Long queryRoomGroupOnlineUserCount(@Param("roomId") Long roomId);
+
+    /**
+     * 查询所有群友ID
+     * @param userId
+     * @return
+     */
+    List<Long> queryGroupUserIds(@Param("userId") Long userId);
 }

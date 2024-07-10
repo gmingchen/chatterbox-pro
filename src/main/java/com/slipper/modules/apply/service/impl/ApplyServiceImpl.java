@@ -176,4 +176,9 @@ public class ApplyServiceImpl extends ServiceImplX<ApplyMapper, ApplyEntity> imp
     public List<ApplyInfoRes> queryPageByLastId(ApplyPageReqVO reqVO) {
         return baseMapper.queryPageByLastId(reqVO.getSize(), SecurityUtils.getLoginUserId(), reqVO.getLastId());
     }
+
+    @Override
+    public Long queryAuditCount() {
+        return baseMapper.queryCountByStatus(SecurityUtils.getLoginUserId(), ApplyStatusEnum.AUDIT.getCode());
+    }
 }

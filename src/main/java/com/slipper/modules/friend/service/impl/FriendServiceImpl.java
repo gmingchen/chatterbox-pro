@@ -109,6 +109,11 @@ public class FriendServiceImpl extends ServiceImplX<FriendMapper, FriendEntity> 
         return baseMapper.selectCount(wrapper) == 2;
     }
 
+    @Override
+    public List<Long> queryFriendIds(Long userId) {
+        return baseMapper.queryFriendIds(userId);
+    }
+
     /**
      * 生成好友对象 判断使用有效的分组ID
      * @param userId 用户ID

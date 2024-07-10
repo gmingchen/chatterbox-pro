@@ -69,4 +69,9 @@ public interface ApplyService extends IServiceX<ApplyEntity> {
      */
     List<ApplyInfoRes> queryPageByLastId(ApplyPageReqVO reqVO);
 
+    /**
+     * 查询待审核的申请
+     * @return
+     */
+    Long queryAuditCount();
 }
