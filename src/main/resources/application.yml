@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: prod # 环境 dev|test|prod
+    active: dev # 环境 dev|test|prod
   jackson:
     time-zone: GMT+8 # 时区
     date-format: yyyy-MM-dd HH:mm:ss # 时间格式化
